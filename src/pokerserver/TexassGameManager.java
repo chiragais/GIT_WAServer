@@ -37,6 +37,17 @@ public class TexassGameManager implements GameConstants {
 	WinnerManager winnerManager;
 	int totalBBPlayersTurn = 0;
 	int totalGameCntr=0;
+	int bliendAmount = SBAmount;
+	/**
+	 * Game type : Regular WA/TH or Tournament
+	 */
+	int gameType = GAME_TYPE_REGULAR;
+	/**
+	 * For tournament only
+	 */
+	int newBliendAmt = SBAmount;
+	
+	ArrayList<PlayerBean> listTournamentPlayers = new ArrayList<PlayerBean>();
 	
 	public TexassGameManager() {
 		playersManager = new PlayersManager();
@@ -45,6 +56,7 @@ public class TexassGameManager implements GameConstants {
 	public void initGameRounds() {
 		System.out
 				.println("================== Texass Game started ==================");
+		this.bliendAmount = newBliendAmt;
 		handManager = new GeneralHandManager(TEXASS_PLAYER_CARD_LIMIT_FOR_HAND);
 		winnerManager = new WinnerManager(playersManager, handManager);
 		generateDefaultCards();
@@ -61,13 +73,13 @@ public class TexassGameManager implements GameConstants {
 	}
 
 	public RoundManager getCurrentRoundInfo() {
-		if (preflopRound.getStatus() == ROUND_STATUS_ACTIVE) {
+		if (preflopRound.getStatus() == STATUS_ACTIVE) {
 			return preflopRound;
-		} else if (flopRound.getStatus() == ROUND_STATUS_ACTIVE) {
+		} else if (flopRound.getStatus() == STATUS_ACTIVE) {
 			return flopRound;
-		} else if (turnRound.getStatus() == ROUND_STATUS_ACTIVE) {
+		} else if (turnRound.getStatus() == STATUS_ACTIVE) {
 			return turnRound;
-		} else if (riverRound.getStatus() == ROUND_STATUS_ACTIVE) {
+		} else if (riverRound.getStatus() == STATUS_ACTIVE) {
 			return riverRound;
 		}
 		return null;
@@ -107,43 +119,55 @@ public class TexassGameManager implements GameConstants {
 		return currentRound;
 	}
 
+	public void setGameType(int gameType){
+		this.gameType = gameType;
+	}
+	public int getGameType (){
+		return gameType;
+	}
+	public int getBliendAmount(){
+		return bliendAmount;
+	}
+	public void setBliendAmount(int amt){
+		this.newBliendAmt = amt;
+	}
 	/**
 	 * Start pre flop round and set other round status as a pending
 	 */
 	public void startPreFlopRound() {
 		currentRound = TEXASS_ROUND_PREFLOP;
 		System.out.println(">>>>>>>>>>> Preflop Round started");
-		preflopRound.setStatus(ROUND_STATUS_ACTIVE);
-		flopRound.setStatus(ROUND_STATUS_PENDING);
-		turnRound.setStatus(ROUND_STATUS_PENDING);
-		riverRound.setStatus(ROUND_STATUS_PENDING);
+		preflopRound.setStatus(STATUS_ACTIVE);
+		flopRound.setStatus(STATUS_PENDING);
+		turnRound.setStatus(STATUS_PENDING);
+		riverRound.setStatus(STATUS_PENDING);
 	}
 
 	public void startFlopRound() {
 		currentRound = TEXASS_ROUND_FLOP;
 		System.out.println(">>>>>>>>>>> Flop Round started  ");
-		preflopRound.setStatus(ROUND_STATUS_FINISH);
-		flopRound.setStatus(ROUND_STATUS_ACTIVE);
-		turnRound.setStatus(ROUND_STATUS_PENDING);
-		riverRound.setStatus(ROUND_STATUS_PENDING);
+		preflopRound.setStatus(STATUS_FINISH);
+		flopRound.setStatus(STATUS_ACTIVE);
+		turnRound.setStatus(STATUS_PENDING);
+		riverRound.setStatus(STATUS_PENDING);
 	}
 
 	public void startTurnRound() {
 		currentRound = TEXASS_ROUND_TURN;
 		System.out.println(">>>>>>>>>>> Turn Round started  ");
-		preflopRound.setStatus(ROUND_STATUS_FINISH);
-		flopRound.setStatus(ROUND_STATUS_FINISH);
-		turnRound.setStatus(ROUND_STATUS_ACTIVE);
-		riverRound.setStatus(ROUND_STATUS_PENDING);
+		preflopRound.setStatus(STATUS_FINISH);
+		flopRound.setStatus(STATUS_FINISH);
+		turnRound.setStatus(STATUS_ACTIVE);
+		riverRound.setStatus(STATUS_PENDING);
 	}
 
 	public void startRiverRound() {
 		currentRound = TEXASS_ROUND_RIVER;
 		System.out.println(">>>>>>>>>>> River Round started  ");
-		preflopRound.setStatus(ROUND_STATUS_FINISH);
-		flopRound.setStatus(ROUND_STATUS_FINISH);
-		turnRound.setStatus(ROUND_STATUS_FINISH);
-		riverRound.setStatus(ROUND_STATUS_ACTIVE);
+		preflopRound.setStatus(STATUS_FINISH);
+		flopRound.setStatus(STATUS_FINISH);
+		turnRound.setStatus(STATUS_FINISH);
+		riverRound.setStatus(STATUS_ACTIVE);
 	}
 
 	public RoundManager getPreflopRound() {
@@ -326,7 +350,7 @@ public class TexassGameManager implements GameConstants {
 			break;
 		case TEXASS_ROUND_RIVER:
 			calculatePotAmountForAllInMembers();
-			getCurrentRoundInfo().setStatus(ROUND_STATUS_FINISH);
+			getCurrentRoundInfo().setStatus(STATUS_FINISH);
 			break;
 		}
 
@@ -432,7 +456,7 @@ public class TexassGameManager implements GameConstants {
 	}
 
 	public void findAllWinnerPlayers() {
-		winnerManager.findWinnerPlayers();
+		winnerManager.findWinnerPlayers(gameType);
 	}
 
 	public List<PlayerBean> generateWinnerPlayers() {
@@ -481,13 +505,25 @@ public class TexassGameManager implements GameConstants {
 				AllInPlayer allInPlayer = new AllInPlayer(
 						player.getPlayerName(), allInBetTotalAmount);
 				winnerManager.addAllInTotalPotAmount(allInPlayer);
-
 			}
-
 		}
-
 	}
 
+	public void addTournamentPlayer(PlayerBean playerBean){
+		listTournamentPlayers.add(playerBean);
+	}
+	public int getPlayerPreviousBalance(String plrName){
+		int balanace = 0;
+		
+		for(PlayerBean playerBean : listTournamentPlayers){
+			if(playerBean.getPlayerName().equals(plrName)){
+				balanace = playerBean.getTotalBalance();
+				listTournamentPlayers.remove(playerBean);
+				break;
+			}
+		}
+		return balanace;
+	}
 	public void setTotalTableBetAmount() {
 		int totalBetAmount = 0;
 		totalBetAmount += preflopRound.getTotalRoundBetAmount();

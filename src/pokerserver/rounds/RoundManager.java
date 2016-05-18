@@ -36,8 +36,8 @@ public class RoundManager implements GameConstants {
 	}
 
 	/**
-	 * Get current status of round it may be ROUND_STATUS_ACTIVE,
-	 * ROUND_STATUS_PENDING, ROUND_STATUS_FINISH
+	 * Get current status of round it may be STATUS_ACTIVE,
+	 * STATUS_PENDING, STATUS_FINISH
 	 * 
 	 * @return index
 	 */
@@ -50,8 +50,8 @@ public class RoundManager implements GameConstants {
 	}
 
 	/**
-	 * Update current status of round it may be ROUND_STATUS_ACTIVE,
-	 * ROUND_STATUS_PENDING, ROUND_STATUS_FINISH
+	 * Update current status of round it may be STATUS_ACTIVE,
+	 * STATUS_PENDING, STATUS_FINISH
 	 * 
 	 * @param status
 	 */

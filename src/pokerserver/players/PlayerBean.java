@@ -28,6 +28,7 @@ public class PlayerBean {
 	private boolean isBigBlind;
 	private boolean isAllInPlayer;
 	private boolean isFoldedPlayer;
+	private boolean isWaitingForGame;
 	private HAND_RANK handRank;
 	private int winningIndex = 0;
 	private Card[] handBestCards = new Card[5];
@@ -103,8 +104,16 @@ public class PlayerBean {
 	public int getTotalBalance() {
 		return this.totalBalance;
 	}
-
 	
+	public boolean isWaitingForGame() {
+		return isWaitingForGame;
+	}
+
+	public void setWaitingForGame(boolean isWaitingForGame) {
+		this.isWaitingForGame = isWaitingForGame;
+		this.isFoldedPlayer = true;
+	}
+
 	public int getBestHandRankTotal(){
 		int totalRank =0;
 		for(Card card :handBestCards ){
@@ -112,9 +121,7 @@ public class PlayerBean {
 		}
 		return totalRank;
 	}
-//	public void setPlayerActive(boolean isActive) {
-//		this.isActivePlayer = isActive;
-//	}
+
 	public void setCards(Card card1, Card card2, Card waCard) {
 		this.cards = new PlayerCards(card1, card2);
 		this.waCard = waCard;

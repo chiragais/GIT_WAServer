@@ -123,11 +123,11 @@ public interface GameConstants {
 	public int ACTION_WA_DOWN = 12;
 	public int ACTION_WA_NO = 13;
 	public int ACTION_NO_TURN = 14;
-
+	public int ACTION_WAITING_FOR_GAME = 15;
 	// Round status
-	int ROUND_STATUS_ACTIVE = 1;
-	int ROUND_STATUS_PENDING = 2;
-	int ROUND_STATUS_FINISH = 3;
+	int STATUS_ACTIVE = 1;
+	int STATUS_PENDING = 2;
+	int STATUS_FINISH = 3;
 
 	// Common for server and client
 	String RESPONSE_DATA_SEPRATOR = "#";
@@ -143,7 +143,12 @@ public interface GameConstants {
 	String RESPONSE_FOR_WINNIER_INFO = 10 + RESPONSE_DATA_SEPRATOR;
 	String REQUEST_FOR_RESTART_GAME = 11 + RESPONSE_DATA_SEPRATOR;
 	String REQUEST_FOR_WA_POT_WINNER = 12 + RESPONSE_DATA_SEPRATOR;
-
+	String REQUEST_FOR_BLIEND_AMOUNT = 13 + RESPONSE_DATA_SEPRATOR;
+	
+	String TAG_GAME_TYPE = "Game_Type";
+	int GAME_TYPE_REGULAR = 0;
+	int GAME_TYPE_SIT_N_GO = 1;
+	
 	String TAG_ACTION = "Action";
 	String TAG_BET_AMOUNT = "Bet_Amount";
 	String TAG_TABLE_AMOUNT = "Total_Table_Amount";
@@ -181,6 +186,8 @@ public interface GameConstants {
 	String TAG_WINNERS_WINNING_AMOUNT = "Winning_Amount";
 	
 	String TAG_WINNER_TOTAL_BALENCE = "winner_balance";
+	String TAG_GAME_STATUS = "Game_Status";
+	String TAG_PLAYER_STATUS = "Player_Status";
 
 	int SBAmount = 10;
 	

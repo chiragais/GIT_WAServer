@@ -117,6 +117,13 @@ public class TexassPokerRoomAdapter extends BaseTurnRoomAdaptor implements
 
 		for (PlayerBean player : gameManager.getPlayersManager()
 				.getAllAvailablePlayers()) {
+			int plrStatus = STATUS_ACTIVE;
+			if(player.isWaitingForGame()){
+				plrStatus=ACTION_WAITING_FOR_GAME;
+			}else if(player.isFolded() ){
+				plrStatus = ACTION_FOLDED;
+			}
+			
 			JSONObject cardsObject = new JSONObject();
 			try {
 				cardsObject.put(TAG_PLAYER_NAME, player.getPlayerName());
@@ -125,9 +132,11 @@ public class TexassPokerRoomAdapter extends BaseTurnRoomAdaptor implements
 				cardsObject.put(TAG_CARD_PLAYER_2, player.getSecondCard()
 						.getCardName());
 				cardsObject.put(TAG_PLAYER_BALANCE, player.getTotalBalance());
+				cardsObject.put(TAG_GAME_STATUS, GAME_STATUS);
+				cardsObject.put(TAG_PLAYER_STATUS, plrStatus);
 				gameRoom.BroadcastChat(TEXASS_SERVER_NAME, RESPONSE_FOR_PLAYERS_INFO
 						+ cardsObject.toString());
-//				System.out.println("Texass Player Info : " + cardsObject.toString());
+				System.out.println("Texass Player Info : " + cardsObject.toString());
 			} catch (JSONException e) {
 				e.printStackTrace();
 			}
@@ -198,7 +207,7 @@ public class TexassPokerRoomAdapter extends BaseTurnRoomAdaptor implements
 		} else if (playerAction != ACTION_DEALER
 				&& gameManager.checkEveryPlayerHaveSameBetAmount()) {
 			isRoundCompelete = true;
-			if (gameManager.getCurrentRoundInfo().getStatus() == ROUND_STATUS_ACTIVE
+			if (gameManager.getCurrentRoundInfo().getStatus() == STATUS_ACTIVE
 					&& gameManager.getCurrentRoundIndex() == TEXASS_ROUND_RIVER) {
 				manageGameFinishEvent();
 			} else {
@@ -284,12 +293,21 @@ public class TexassPokerRoomAdapter extends BaseTurnRoomAdaptor implements
 				.getName()));
 		broadcastBlindPlayerDatas();
 		// This will be changed.
-		if (GAME_STATUS == RUNNING || GAME_STATUS == FINISHED
-				&& gameRoom.getJoinedUsers().size() == 0) {
-			System.out.println("Room : Game Over ..... ");
-			gameManager.getPlayersManager().removeAllPlayers();
-			GAME_STATUS = FINISHED;
+		if (GAME_STATUS == RUNNING || GAME_STATUS == FINISHED) {
+			if(gameRoom.getJoinedUsers().size() == 0){
+				System.out.println("Room : Game Over ..... ");
+				gameManager.getPlayersManager().removeAllPlayers();
+				GAME_STATUS = FINISHED;
+			}else{
+//				System.out.print("CD:: "+gameRoom.getNextTurnUser().getName());
+//				gameRoom.setNextTurn(gameRoom.getNextTurnUser());
+			}
 		}
+		if(gameRoom.getJoinedUsers().size() == 0 && gameManager.getGameType() != GAME_TYPE_REGULAR){
+			System.out.print("CD:: Bliend Amt : "+SBAmount);
+			gameManager.setBliendAmount(SBAmount);
+		}
+		
 	}
 
 	/*
@@ -313,6 +331,10 @@ public class TexassPokerRoomAdapter extends BaseTurnRoomAdaptor implements
 		listRestartGameReq.clear();
 		gameRoom.BroadcastChat(TEXASS_SERVER_NAME, RESPONSE_FOR_GAME_START);
 //		gameManager.initGameRounds();
+		// For Temporary. It will be come from DB
+		for(PlayerBean playerBean : gameManager.getPlayersManager().getAllAvailablePlayers()){
+			gameManager.addTournamentPlayer(playerBean);
+		}
 		gameManager.getPlayersManager().removeAllPlayers();
 		for (IUser user : gameRoom.getJoinedUsers()) {
 			addNewPlayerCards(user.getName());
@@ -352,16 +374,27 @@ public class TexassPokerRoomAdapter extends BaseTurnRoomAdaptor implements
 				gameManager.startPreFlopRound();
 				gameManager.managePlayerAction(gameManager.getPlayersManager()
 						.getSmallBlindPayer().getPlayerName(), ACTION_BET,
-						SBAmount);
+						gameManager.getBliendAmount());
 				gameManager.managePlayerAction(gameManager.getPlayersManager()
 						.getBigBlindPayer().getPlayerName(), ACTION_BET,
-						SBAmount * 2);
+						gameManager.getBliendAmount() * 2);
 				startGame();
 			}
 		} else if (message.startsWith(REQUEST_FOR_RESTART_GAME)) {
 			listRestartGameReq.add(sender.getName());
 			if (isRequestFromAllActivePlayers())
 				handleRestartGame();
+		}else if(message.startsWith(REQUEST_FOR_BLIEND_AMOUNT)){
+			message = message.replace(REQUEST_FOR_BLIEND_AMOUNT, "");
+			try {
+				JSONObject jsonObject = new JSONObject(message);
+				gameManager.setBliendAmount(jsonObject.getInt(TAG_SMALL_BLIEND_AMOUNT));
+				gameManager.setGameType(jsonObject.getInt(TAG_GAME_TYPE));
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			System.out.println("Bliend Amt : "+ message);
 		}
 	}
 	private boolean isRequestFromAllActivePlayers() {
@@ -407,18 +440,33 @@ public class TexassPokerRoomAdapter extends BaseTurnRoomAdaptor implements
 		PlayerBean player = new PlayerBean(
 				gameRoom.getJoinedUsers().size() - 1, userName);
 		int totalPlayers =gameManager.getPlayersManager().getAllAvailablePlayers().size() ; 
-		if(totalPlayers== 0){
-			player.setTotalBalance(2000);
-		} else if (totalPlayers== 1) {
-			player.setTotalBalance(1000);
-		} else if (totalPlayers == 2) {
-			player.setTotalBalance(3000);
-		}
-
+		/*if(gameManager.getGameType()==GAME_TYPE_REGULAR){
+			if(totalPlayers== 0){
+				player.setTotalBalance(2000);
+			} else if (totalPlayers== 1) {
+				player.setTotalBalance(1000);
+			} else if (totalPlayers == 2) {
+				player.setTotalBalance(3000);
+			} else {
+				player.setTotalBalance(1000);
+			}
+		}else{
+			int plrBalance = 1000;
+			plrBalance = gameManager.getPlayerPreviousBalance(userName);
+			System.out.println("<<>>> "+userName +" : "+plrBalance);
+			player.setTotalBalance(plrBalance);
+		}*/
+		int prvBalance =gameManager.getPlayerPreviousBalance(userName);
+		int plrBalance = prvBalance!=0 ?prvBalance :2000;
+		System.out.println("<<>>> "+userName +" : "+plrBalance);
+		player.setTotalBalance(plrBalance);
+		
 		player.setCards(gameManager.generatePlayerCards(),
 				gameManager.generatePlayerCards(),
 				gameManager.generatePlayerCards());
-
+		if (GAME_STATUS == RUNNING){
+			player.setWaitingForGame(true);
+		}
 		gameManager.addNewPlayerToGame(player);
 	}
 	public void onUserPaused(IUser user) {
@@ -496,7 +544,7 @@ public class TexassPokerRoomAdapter extends BaseTurnRoomAdaptor implements
 					cardsObject.put(TAG_PLAYER_BIG_BLIND,
 							RESPONSE_DATA_SEPRATOR);
 				}
-				cardsObject.put(TAG_SMALL_BLIEND_AMOUNT,SBAmount);
+				cardsObject.put(TAG_SMALL_BLIEND_AMOUNT,gameManager.getBliendAmount());
 				
 				System.out.println("Blind Player Details : "
 						+ cardsObject.toString());

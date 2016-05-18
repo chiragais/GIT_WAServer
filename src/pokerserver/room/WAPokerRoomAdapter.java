@@ -15,7 +15,6 @@ import pokerserver.rounds.RoundManager;
 import pokerserver.turns.TurnManager;
 import pokerserver.utils.GameConstants;
 
-import com.shephertz.app42.server.domain.Room;
 import com.shephertz.app42.server.idomain.BaseTurnRoomAdaptor;
 import com.shephertz.app42.server.idomain.HandlingResult;
 import com.shephertz.app42.server.idomain.ITurnBasedRoom;
@@ -73,6 +72,12 @@ public class WAPokerRoomAdapter extends BaseTurnRoomAdaptor implements
 		for (PlayerBean player : gameManager.getPlayersManager()
 				.getAllAvailablePlayers()) {
 
+			int plrStatus = STATUS_ACTIVE;
+			if(player.isWaitingForGame()){
+				plrStatus=ACTION_WAITING_FOR_GAME;
+			}else if(player.isFolded() ){
+				plrStatus = ACTION_FOLDED;
+			}
 			JSONObject cardsObject = new JSONObject();
 
 			try {
@@ -83,13 +88,15 @@ public class WAPokerRoomAdapter extends BaseTurnRoomAdaptor implements
 						.getCardName());
 				cardsObject.put(TAG_CARD_WA, player.getWACard().getCardName());
 				cardsObject.put(TAG_PLAYER_BALANCE, player.getTotalBalance());
+				cardsObject.put(TAG_GAME_STATUS, GAME_STATUS);
+				cardsObject.put(TAG_PLAYER_STATUS, plrStatus);
 
+				gameRoom.BroadcastChat(WA_SERVER_NAME, RESPONSE_FOR_PLAYERS_INFO
+						+ cardsObject.toString());
+				System.out.println("Player Info : " + cardsObject.toString());
 			} catch (JSONException e) {
 				e.printStackTrace();
 			}
-			gameRoom.BroadcastChat(WA_SERVER_NAME, RESPONSE_FOR_PLAYERS_INFO
-					+ cardsObject.toString());
-			System.out.println("Player Info : " + cardsObject.toString());
 		}
 	}
 
@@ -151,12 +158,12 @@ public class WAPokerRoomAdapter extends BaseTurnRoomAdaptor implements
 		if (lastActivePlayer != null) {
 			if(gameManager.isAllPlayersAreFolded()){
 				manageGameFinishEvent();
-			}else if (gameManager.getWhoopAssRound().getStatus() == ROUND_STATUS_PENDING) {
+			}else if (gameManager.getWhoopAssRound().getStatus() == STATUS_PENDING) {
 				gameManager.calculatePotAmountForAllInMembers();
 				gameManager.startWhoopAssRound();
 				broadcastRoundCompeleteToAllPlayers();
-			} else if ((gameManager.getWhoopAssRound().getStatus() == ROUND_STATUS_ACTIVE || gameManager
-					.getCurrentRoundInfo().getStatus() == ROUND_STATUS_ACTIVE)
+			} else if ((gameManager.getWhoopAssRound().getStatus() == STATUS_ACTIVE || gameManager
+					.getCurrentRoundInfo().getStatus() == STATUS_ACTIVE)
 					&& gameManager.checkEveryPlayerHaveSameBetAmount()) {
 				manageGameFinishEvent();
 			}
@@ -164,7 +171,7 @@ public class WAPokerRoomAdapter extends BaseTurnRoomAdaptor implements
 		} else if (playerAction != ACTION_DEALER
 				&& gameManager.checkEveryPlayerHaveSameBetAmount()) {
 			isRoundCompelete = true;
-			if (gameManager.getCurrentRoundInfo().getStatus() == ROUND_STATUS_ACTIVE
+			if (gameManager.getCurrentRoundInfo().getStatus() == STATUS_ACTIVE
 					&& gameManager.getCurrentRoundIndex() == WA_ROUND_THIRD_FLOP) {
 				manageGameFinishEvent();
 			} else {
@@ -468,12 +475,17 @@ public class WAPokerRoomAdapter extends BaseTurnRoomAdaptor implements
 			player.setTotalBalance(1000);
 		} else if (totalPlayers == 2) {
 			player.setTotalBalance(3000);
+		}else {
+			player.setTotalBalance(1000);
 		}
 		
 		player.setCards(gameManager.generatePlayerCards(),
 				gameManager.generatePlayerCards(),
 				gameManager.generatePlayerCards());
 
+		if (GAME_STATUS == RUNNING){
+			player.setWaitingForGame(true);
+		}
 		gameManager.addNewPlayerToGame(player);
 	}
 

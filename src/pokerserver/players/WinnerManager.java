@@ -8,9 +8,10 @@ import java.util.List;
 import pokerserver.cards.Card;
 import pokerserver.handrank.GeneralHandManager;
 import pokerserver.turns.TurnManager;
+import pokerserver.utils.GameConstants;
 import pokerserver.utils.GameConstants.HAND_RANK;
 
-public class WinnerManager {
+public class WinnerManager implements GameConstants{
 
 	PlayersManager playerManager;
 	ArrayList<Winner> listWinners;
@@ -200,7 +201,7 @@ public class WinnerManager {
 		}
 		return listWinnerWAPotAfterFold;
 	}
-	public void findWinnerPlayers() {
+	public void findWinnerPlayers(int gameType) {
 	//	System.out.println("\n Find Winner Player ------------");
 		List<PlayerBean> listAscWinningPlayers = generateWinnerPlayers(); 
 
@@ -216,27 +217,11 @@ public class WinnerManager {
 				}
 			}
 		}
-		for (PlayerBean player : listAscWinningPlayers) {
-			if (!player.isFolded()) {
-				if (!player.isAllIn()) {
-					Winner winner = new Winner(player, totalTableAmount);
-					winner.getPlayer().setTotalBalance(
-							winner.getPlayer().getTotalBalance()
-									+ winner.getWinningAmount());
-					totalTableAmount = 0;
-					listWinners.add(winner);
-					break;
-				} else {
-					if (getAllInPotAmount(player.getPlayerName()) < totalTableAmount) {
-						Winner winner = new Winner(player,
-								getAllInPotAmount(player.getPlayerName()));
-						winner.getPlayer().setTotalBalance(
-								winner.getPlayer().getTotalBalance()
-										+ winner.getWinningAmount());
-						totalTableAmount -= getAllInPotAmount(player
-								.getPlayerName());
-						listWinners.add(winner);
-					} else {
+		if (gameType == GAME_TYPE_REGULAR) {
+			// For Regular game
+			for (PlayerBean player : listAscWinningPlayers) {
+				if (!player.isFolded()) {
+					if (!player.isAllIn()) {
 						Winner winner = new Winner(player, totalTableAmount);
 						winner.getPlayer().setTotalBalance(
 								winner.getPlayer().getTotalBalance()
@@ -244,9 +229,30 @@ public class WinnerManager {
 						totalTableAmount = 0;
 						listWinners.add(winner);
 						break;
+					} else {
+						if (getAllInPotAmount(player.getPlayerName()) < totalTableAmount) {
+							Winner winner = new Winner(player,
+									getAllInPotAmount(player.getPlayerName()));
+							winner.getPlayer().setTotalBalance(
+									winner.getPlayer().getTotalBalance()
+											+ winner.getWinningAmount());
+							totalTableAmount -= getAllInPotAmount(player
+									.getPlayerName());
+							listWinners.add(winner);
+						} else {
+							Winner winner = new Winner(player, totalTableAmount);
+							winner.getPlayer().setTotalBalance(
+									winner.getPlayer().getTotalBalance()
+											+ winner.getWinningAmount());
+							totalTableAmount = 0;
+							listWinners.add(winner);
+							break;
+						}
 					}
 				}
 			}
+		}else if(gameType==GAME_TYPE_SIT_N_GO){
+			
 		}
 		if (totalTableAmount != 0) {
 			remainingAmount = totalTableAmount;

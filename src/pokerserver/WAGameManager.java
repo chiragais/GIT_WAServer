@@ -39,6 +39,10 @@ public class WAGameManager implements GameConstants {
 	int waCardAmt = 0;
 	int totalBBPlayersTurn = 0;
 	int totalGameCntr=0;
+	/**
+	 * Game type : Regular WA/TH or Tournament
+	 */
+	int gameType = GAME_TYPE_REGULAR;
 	
 	public WAGameManager() {
 		playersManager = new PlayersManager();
@@ -64,15 +68,15 @@ public class WAGameManager implements GameConstants {
 	}
 
 	public RoundManager getCurrentRoundInfo() {
-		if (startRound.getStatus() == ROUND_STATUS_ACTIVE) {
+		if (startRound.getStatus() == STATUS_ACTIVE) {
 			return startRound;
-		} else if (firstFlopRound.getStatus() == ROUND_STATUS_ACTIVE) {
+		} else if (firstFlopRound.getStatus() == STATUS_ACTIVE) {
 			return firstFlopRound;
-		} else if (secondFlopRound.getStatus() == ROUND_STATUS_ACTIVE) {
+		} else if (secondFlopRound.getStatus() == STATUS_ACTIVE) {
 			return secondFlopRound;
-		} else if (whoopAssRound.getStatus() == ROUND_STATUS_ACTIVE) {
+		} else if (whoopAssRound.getStatus() == STATUS_ACTIVE) {
 			return whoopAssRound;
-		} else if (thirdRound.getStatus() == ROUND_STATUS_ACTIVE) {
+		} else if (thirdRound.getStatus() == STATUS_ACTIVE) {
 			return thirdRound;
 		}
 		return null;
@@ -138,7 +142,7 @@ public class WAGameManager implements GameConstants {
 	}
 
 	public void findAllWinnerPlayers() {
-		winnerManager.findWinnerPlayers();
+		winnerManager.findWinnerPlayers(gameType);
 	}
 
 	public List<PlayerBean> generateWinnerPlayers() {
@@ -234,51 +238,51 @@ public class WAGameManager implements GameConstants {
 	public void startFirstRound() {
 		currentRound = WA_ROUND_START;
 		System.out.println(">>>>>>>>>>> WA start Round started");
-		startRound.setStatus(ROUND_STATUS_ACTIVE);
-		firstFlopRound.setStatus(ROUND_STATUS_PENDING);
-		secondFlopRound.setStatus(ROUND_STATUS_PENDING);
-		whoopAssRound.setStatus(ROUND_STATUS_PENDING);
-		thirdRound.setStatus(ROUND_STATUS_PENDING);
+		startRound.setStatus(STATUS_ACTIVE);
+		firstFlopRound.setStatus(STATUS_PENDING);
+		secondFlopRound.setStatus(STATUS_PENDING);
+		whoopAssRound.setStatus(STATUS_PENDING);
+		thirdRound.setStatus(STATUS_PENDING);
 	}
 
 	public void startFirstFlopRound() {
 		currentRound = WA_ROUND_FIRST_FLOP;
 		System.out.println(">>>>>>>>>>>WA First Flop Round started  ");
-		startRound.setStatus(ROUND_STATUS_FINISH);
-		firstFlopRound.setStatus(ROUND_STATUS_ACTIVE);
-		secondFlopRound.setStatus(ROUND_STATUS_PENDING);
-		whoopAssRound.setStatus(ROUND_STATUS_PENDING);
-		thirdRound.setStatus(ROUND_STATUS_PENDING);
+		startRound.setStatus(STATUS_FINISH);
+		firstFlopRound.setStatus(STATUS_ACTIVE);
+		secondFlopRound.setStatus(STATUS_PENDING);
+		whoopAssRound.setStatus(STATUS_PENDING);
+		thirdRound.setStatus(STATUS_PENDING);
 	}
 
 	public void startSecondFlopRound() {
 		currentRound = WA_ROUND_SECOND_FLOP;
 		System.out.println(">>>>>>>>>>> WA Second flop Round started  ");
-		startRound.setStatus(ROUND_STATUS_FINISH);
-		firstFlopRound.setStatus(ROUND_STATUS_FINISH);
-		secondFlopRound.setStatus(ROUND_STATUS_ACTIVE);
-		whoopAssRound.setStatus(ROUND_STATUS_PENDING);
-		thirdRound.setStatus(ROUND_STATUS_PENDING);
+		startRound.setStatus(STATUS_FINISH);
+		firstFlopRound.setStatus(STATUS_FINISH);
+		secondFlopRound.setStatus(STATUS_ACTIVE);
+		whoopAssRound.setStatus(STATUS_PENDING);
+		thirdRound.setStatus(STATUS_PENDING);
 	}
 
 	public void startWhoopAssRound() {
 		currentRound = WA_ROUND_WHOOPASS;
 		System.out.println(">>>>>>>>>>> WA WhoopAss Round started  ");
-		startRound.setStatus(ROUND_STATUS_FINISH);
-		firstFlopRound.setStatus(ROUND_STATUS_FINISH);
-		secondFlopRound.setStatus(ROUND_STATUS_FINISH);
-		whoopAssRound.setStatus(ROUND_STATUS_ACTIVE);
-		thirdRound.setStatus(ROUND_STATUS_PENDING);
+		startRound.setStatus(STATUS_FINISH);
+		firstFlopRound.setStatus(STATUS_FINISH);
+		secondFlopRound.setStatus(STATUS_FINISH);
+		whoopAssRound.setStatus(STATUS_ACTIVE);
+		thirdRound.setStatus(STATUS_PENDING);
 	}
 
 	public void startThirdFlopRound() {
 		currentRound = WA_ROUND_THIRD_FLOP;
 		System.out.println(">>>>>>>>>>> WA Third Round started  ");
-		startRound.setStatus(ROUND_STATUS_FINISH);
-		firstFlopRound.setStatus(ROUND_STATUS_FINISH);
-		secondFlopRound.setStatus(ROUND_STATUS_FINISH);
-		whoopAssRound.setStatus(ROUND_STATUS_FINISH);
-		thirdRound.setStatus(ROUND_STATUS_ACTIVE);
+		startRound.setStatus(STATUS_FINISH);
+		firstFlopRound.setStatus(STATUS_FINISH);
+		secondFlopRound.setStatus(STATUS_FINISH);
+		whoopAssRound.setStatus(STATUS_FINISH);
+		thirdRound.setStatus(STATUS_ACTIVE);
 	}
 
 	public RoundManager getStartRound() {
@@ -447,7 +451,7 @@ public class WAGameManager implements GameConstants {
 		case WA_ROUND_THIRD_FLOP:
 			// startThirdFlopRound();
 			calculatePotAmountForAllInMembers();
-			getCurrentRoundInfo().setStatus(ROUND_STATUS_FINISH);
+			getCurrentRoundInfo().setStatus(STATUS_FINISH);
 			break;
 		}
 
