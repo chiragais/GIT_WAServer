@@ -87,7 +87,7 @@ public class WAPokerRoomAdapter extends BaseTurnRoomAdaptor implements
 				cardsObject.put(TAG_CARD_PLAYER_2, player.getSecondCard()
 						.getCardName());
 				cardsObject.put(TAG_CARD_WA, player.getWACard().getCardName());
-				cardsObject.put(TAG_PLAYER_BALANCE, player.getTotalBalance());
+				cardsObject.put(TAG_PLAYER_BALANCE, player.getBalance());
 				cardsObject.put(TAG_GAME_STATUS, GAME_STATUS);
 				cardsObject.put(TAG_PLAYER_STATUS, plrStatus);
 
@@ -192,7 +192,7 @@ public class WAPokerRoomAdapter extends BaseTurnRoomAdaptor implements
 			JSONObject waCardJsonObject = new JSONObject();
 			try {
 				int totalWinningAmt =  (waCardPot.getPotAmt() * waCardPot.getPlayers().size());
-				int winnerPlayerTotalAmt = waCardPot.getWinnerPlayer().getTotalBalance()+totalWinningAmt;
+				int winnerPlayerTotalAmt = waCardPot.getWinnerPlayer().getBalance()+totalWinningAmt;
 				waCardJsonObject.put(TAG_WINNER_NAME, waCardPot.getWinnerPlayer().getPlayerName());
 				waCardJsonObject.put(TAG_WINNERS_WINNING_AMOUNT,totalWinningAmt);
 				waCardJsonObject.put(TAG_WINNER_TOTAL_BALENCE, winnerPlayerTotalAmt);
@@ -470,13 +470,13 @@ public class WAPokerRoomAdapter extends BaseTurnRoomAdaptor implements
 //		if (gameRoom.getJoinedUsers().size() == 0) {
 		int totalPlayers =gameManager.getPlayersManager().getAllAvailablePlayers().size() ; 
 		if(totalPlayers== 0){
-			player.setTotalBalance(2000);
+			player.setBalance(2000);
 		} else if (totalPlayers== 1) {
-			player.setTotalBalance(1000);
+			player.setBalance(1000);
 		} else if (totalPlayers == 2) {
-			player.setTotalBalance(3000);
+			player.setBalance(3000);
 		}else {
-			player.setTotalBalance(1000);
+			player.setBalance(1000);
 		}
 		
 		player.setCards(gameManager.generatePlayerCards(),
@@ -619,7 +619,7 @@ public class WAPokerRoomAdapter extends BaseTurnRoomAdaptor implements
 						gameManager.getTotalTableAmount());
 
 				winnerObject.put(TAG_WINNER_TOTAL_BALENCE, winnerPlayer
-						.getPlayer().getTotalBalance());
+						.getPlayer().getBalance());
 				winnerObject.put(TAG_WINNER_NAME, winnerPlayer.getPlayer()
 						.getPlayerName());
 				winnerObject.put(TAG_WINNER_RANK, winnerPlayer.getPlayer()
@@ -638,8 +638,8 @@ public class WAPokerRoomAdapter extends BaseTurnRoomAdaptor implements
 					JSONObject waPotObject = new JSONObject();
 					waPotObject.put(TAG_WINNERS_WINNING_AMOUNT, waCardPot.getPotAmt());
 					waPotObject.put(TAG_WINNER_NAME, waCardPot.getWinnerPlayer().getPlayerName());
-					waCardPot.getWinnerPlayer().setTotalBalance(waCardPot.getWinnerPlayer().getTotalBalance()+waCardPot.getPotAmt());
-					waPotObject.put(TAG_WINNER_TOTAL_BALENCE, waCardPot.getWinnerPlayer().getTotalBalance());
+					waCardPot.getWinnerPlayer().setBalance(waCardPot.getWinnerPlayer().getBalance()+waCardPot.getPotAmt());
+					waPotObject.put(TAG_WINNER_TOTAL_BALENCE, waCardPot.getWinnerPlayer().getBalance());
 					winnerWAPotArray.put(waPotObject);
 				}
 			}
@@ -666,7 +666,7 @@ public class WAPokerRoomAdapter extends BaseTurnRoomAdaptor implements
 			cardsObject.put(TAG_PLAYER_NAME, turnManager.getPlayer()
 					.getPlayerName());
 			cardsObject.put(TAG_PLAYER_BALANCE, turnManager.getPlayer()
-					.getTotalBalance());
+					.getBalance());
 			gameRoom.BroadcastChat(WA_SERVER_NAME, RESPONSE_FOR_ACTION_DONE
 					+ cardsObject.toString());
 			System.out.println("Action<<>> " + cardsObject.toString());

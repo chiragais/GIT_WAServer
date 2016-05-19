@@ -533,10 +533,10 @@ public class WAGameManager implements GameConstants {
 			if(currentRoundManger.getRound()==WA_ROUND_WHOOPASS && waCardAmt<=betAmount){
 				waCardAmt = betAmount;
 			}
-			if (currentPlayer.getTotalBalance() == 0
+			if (currentPlayer.getBalance() == 0
 					&& currentRoundManger.getRound() != WA_ROUND_WHOOPASS) {
 				action = ACTION_ALL_IN;
-			}else if(currentPlayer.getTotalBalance() == 0
+			}else if(currentPlayer.getBalance() == 0
 					&& currentRoundManger.getRound() == WA_ROUND_WHOOPASS) {
 				currentPlayer.setPlayerAllIn(true);
 			}

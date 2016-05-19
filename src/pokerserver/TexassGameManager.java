@@ -38,6 +38,9 @@ public class TexassGameManager implements GameConstants {
 	int totalBBPlayersTurn = 0;
 	int totalGameCntr=0;
 	int bliendAmount = SBAmount;
+	int tournamentEntryFee = 1000;
+	boolean isTournamentStarted = false;
+	public boolean isReBuyChips = false;
 	/**
 	 * Game type : Regular WA/TH or Tournament
 	 */
@@ -119,6 +122,15 @@ public class TexassGameManager implements GameConstants {
 		return currentRound;
 	}
 
+	
+	public boolean isTournamentStarted() {
+		return isTournamentStarted;
+	}
+
+	public void setTournamentStarted(boolean isTournamentStarted) {
+		this.isTournamentStarted = isTournamentStarted;
+	}
+
 	public void setGameType(int gameType){
 		this.gameType = gameType;
 	}
@@ -128,7 +140,7 @@ public class TexassGameManager implements GameConstants {
 	public int getBliendAmount(){
 		return bliendAmount;
 	}
-	public void setBliendAmount(int amt){
+	public void setNewBliendAmount(int amt){
 		this.newBliendAmt = amt;
 	}
 	/**
@@ -304,16 +316,10 @@ public class TexassGameManager implements GameConstants {
 		if (allPlayerHaveTurn && allPlayersAreAllIn) {
 			return true;
 		}
-//		PlayerBetBean lastPlayerBetAmt = totalPlayerWiseBetAmount.get(0);
-//		totalPlayerWiseBetAmount.remove(0);
-		// Checking all players have same bet amount
 		for (PlayerBetBean currentPlayer : totalPlayerWiseBetAmount) {
-//			if (currentPlayerBetAmt.getBetAmount() != lastPlayerBetAmt
-//					.getBetAmount()) {
 				if(currentPlayer.getBetAmount()!=maxPlayerBetAmt){
 					return false;
 				}
-//			}
 		}
 		if (!allPlayerHaveTurn) {
 			return false;
@@ -358,13 +364,14 @@ public class TexassGameManager implements GameConstants {
 
 	/** It will generate flop(3), turn(1) and river(1) cards. Total 5 cards */
 	public void generateDefaultCards() {
+		System.out.println("Generate Default Cards " );
 		listDefaultCards.clear();
 		listTableCards.clear();
 		while (listDefaultCards.size() != 5) {
 			Card cardBean = new Card();
 			if (!isAlreadyDesributedCard(cardBean)) {
 				
-				System.out.println("Default card : " + cardBean.getCardName());
+//				System.out.println("Default card : " + cardBean.getCardName());
 				listDefaultCards.add(cardBean);
 			}
 		}
@@ -377,6 +384,7 @@ public class TexassGameManager implements GameConstants {
 				return true;
 			}
 		}
+		System.out.println("Total Cards on table : " + listTableCards.size());
 		listTableCards.add(cardBean);
 		return false;
 	}
@@ -406,7 +414,7 @@ public class TexassGameManager implements GameConstants {
 			totalBBPlayersTurn++;
 		}
 		if (currentPlayer != null) {
-			if(currentPlayer.getTotalBalance()==0){
+			if(currentPlayer.getBalance()==0){
 				action = ACTION_ALL_IN;
 			}
 			RoundManager currentRoundManger = getCurrentRoundInfo();
@@ -451,6 +459,9 @@ public class TexassGameManager implements GameConstants {
 		return listWinners;
 	}
 
+	public int getTournamentEntryFee(){
+		return tournamentEntryFee;
+	}
 	public ArrayList<Winner> getAllWinnerPlayers() {
 		return winnerManager.getWinnerList();
 	}
@@ -517,7 +528,7 @@ public class TexassGameManager implements GameConstants {
 		
 		for(PlayerBean playerBean : listTournamentPlayers){
 			if(playerBean.getPlayerName().equals(plrName)){
-				balanace = playerBean.getTotalBalance();
+				balanace = playerBean.getBalance();
 				listTournamentPlayers.remove(playerBean);
 				break;
 			}

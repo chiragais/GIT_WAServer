@@ -6994,3 +6994,496 @@
 2016-05-18 11:47:38,430 - WARNING: already stopped
 2016-05-18 11:47:51,873 - WARNING: got out of turn request
 2016-05-18 12:06:21,364 - ERROR: Error in getLockProperties java.lang.NullPointerException
+2016-05-18 13:14:36,366 - WARNING: Room Created: id= 1432346169
+2016-05-18 13:14:36,411 - ERROR: Error in getLockProperties java.lang.NullPointerException
+2016-05-18 13:14:49,908 - ERROR: Error in getLockProperties java.lang.NullPointerException
+2016-05-18 13:15:15,164 - ERROR: Error in getLockProperties java.lang.NullPointerException
+2016-05-18 13:15:46,571 - WARNING: already stopped or not in joined user
+2016-05-18 13:15:46,595 - WARNING: already stopped or not in joined user
+2016-05-18 13:15:46,623 - WARNING: already stopped or not in joined user
+2016-05-18 13:18:52,565 - WARNING: Room Created: id= 738498862
+2016-05-18 13:18:52,579 - ERROR: Error in getLockProperties java.lang.NullPointerException
+2016-05-18 13:19:07,036 - ERROR: Error in getLockProperties java.lang.NullPointerException
+2016-05-18 13:19:24,277 - ERROR: Error in getLockProperties java.lang.NullPointerException
+2016-05-18 13:19:47,166 - WARNING: exceptionCaught cause null remote /192.168.1.200:50097
+2016-05-18 13:27:32,324 - WARNING: Room Created: id= 348185102
+2016-05-18 13:27:32,344 - ERROR: Error in getLockProperties java.lang.NullPointerException
+2016-05-18 13:27:50,050 - ERROR: Error in getLockProperties java.lang.NullPointerException
+2016-05-18 13:27:54,893 - ERROR: Error in getLockProperties java.lang.NullPointerException
+2016-05-18 13:28:19,253 - WARNING: already stopped or not in joined user
+2016-05-18 13:28:19,258 - WARNING: already stopped or not in joined user
+2016-05-18 13:28:19,266 - WARNING: already stopped or not in joined user
+2016-05-18 13:34:51,652 - WARNING: Room Created: id= 964948972
+2016-05-18 13:34:51,668 - ERROR: Error in getLockProperties java.lang.NullPointerException
+2016-05-18 13:35:18,099 - ERROR: Error in getLockProperties java.lang.NullPointerException
+2016-05-18 13:35:33,205 - ERROR: Error in getLockProperties java.lang.NullPointerException
+2016-05-18 13:35:45,741 - ERROR: Error in getLockProperties java.lang.NullPointerException
+2016-05-18 13:36:16,465 - WARNING: already stopped or not in joined user
+2016-05-18 13:36:16,482 - WARNING: already stopped or not in joined user
+2016-05-18 13:36:17,640 - WARNING: got out of turn request
+2016-05-18 13:37:09,519 - ERROR: Error in getLockProperties java.lang.NullPointerException
+2016-05-18 13:37:21,122 - ERROR: Error in getLockProperties java.lang.NullPointerException
+2016-05-18 13:37:34,840 - ERROR: Error in getLockProperties java.lang.NullPointerException
+2016-05-18 13:38:02,240 - WARNING: already stopped or not in joined user
+2016-05-18 13:38:02,240 - WARNING: already stopped or not in joined user
+2016-05-18 13:38:03,915 - WARNING: got out of turn request
+2016-05-18 13:40:39,026 - WARNING: Room Created: id= 1623758146
+2016-05-18 13:40:39,038 - ERROR: Error in getLockProperties java.lang.NullPointerException
+2016-05-18 13:40:51,149 - ERROR: Error in getLockProperties java.lang.NullPointerException
+2016-05-18 13:41:05,978 - ERROR: Error in getLockProperties java.lang.NullPointerException
+2016-05-18 13:41:32,115 - WARNING: already stopped or not in joined user
+2016-05-18 13:41:32,116 - WARNING: already stopped or not in joined user
+2016-05-18 13:41:33,668 - WARNING: got out of turn request
+2016-05-18 13:42:54,300 - WARNING: Room Created: id= 494642124
+2016-05-18 13:42:54,316 - ERROR: Error in getLockProperties java.lang.NullPointerException
+2016-05-18 13:42:58,734 - ERROR: Error in getLockProperties java.lang.NullPointerException
+2016-05-18 13:43:18,004 - ERROR: Error in getLockProperties java.lang.NullPointerException
+2016-05-18 13:43:45,022 - WARNING: already stopped or not in joined user
+2016-05-18 13:43:45,031 - WARNING: already stopped or not in joined user
+2016-05-18 13:43:46,122 - WARNING: got out of turn request
+2016-05-18 13:45:52,626 - WARNING: Room Created: id= 826715952
+2016-05-18 13:45:52,644 - ERROR: Error in getLockProperties java.lang.NullPointerException
+2016-05-18 13:46:06,720 - ERROR: Error in getLockProperties java.lang.NullPointerException
+2016-05-18 13:46:21,273 - ERROR: Error in getLockProperties java.lang.NullPointerException
+2016-05-18 13:46:45,184 - WARNING: already stopped or not in joined user
+2016-05-18 13:46:45,184 - WARNING: already stopped or not in joined user
+2016-05-18 13:46:45,195 - WARNING: already stopped or not in joined user
+2016-05-18 13:55:30,305 - WARNING: Room Created: id= 924818672
+2016-05-18 13:55:30,324 - ERROR: Error in getLockProperties java.lang.NullPointerException
+2016-05-18 13:55:33,858 - ERROR: Error in getLockProperties java.lang.NullPointerException
+2016-05-18 13:55:52,522 - ERROR: Error in getLockProperties java.lang.NullPointerException
+2016-05-18 13:57:21,691 - WARNING: already stopped or not in joined user
+2016-05-18 13:57:21,695 - WARNING: already stopped or not in joined user
+2016-05-18 13:57:21,716 - WARNING: already stopped or not in joined user
+2016-05-18 14:00:29,941 - WARNING: Room Created: id= 1329654600
+2016-05-18 14:00:29,956 - ERROR: Error in getLockProperties java.lang.NullPointerException
+2016-05-18 14:00:47,312 - ERROR: Error in getLockProperties java.lang.NullPointerException
+2016-05-18 14:00:55,936 - ERROR: Error in getLockProperties java.lang.NullPointerException
+2016-05-18 14:01:19,493 - WARNING: already stopped or not in joined user
+2016-05-18 14:01:19,495 - WARNING: already stopped or not in joined user
+2016-05-18 14:01:19,497 - WARNING: already stopped or not in joined user
+2016-05-18 14:13:36,954 - ERROR: Error in getLockProperties java.lang.NullPointerException
+2016-05-18 14:14:03,226 - ERROR: Error in getLockProperties java.lang.NullPointerException
+2016-05-18 14:14:21,937 - ERROR: Error in getLockProperties java.lang.NullPointerException
+2016-05-18 14:14:46,988 - WARNING: already stopped or not in joined user
+2016-05-18 14:14:46,994 - WARNING: already stopped or not in joined user
+2016-05-18 14:14:47,014 - WARNING: already stopped or not in joined user
+2016-05-18 14:15:40,322 - WARNING: already stopped or not in joined user
+2016-05-18 14:15:40,322 - WARNING: already stopped or not in joined user
+2016-05-18 14:15:40,323 - WARNING: already stopped or not in joined user
+2016-05-18 15:55:12,122 - ERROR: Error in getLockProperties java.lang.NullPointerException
+2016-05-18 15:55:29,110 - ERROR: Error in getLockProperties java.lang.NullPointerException
+2016-05-18 15:55:45,377 - ERROR: Error in getLockProperties java.lang.NullPointerException
+2016-05-18 15:56:11,852 - WARNING: already stopped or not in joined user
+2016-05-18 15:56:11,881 - WARNING: already stopped or not in joined user
+2016-05-18 15:56:11,883 - WARNING: already stopped or not in joined user
+2016-05-18 16:51:18,545 - WARNING: Room Created: id= 1772606812
+2016-05-18 16:51:18,561 - ERROR: Error in getLockProperties java.lang.NullPointerException
+2016-05-18 16:51:45,578 - ERROR: Error in getLockProperties java.lang.NullPointerException
+2016-05-18 16:52:43,856 - ERROR: Error in getLockProperties java.lang.NullPointerException
+2016-05-18 16:53:31,706 - WARNING: already stopped or not in joined user
+2016-05-18 16:53:31,714 - WARNING: already stopped or not in joined user
+2016-05-18 16:53:31,719 - WARNING: already stopped or not in joined user
+2016-05-18 16:54:36,584 - WARNING: got out of turn request
+2016-05-18 16:57:06,110 - ERROR: Error in getLockProperties java.lang.NullPointerException
+2016-05-18 16:57:16,550 - ERROR: Error in getLockProperties java.lang.NullPointerException
+2016-05-18 16:57:31,733 - ERROR: Error in getLockProperties java.lang.NullPointerException
+2016-05-18 16:58:12,690 - WARNING: already stopped or not in joined user
+2016-05-18 16:58:12,696 - WARNING: already stopped or not in joined user
+2016-05-18 16:58:12,727 - WARNING: already stopped or not in joined user
+2016-05-18 16:59:11,550 - WARNING: got out of turn request
+2016-05-18 17:04:34,384 - ERROR: Error in getLockProperties java.lang.NullPointerException
+2016-05-18 17:04:57,355 - ERROR: Error in getLockProperties java.lang.NullPointerException
+2016-05-18 17:05:10,849 - ERROR: Error in getLockProperties java.lang.NullPointerException
+2016-05-18 17:05:37,080 - WARNING: already stopped or not in joined user
+2016-05-18 17:05:37,083 - WARNING: already stopped or not in joined user
+2016-05-18 17:05:37,089 - WARNING: already stopped or not in joined user
+2016-05-18 17:14:29,663 - ERROR: Error in getLockProperties java.lang.NullPointerException
+2016-05-18 17:14:33,471 - ERROR: Error in getLockProperties java.lang.NullPointerException
+2016-05-18 17:14:36,626 - ERROR: Error in getLockProperties java.lang.NullPointerException
+2016-05-18 17:15:00,460 - WARNING: already stopped or not in joined user
+2016-05-18 17:15:00,469 - WARNING: already stopped or not in joined user
+2016-05-18 17:15:00,481 - WARNING: already stopped or not in joined user
+2016-05-18 17:15:58,309 - WARNING: already stopped or not in joined user
+2016-05-18 17:15:58,320 - WARNING: already stopped or not in joined user
+2016-05-18 17:15:58,344 - WARNING: already stopped or not in joined user
+2016-05-18 17:16:49,265 - WARNING: exceptionCaught cause null remote /192.168.1.200:52578
+2016-05-18 17:22:40,943 - WARNING: Room Created: id= 2006685421
+2016-05-18 17:22:40,954 - ERROR: Error in getLockProperties java.lang.NullPointerException
+2016-05-18 17:23:02,217 - ERROR: Error in getLockProperties java.lang.NullPointerException
+2016-05-18 17:23:06,226 - ERROR: Error in getLockProperties java.lang.NullPointerException
+2016-05-18 17:23:31,450 - WARNING: already stopped or not in joined user
+2016-05-18 17:23:31,451 - WARNING: already stopped or not in joined user
+2016-05-18 17:23:31,453 - WARNING: already stopped or not in joined user
+2016-05-18 17:24:31,221 - WARNING: already stopped or not in joined user
+2016-05-18 17:24:31,222 - WARNING: already stopped or not in joined user
+2016-05-18 17:24:31,228 - WARNING: already stopped or not in joined user
+2016-05-18 18:03:05,602 - WARNING: Room Created: id= 523355236
+2016-05-18 18:03:05,609 - ERROR: Error in getLockProperties java.lang.NullPointerException
+2016-05-18 18:03:25,486 - ERROR: Error in getLockProperties java.lang.NullPointerException
+2016-05-18 18:03:28,361 - ERROR: Error in getLockProperties java.lang.NullPointerException
+2016-05-18 18:05:23,842 - ERROR: Error in getLockProperties java.lang.NullPointerException
+2016-05-18 18:05:26,869 - ERROR: Error in getLockProperties java.lang.NullPointerException
+2016-05-18 18:05:40,560 - ERROR: Error in getLockProperties java.lang.NullPointerException
+2016-05-18 18:06:10,111 - WARNING: already stopped or not in joined user
+2016-05-18 18:06:10,125 - WARNING: already stopped or not in joined user
+2016-05-18 18:06:10,126 - WARNING: already stopped or not in joined user
+2016-05-18 18:07:28,957 - WARNING: already stopped or not in joined user
+2016-05-18 18:07:28,959 - WARNING: already stopped or not in joined user
+2016-05-18 18:07:29,012 - WARNING: already stopped or not in joined user
+2016-05-18 18:08:51,605 - WARNING: already stopped or not in joined user
+2016-05-18 18:08:51,606 - WARNING: already stopped or not in joined user
+2016-05-18 18:08:51,632 - WARNING: already stopped or not in joined user
+2016-05-19 12:52:16,644 - WARNING: Room Created: id= 262983732
+2016-05-19 12:52:16,661 - ERROR: Error in getLockProperties java.lang.NullPointerException
+2016-05-19 12:52:31,269 - ERROR: Error in getLockProperties java.lang.NullPointerException
+2016-05-19 12:53:02,744 - ERROR: Error in getLockProperties java.lang.NullPointerException
+2016-05-19 12:53:29,151 - WARNING: already stopped or not in joined user
+2016-05-19 12:53:29,152 - WARNING: already stopped or not in joined user
+2016-05-19 12:53:29,154 - WARNING: already stopped or not in joined user
+2016-05-19 12:54:20,348 - WARNING: already stopped or not in joined user
+2016-05-19 12:54:20,348 - WARNING: already stopped or not in joined user
+2016-05-19 12:54:20,350 - WARNING: already stopped or not in joined user
+2016-05-19 12:54:43,879 - WARNING: already stopped or not in joined user
+2016-05-19 12:54:43,880 - WARNING: already stopped or not in joined user
+2016-05-19 12:54:43,881 - WARNING: already stopped or not in joined user
+2016-05-19 12:54:43,902 - WARNING: got out of turn request
+2016-05-19 12:55:07,408 - WARNING: already stopped or not in joined user
+2016-05-19 12:55:07,409 - WARNING: already stopped or not in joined user
+2016-05-19 12:55:07,410 - WARNING: already stopped or not in joined user
+2016-05-19 12:55:07,438 - WARNING: got out of turn request
+2016-05-19 12:55:30,964 - WARNING: already stopped or not in joined user
+2016-05-19 12:55:30,968 - WARNING: already stopped or not in joined user
+2016-05-19 12:55:30,973 - WARNING: got out of turn request
+2016-05-19 12:55:30,988 - WARNING: already stopped or not in joined user
+2016-05-19 12:57:57,261 - WARNING: Room Created: id= 2035797530
+2016-05-19 12:57:57,279 - ERROR: Error in getLockProperties java.lang.NullPointerException
+2016-05-19 12:58:02,351 - ERROR: Error in getLockProperties java.lang.NullPointerException
+2016-05-19 12:58:16,350 - ERROR: Error in getLockProperties java.lang.NullPointerException
+2016-05-19 12:58:59,274 - WARNING: already stopped or not in joined user
+2016-05-19 12:58:59,278 - WARNING: already stopped or not in joined user
+2016-05-19 12:58:59,281 - WARNING: already stopped or not in joined user
+2016-05-19 12:59:22,858 - WARNING: already stopped or not in joined user
+2016-05-19 12:59:22,859 - WARNING: already stopped or not in joined user
+2016-05-19 12:59:22,863 - WARNING: got out of turn request
+2016-05-19 12:59:22,875 - WARNING: already stopped or not in joined user
+2016-05-19 13:01:00,245 - WARNING: Room Created: id= 251638963
+2016-05-19 13:01:00,264 - ERROR: Error in getLockProperties java.lang.NullPointerException
+2016-05-19 13:01:13,105 - ERROR: Error in getLockProperties java.lang.NullPointerException
+2016-05-19 13:10:34,619 - WARNING: Room Created: id= 2003244793
+2016-05-19 13:10:34,635 - ERROR: Error in getLockProperties java.lang.NullPointerException
+2016-05-19 13:12:26,640 - WARNING: Room Created: id= 2015847801
+2016-05-19 13:12:26,658 - ERROR: Error in getLockProperties java.lang.NullPointerException
+2016-05-19 13:35:46,637 - WARNING: Room Created: id= 1904263703
+2016-05-19 13:35:46,650 - ERROR: Error in getLockProperties java.lang.NullPointerException
+2016-05-19 13:41:51,232 - WARNING: Room Created: id= 994653875
+2016-05-19 13:41:51,247 - ERROR: Error in getLockProperties java.lang.NullPointerException
+2016-05-19 13:42:15,541 - ERROR: Error in getLockProperties java.lang.NullPointerException
+2016-05-19 13:42:18,793 - ERROR: Error in getLockProperties java.lang.NullPointerException
+2016-05-19 13:42:47,848 - WARNING: already stopped or not in joined user
+2016-05-19 13:42:47,852 - WARNING: already stopped or not in joined user
+2016-05-19 13:42:47,867 - WARNING: already stopped or not in joined user
+2016-05-19 13:43:37,581 - WARNING: already stopped or not in joined user
+2016-05-19 13:43:37,583 - WARNING: already stopped or not in joined user
+2016-05-19 13:43:37,585 - WARNING: already stopped or not in joined user
+2016-05-19 13:43:37,611 - WARNING: got out of turn request
+2016-05-19 13:45:02,647 - WARNING: Room Created: id= 135513599
+2016-05-19 13:45:02,663 - ERROR: Error in getLockProperties java.lang.NullPointerException
+2016-05-19 13:45:17,045 - ERROR: Error in getLockProperties java.lang.NullPointerException
+2016-05-19 13:45:20,223 - ERROR: Error in getLockProperties java.lang.NullPointerException
+2016-05-19 13:46:08,419 - WARNING: already stopped or not in joined user
+2016-05-19 13:46:08,421 - WARNING: already stopped or not in joined user
+2016-05-19 13:46:08,429 - WARNING: got out of turn request
+2016-05-19 13:46:08,435 - WARNING: already stopped or not in joined user
+2016-05-19 13:47:53,074 - ERROR: Error in getLockProperties java.lang.NullPointerException
+2016-05-19 13:48:42,460 - WARNING: Room Created: id= 716729049
+2016-05-19 13:48:42,475 - ERROR: Error in getLockProperties java.lang.NullPointerException
+2016-05-19 13:49:02,430 - ERROR: Error in getLockProperties java.lang.NullPointerException
+2016-05-19 13:49:13,425 - ERROR: Error in getLockProperties java.lang.NullPointerException
+2016-05-19 13:49:33,837 - WARNING: already stopped or not in joined user
+2016-05-19 13:49:33,840 - WARNING: already stopped or not in joined user
+2016-05-19 13:49:33,841 - WARNING: already stopped or not in joined user
+2016-05-19 13:49:33,852 - WARNING: got out of turn request
+2016-05-19 13:50:02,867 - WARNING: already stopped or not in joined user
+2016-05-19 13:50:02,867 - WARNING: already stopped or not in joined user
+2016-05-19 13:50:02,868 - WARNING: already stopped or not in joined user
+2016-05-19 13:50:02,893 - WARNING: got out of turn request
+2016-05-19 13:50:26,095 - WARNING: already stopped or not in joined user
+2016-05-19 13:50:26,096 - WARNING: already stopped or not in joined user
+2016-05-19 13:50:26,109 - WARNING: got out of turn request
+2016-05-19 13:50:26,109 - WARNING: already stopped or not in joined user
+2016-05-19 13:53:09,094 - WARNING: Room Created: id= 1928794454
+2016-05-19 13:53:09,110 - ERROR: Error in getLockProperties java.lang.NullPointerException
+2016-05-19 13:59:07,063 - WARNING: Room Created: id= 1460623858
+2016-05-19 13:59:07,078 - ERROR: Error in getLockProperties java.lang.NullPointerException
+2016-05-19 13:59:24,308 - ERROR: Error in getLockProperties java.lang.NullPointerException
+2016-05-19 13:59:39,010 - ERROR: Error in getLockProperties java.lang.NullPointerException
+2016-05-19 14:01:07,148 - WARNING: Room Created: id= 835015765
+2016-05-19 14:01:07,167 - ERROR: Error in getLockProperties java.lang.NullPointerException
+2016-05-19 14:03:09,112 - WARNING: Room Created: id= 337018640
+2016-05-19 14:03:09,130 - ERROR: Error in getLockProperties java.lang.NullPointerException
+2016-05-19 14:03:24,215 - ERROR: Error in getLockProperties java.lang.NullPointerException
+2016-05-19 14:03:50,168 - ERROR: Error in getLockProperties java.lang.NullPointerException
+2016-05-19 14:04:05,556 - WARNING: already stopped or not in joined user
+2016-05-19 14:04:05,570 - WARNING: already stopped or not in joined user
+2016-05-19 14:04:05,573 - WARNING: already stopped or not in joined user
+2016-05-19 14:04:05,606 - WARNING: got out of turn request
+2016-05-19 14:21:58,646 - WARNING: Room Created: id= 61205427
+2016-05-19 14:21:58,663 - ERROR: Error in getLockProperties java.lang.NullPointerException
+2016-05-19 14:22:17,383 - ERROR: Error in getLockProperties java.lang.NullPointerException
+2016-05-19 14:22:20,334 - ERROR: Error in getLockProperties java.lang.NullPointerException
+2016-05-19 14:22:50,700 - WARNING: already stopped or not in joined user
+2016-05-19 14:22:50,703 - WARNING: already stopped or not in joined user
+2016-05-19 14:22:50,704 - WARNING: already stopped or not in joined user
+2016-05-19 14:23:44,340 - WARNING: already stopped or not in joined user
+2016-05-19 14:23:44,346 - WARNING: already stopped or not in joined user
+2016-05-19 14:23:44,351 - WARNING: already stopped or not in joined user
+2016-05-19 14:24:24,895 - WARNING: already stopped or not in joined user
+2016-05-19 14:24:24,895 - WARNING: already stopped or not in joined user
+2016-05-19 14:24:24,899 - WARNING: already stopped or not in joined user
+2016-05-19 14:24:58,433 - WARNING: already stopped or not in joined user
+2016-05-19 14:24:58,434 - WARNING: already stopped or not in joined user
+2016-05-19 14:24:58,441 - WARNING: already stopped or not in joined user
+2016-05-19 14:25:31,956 - WARNING: already stopped or not in joined user
+2016-05-19 14:25:31,957 - WARNING: already stopped or not in joined user
+2016-05-19 14:25:31,957 - WARNING: already stopped or not in joined user
+2016-05-19 14:26:05,518 - WARNING: already stopped or not in joined user
+2016-05-19 14:26:05,520 - WARNING: already stopped or not in joined user
+2016-05-19 14:26:05,534 - WARNING: already stopped or not in joined user
+2016-05-19 14:32:50,880 - WARNING: Room Created: id= 1230689864
+2016-05-19 14:32:50,897 - ERROR: Error in getLockProperties java.lang.NullPointerException
+2016-05-19 14:32:54,483 - ERROR: Error in getLockProperties java.lang.NullPointerException
+2016-05-19 14:33:08,909 - ERROR: Error in getLockProperties java.lang.NullPointerException
+2016-05-19 14:34:30,372 - WARNING: Room Created: id= 313008992
+2016-05-19 14:34:30,387 - ERROR: Error in getLockProperties java.lang.NullPointerException
+2016-05-19 14:34:39,522 - ERROR: Error in getLockProperties java.lang.NullPointerException
+2016-05-19 14:34:57,783 - ERROR: Error in getLockProperties java.lang.NullPointerException
+2016-05-19 14:35:18,191 - WARNING: already stopped or not in joined user
+2016-05-19 14:35:18,194 - WARNING: already stopped or not in joined user
+2016-05-19 14:35:18,216 - WARNING: already stopped or not in joined user
+2016-05-19 14:36:08,700 - WARNING: already stopped or not in joined user
+2016-05-19 14:36:08,703 - WARNING: already stopped or not in joined user
+2016-05-19 14:36:08,704 - WARNING: already stopped or not in joined user
+2016-05-19 14:36:48,574 - WARNING: already stopped or not in joined user
+2016-05-19 14:36:48,574 - WARNING: already stopped or not in joined user
+2016-05-19 14:36:48,574 - WARNING: already stopped or not in joined user
+2016-05-19 14:37:30,914 - WARNING: already stopped or not in joined user
+2016-05-19 14:37:30,922 - WARNING: already stopped or not in joined user
+2016-05-19 14:37:30,928 - WARNING: already stopped or not in joined user
+2016-05-19 15:27:33,766 - WARNING: Room Created: id= 424233646
+2016-05-19 15:27:33,781 - ERROR: Error in getLockProperties java.lang.NullPointerException
+2016-05-19 15:27:53,584 - ERROR: Error in getLockProperties java.lang.NullPointerException
+2016-05-19 15:27:59,133 - ERROR: Error in getLockProperties java.lang.NullPointerException
+2016-05-19 15:28:25,973 - WARNING: already stopped or not in joined user
+2016-05-19 15:28:25,977 - WARNING: already stopped or not in joined user
+2016-05-19 15:28:25,978 - WARNING: already stopped or not in joined user
+2016-05-19 15:29:32,402 - WARNING: already stopped or not in joined user
+2016-05-19 15:29:32,405 - WARNING: already stopped or not in joined user
+2016-05-19 15:29:32,418 - WARNING: already stopped or not in joined user
+2016-05-19 15:30:34,156 - WARNING: already stopped or not in joined user
+2016-05-19 15:30:34,162 - WARNING: already stopped or not in joined user
+2016-05-19 15:30:34,167 - WARNING: already stopped or not in joined user
+2016-05-19 15:35:08,318 - WARNING: Room Created: id= 356791868
+2016-05-19 15:35:08,335 - ERROR: Error in getLockProperties java.lang.NullPointerException
+2016-05-19 15:35:21,001 - ERROR: Error in getLockProperties java.lang.NullPointerException
+2016-05-19 15:35:35,704 - ERROR: Error in getLockProperties java.lang.NullPointerException
+2016-05-19 15:36:34,721 - WARNING: already stopped or not in joined user
+2016-05-19 15:36:34,726 - WARNING: already stopped or not in joined user
+2016-05-19 15:36:34,727 - WARNING: already stopped or not in joined user
+2016-05-19 15:38:49,749 - WARNING: already stopped or not in joined user
+2016-05-19 15:38:49,750 - WARNING: already stopped or not in joined user
+2016-05-19 15:38:49,751 - WARNING: already stopped or not in joined user
+2016-05-19 15:51:27,774 - ERROR: Error in getLockProperties java.lang.NullPointerException
+2016-05-19 15:51:46,819 - ERROR: Error in getLockProperties java.lang.NullPointerException
+2016-05-19 15:51:51,206 - ERROR: Error in getLockProperties java.lang.NullPointerException
+2016-05-19 15:53:11,205 - WARNING: already stopped or not in joined user
+2016-05-19 15:53:11,207 - WARNING: already stopped or not in joined user
+2016-05-19 15:53:11,208 - WARNING: already stopped or not in joined user
+2016-05-19 15:55:38,111 - WARNING: already stopped or not in joined user
+2016-05-19 15:55:38,135 - WARNING: already stopped or not in joined user
+2016-05-19 15:55:38,136 - WARNING: already stopped or not in joined user
+2016-05-19 15:57:11,647 - WARNING: already stopped or not in joined user
+2016-05-19 15:57:11,647 - WARNING: already stopped or not in joined user
+2016-05-19 15:57:11,656 - WARNING: already stopped or not in joined user
+2016-05-19 15:58:44,834 - WARNING: already stopped or not in joined user
+2016-05-19 15:58:44,835 - WARNING: already stopped or not in joined user
+2016-05-19 15:58:44,838 - WARNING: already stopped or not in joined user
+2016-05-19 16:04:30,265 - WARNING: Room Created: id= 1333037541
+2016-05-19 16:04:30,278 - ERROR: Error in getLockProperties java.lang.NullPointerException
+2016-05-19 16:04:47,585 - ERROR: Error in getLockProperties java.lang.NullPointerException
+2016-05-19 16:05:03,222 - ERROR: Error in getLockProperties java.lang.NullPointerException
+2016-05-19 16:05:46,505 - WARNING: already stopped or not in joined user
+2016-05-19 16:05:46,507 - WARNING: already stopped or not in joined user
+2016-05-19 16:05:46,508 - WARNING: already stopped or not in joined user
+2016-05-19 16:06:20,012 - WARNING: already stopped or not in joined user
+2016-05-19 16:06:20,019 - WARNING: already stopped or not in joined user
+2016-05-19 16:06:20,039 - WARNING: already stopped or not in joined user
+2016-05-19 16:18:24,472 - WARNING: Room Created: id= 251323825
+2016-05-19 16:18:24,489 - ERROR: Error in getLockProperties java.lang.NullPointerException
+2016-05-19 16:18:47,319 - ERROR: Error in getLockProperties java.lang.NullPointerException
+2016-05-19 16:18:50,876 - ERROR: Error in getLockProperties java.lang.NullPointerException
+2016-05-19 16:20:03,484 - WARNING: already stopped or not in joined user
+2016-05-19 16:20:03,491 - WARNING: already stopped or not in joined user
+2016-05-19 16:20:03,495 - WARNING: already stopped or not in joined user
+2016-05-19 16:27:40,558 - ERROR: Error in getLockProperties java.lang.NullPointerException
+2016-05-19 16:28:00,333 - ERROR: Error in getLockProperties java.lang.NullPointerException
+2016-05-19 16:28:04,345 - ERROR: Error in getLockProperties java.lang.NullPointerException
+2016-05-19 16:28:29,589 - WARNING: already stopped or not in joined user
+2016-05-19 16:28:29,593 - WARNING: already stopped or not in joined user
+2016-05-19 16:28:29,601 - WARNING: already stopped or not in joined user
+2016-05-19 16:30:02,775 - WARNING: already stopped or not in joined user
+2016-05-19 16:30:02,780 - WARNING: already stopped or not in joined user
+2016-05-19 16:30:02,783 - WARNING: already stopped or not in joined user
+2016-05-19 16:31:36,336 - WARNING: already stopped or not in joined user
+2016-05-19 16:31:36,343 - WARNING: already stopped or not in joined user
+2016-05-19 16:31:36,348 - WARNING: already stopped or not in joined user
+2016-05-19 16:33:09,906 - WARNING: already stopped or not in joined user
+2016-05-19 16:33:09,906 - WARNING: already stopped or not in joined user
+2016-05-19 16:33:09,907 - WARNING: already stopped or not in joined user
+2016-05-19 16:34:14,243 - WARNING: Room Created: id= 1434906254
+2016-05-19 16:34:14,257 - ERROR: Error in getLockProperties java.lang.NullPointerException
+2016-05-19 16:34:34,466 - ERROR: Error in getLockProperties java.lang.NullPointerException
+2016-05-19 16:34:53,278 - ERROR: Error in getLockProperties java.lang.NullPointerException
+2016-05-19 16:35:19,157 - WARNING: already stopped or not in joined user
+2016-05-19 16:35:19,159 - WARNING: already stopped or not in joined user
+2016-05-19 16:35:19,170 - WARNING: already stopped or not in joined user
+2016-05-19 16:35:56,303 - WARNING: already stopped or not in joined user
+2016-05-19 16:35:56,304 - WARNING: already stopped or not in joined user
+2016-05-19 16:35:56,308 - WARNING: already stopped or not in joined user
+2016-05-19 16:37:38,265 - ERROR: Error in getLockProperties java.lang.NullPointerException
+2016-05-19 16:37:50,751 - ERROR: Error in getLockProperties java.lang.NullPointerException
+2016-05-19 16:38:02,679 - ERROR: Error in getLockProperties java.lang.NullPointerException
+2016-05-19 16:38:42,259 - WARNING: already stopped or not in joined user
+2016-05-19 16:38:42,263 - WARNING: already stopped or not in joined user
+2016-05-19 16:38:42,267 - WARNING: already stopped or not in joined user
+2016-05-19 16:40:29,056 - WARNING: Room Created: id= 293218457
+2016-05-19 16:40:29,072 - ERROR: Error in getLockProperties java.lang.NullPointerException
+2016-05-19 16:40:32,405 - ERROR: Error in getLockProperties java.lang.NullPointerException
+2016-05-19 16:40:47,612 - ERROR: Error in getLockProperties java.lang.NullPointerException
+2016-05-19 16:41:12,225 - WARNING: already stopped or not in joined user
+2016-05-19 16:41:12,236 - WARNING: already stopped or not in joined user
+2016-05-19 16:41:12,237 - WARNING: already stopped or not in joined user
+2016-05-19 16:41:47,792 - WARNING: already stopped or not in joined user
+2016-05-19 16:41:47,792 - WARNING: already stopped or not in joined user
+2016-05-19 16:41:47,810 - WARNING: already stopped or not in joined user
+2016-05-19 16:42:24,587 - WARNING: already stopped or not in joined user
+2016-05-19 16:42:24,588 - WARNING: already stopped or not in joined user
+2016-05-19 16:42:24,596 - WARNING: already stopped or not in joined user
+2016-05-19 16:42:58,181 - WARNING: already stopped or not in joined user
+2016-05-19 16:42:58,187 - WARNING: already stopped or not in joined user
+2016-05-19 16:42:58,190 - WARNING: already stopped or not in joined user
+2016-05-19 16:43:31,840 - WARNING: already stopped or not in joined user
+2016-05-19 16:43:31,857 - WARNING: already stopped or not in joined user
+2016-05-19 16:43:31,862 - WARNING: already stopped or not in joined user
+2016-05-19 16:52:02,013 - WARNING: Room Created: id= 772818823
+2016-05-19 16:52:02,028 - ERROR: Error in getLockProperties java.lang.NullPointerException
+2016-05-19 16:52:43,242 - ERROR: Error in getLockProperties java.lang.NullPointerException
+2016-05-19 16:54:04,577 - WARNING: Room Created: id= 848412955
+2016-05-19 16:54:04,596 - ERROR: Error in getLockProperties java.lang.NullPointerException
+2016-05-19 16:54:19,304 - ERROR: Error in getLockProperties java.lang.NullPointerException
+2016-05-19 16:54:23,214 - ERROR: Error in getLockProperties java.lang.NullPointerException
+2016-05-19 16:55:54,888 - WARNING: Room Created: id= 1984313296
+2016-05-19 16:55:54,907 - ERROR: Error in getLockProperties java.lang.NullPointerException
+2016-05-19 16:56:11,330 - ERROR: Error in getLockProperties java.lang.NullPointerException
+2016-05-19 16:56:14,861 - ERROR: Error in getLockProperties java.lang.NullPointerException
+2016-05-19 16:56:25,277 - WARNING: already stopped or not in joined user
+2016-05-19 16:56:25,286 - WARNING: already stopped or not in joined user
+2016-05-19 17:15:20,446 - ERROR: Error in getLockProperties java.lang.NullPointerException
+2016-05-19 17:15:32,832 - ERROR: Error in getLockProperties java.lang.NullPointerException
+2016-05-19 17:15:49,932 - WARNING: already stopped or not in joined user
+2016-05-19 17:15:49,932 - WARNING: already stopped or not in joined user
+2016-05-19 17:18:24,932 - ERROR: Error in getLockProperties java.lang.NullPointerException
+2016-05-19 17:18:28,587 - ERROR: Error in getLockProperties java.lang.NullPointerException
+2016-05-19 17:18:52,798 - WARNING: already stopped or not in joined user
+2016-05-19 17:18:52,799 - WARNING: already stopped or not in joined user
+2016-05-19 17:19:22,707 - WARNING: already stopped or not in joined user
+2016-05-19 17:19:22,715 - WARNING: already stopped or not in joined user
+2016-05-19 17:19:53,676 - WARNING: already stopped or not in joined user
+2016-05-19 17:19:53,678 - WARNING: already stopped or not in joined user
+2016-05-19 17:20:26,385 - WARNING: already stopped or not in joined user
+2016-05-19 17:20:26,390 - WARNING: already stopped or not in joined user
+2016-05-19 17:25:37,676 - WARNING: Room Created: id= 1655482711
+2016-05-19 17:25:37,691 - ERROR: Error in getLockProperties java.lang.NullPointerException
+2016-05-19 17:25:50,634 - ERROR: Error in getLockProperties java.lang.NullPointerException
+2016-05-19 17:26:01,983 - WARNING: already stopped or not in joined user
+2016-05-19 17:26:01,993 - WARNING: already stopped or not in joined user
+2016-05-19 17:26:26,850 - WARNING: already stopped or not in joined user
+2016-05-19 17:26:26,852 - WARNING: already stopped or not in joined user
+2016-05-19 17:41:46,181 - WARNING: Room Created: id= 954129812
+2016-05-19 17:41:46,198 - ERROR: Error in getLockProperties java.lang.NullPointerException
+2016-05-19 17:42:05,774 - ERROR: Error in getLockProperties java.lang.NullPointerException
+2016-05-19 17:42:09,131 - ERROR: Error in getLockProperties java.lang.NullPointerException
+2016-05-19 17:42:39,013 - ERROR: Error in getLockProperties java.lang.NullPointerException
+2016-05-19 17:42:42,973 - ERROR: Error in getLockProperties java.lang.NullPointerException
+2016-05-19 17:43:03,904 - WARNING: already stopped or not in joined user
+2016-05-19 17:43:03,908 - WARNING: already stopped or not in joined user
+2016-05-19 17:43:33,940 - WARNING: already stopped or not in joined user
+2016-05-19 17:43:33,948 - WARNING: already stopped or not in joined user
+2016-05-19 17:44:05,443 - WARNING: already stopped or not in joined user
+2016-05-19 17:44:05,444 - WARNING: already stopped or not in joined user
+2016-05-19 17:44:29,876 - WARNING: already stopped or not in joined user
+2016-05-19 17:44:29,879 - WARNING: already stopped or not in joined user
+2016-05-19 17:45:07,032 - WARNING: already stopped or not in joined user
+2016-05-19 17:45:07,037 - WARNING: already stopped or not in joined user
+2016-05-19 17:51:21,413 - WARNING: Room Created: id= 1164088830
+2016-05-19 17:51:21,430 - ERROR: Error in getLockProperties java.lang.NullPointerException
+2016-05-19 17:51:33,287 - ERROR: Error in getLockProperties java.lang.NullPointerException
+2016-05-19 17:51:47,395 - WARNING: already stopped or not in joined user
+2016-05-19 17:51:47,397 - WARNING: already stopped or not in joined user
+2016-05-19 17:52:07,041 - WARNING: already stopped or not in joined user
+2016-05-19 17:52:07,044 - WARNING: already stopped or not in joined user
+2016-05-19 17:52:25,525 - WARNING: already stopped or not in joined user
+2016-05-19 17:52:25,528 - WARNING: already stopped or not in joined user
+2016-05-19 17:52:59,144 - WARNING: already stopped or not in joined user
+2016-05-19 17:52:59,151 - WARNING: already stopped or not in joined user
+2016-05-19 17:53:16,874 - WARNING: already stopped or not in joined user
+2016-05-19 17:53:16,883 - WARNING: already stopped or not in joined user
+2016-05-19 17:53:44,684 - WARNING: already stopped or not in joined user
+2016-05-19 17:53:44,695 - WARNING: already stopped or not in joined user
+2016-05-19 17:54:16,567 - WARNING: already stopped or not in joined user
+2016-05-19 17:54:16,567 - WARNING: already stopped or not in joined user
+2016-05-19 17:54:51,496 - WARNING: already stopped or not in joined user
+2016-05-19 17:54:51,497 - WARNING: already stopped or not in joined user
+2016-05-19 17:55:20,120 - WARNING: already stopped or not in joined user
+2016-05-19 17:55:20,122 - WARNING: already stopped or not in joined user
+2016-05-19 17:55:55,852 - ERROR: Error in getLockProperties java.lang.NullPointerException
+2016-05-19 17:56:07,686 - WARNING: already stopped or not in joined user
+2016-05-19 17:56:07,738 - WARNING: already stopped or not in joined user
+2016-05-19 17:56:07,740 - WARNING: already stopped or not in joined user
+2016-05-19 17:56:41,078 - WARNING: already stopped or not in joined user
+2016-05-19 17:56:41,080 - WARNING: already stopped or not in joined user
+2016-05-19 17:56:41,098 - WARNING: already stopped or not in joined user
+2016-05-19 17:57:07,410 - WARNING: already stopped or not in joined user
+2016-05-19 17:57:07,411 - WARNING: already stopped or not in joined user
+2016-05-19 17:58:27,490 - WARNING: Room Created: id= 1095367428
+2016-05-19 17:58:59,443 - WARNING: got out of turn request
+2016-05-19 17:59:00,263 - WARNING: got out of turn request
+2016-05-19 18:01:27,371 - WARNING: Room Created: id= 2013760174
+2016-05-19 18:10:16,869 - WARNING: Room Created: id= 1285452951
+2016-05-19 18:12:03,201 - WARNING: got out of turn request
+2016-05-19 18:12:04,241 - WARNING: got out of turn request
+2016-05-19 18:13:03,110 - WARNING: got out of turn request
+2016-05-19 18:13:04,027 - WARNING: got out of turn request
+2016-05-19 18:13:26,570 - WARNING: got out of turn request
+2016-05-19 18:13:47,705 - WARNING: got out of turn request
+2016-05-19 18:13:48,646 - WARNING: got out of turn request
+2016-05-19 18:14:22,303 - WARNING: got out of turn request
+2016-05-19 18:14:24,415 - WARNING: got out of turn request
+2016-05-19 18:16:34,059 - WARNING: exceptionCaught cause null remote /192.168.1.128:64793
+2016-05-19 18:16:34,872 - WARNING: got out of turn request
+2016-05-19 18:17:19,331 - WARNING: got out of turn request
+2016-05-19 18:19:37,880 - WARNING: got out of turn request
+2016-05-19 18:24:09,614 - WARNING: got out of turn request
+2016-05-19 18:24:10,471 - WARNING: got out of turn request
+2016-05-19 18:24:36,405 - ERROR: Error in getLockProperties java.lang.NullPointerException
+2016-05-19 18:24:40,183 - WARNING: Room Created: id= 461202015
+2016-05-19 18:24:40,207 - ERROR: Error in getLockProperties java.lang.NullPointerException
+2016-05-19 18:24:43,312 - ERROR: Error in getLockProperties java.lang.NullPointerException
+2016-05-19 18:24:43,312 - ERROR: Error in getLockProperties java.lang.NullPointerException
+2016-05-19 18:24:53,527 - ERROR: Error in getLockProperties java.lang.NullPointerException
+2016-05-19 18:24:53,527 - ERROR: Error in getLockProperties java.lang.NullPointerException
+2016-05-19 18:25:08,760 - WARNING: already stopped or not in joined user
+2016-05-19 18:25:08,764 - WARNING: already stopped or not in joined user
+2016-05-19 18:25:08,772 - WARNING: already stopped or not in joined user
+2016-05-19 18:25:27,470 - WARNING: got out of turn request
+2016-05-19 18:25:27,480 - WARNING: got out of turn request

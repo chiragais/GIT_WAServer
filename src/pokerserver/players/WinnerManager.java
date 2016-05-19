@@ -7,6 +7,7 @@ import java.util.List;
 
 import pokerserver.cards.Card;
 import pokerserver.handrank.GeneralHandManager;
+import pokerserver.payout.PayoutManager;
 import pokerserver.turns.TurnManager;
 import pokerserver.utils.GameConstants;
 import pokerserver.utils.GameConstants.HAND_RANK;
@@ -202,7 +203,7 @@ public class WinnerManager implements GameConstants{
 		return listWinnerWAPotAfterFold;
 	}
 	public void findWinnerPlayers(int gameType) {
-	//	System.out.println("\n Find Winner Player ------------");
+//		System.out.println("\n Find Winner Player ------------"+gameType);
 		List<PlayerBean> listAscWinningPlayers = generateWinnerPlayers(); 
 
 		// Manage WA card pots
@@ -217,14 +218,35 @@ public class WinnerManager implements GameConstants{
 				}
 			}
 		}
+		if(gameType==GAME_TYPE_TOURNAMENT_SIT_N_GO || gameType==GAME_TYPE_TOURNAMENT_REGULAR){
+			PayoutManager payoutManager = new PayoutManager(9);
+			for (int i =0;i<listAscWinningPlayers.size();i++) {
+				PlayerBean player = listAscWinningPlayers.get(i);
+				float winningPercentage = payoutManager.getWinnigPercentage(i);
+				if (winningPercentage > 0f) {
+					float winningAmt = (totalTableAmount * winningPercentage) / 100;
+					Winner winner = new Winner(player,(int) winningAmt);
+					winner.getPlayer().setBalance(
+							winner.getPlayer().getBalance()
+									+ winner.getWinningAmount());
+					listWinners.add(winner);
+					System.out.println("SNG : Player : "
+							+ player.getPlayerName() + " > Rank Index : " + i
+							+ " > Payout : " + winningPercentage
+							+ " > Winning Amt : " + winningAmt
+							+ " > Pot Amt : " + totalTableAmount);
+				}
+			}
+			totalTableAmount = 0;
+		}
 		if (gameType == GAME_TYPE_REGULAR) {
 			// For Regular game
 			for (PlayerBean player : listAscWinningPlayers) {
 				if (!player.isFolded()) {
 					if (!player.isAllIn()) {
 						Winner winner = new Winner(player, totalTableAmount);
-						winner.getPlayer().setTotalBalance(
-								winner.getPlayer().getTotalBalance()
+						winner.getPlayer().setBalance(
+								winner.getPlayer().getBalance()
 										+ winner.getWinningAmount());
 						totalTableAmount = 0;
 						listWinners.add(winner);
@@ -233,16 +255,16 @@ public class WinnerManager implements GameConstants{
 						if (getAllInPotAmount(player.getPlayerName()) < totalTableAmount) {
 							Winner winner = new Winner(player,
 									getAllInPotAmount(player.getPlayerName()));
-							winner.getPlayer().setTotalBalance(
-									winner.getPlayer().getTotalBalance()
+							winner.getPlayer().setBalance(
+									winner.getPlayer().getBalance()
 											+ winner.getWinningAmount());
 							totalTableAmount -= getAllInPotAmount(player
 									.getPlayerName());
 							listWinners.add(winner);
 						} else {
 							Winner winner = new Winner(player, totalTableAmount);
-							winner.getPlayer().setTotalBalance(
-									winner.getPlayer().getTotalBalance()
+							winner.getPlayer().setBalance(
+									winner.getPlayer().getBalance()
 											+ winner.getWinningAmount());
 							totalTableAmount = 0;
 							listWinners.add(winner);
@@ -251,9 +273,9 @@ public class WinnerManager implements GameConstants{
 					}
 				}
 			}
-		}else if(gameType==GAME_TYPE_SIT_N_GO){
-			
 		}
+//		else
+		
 		if (totalTableAmount != 0) {
 			remainingAmount = totalTableAmount;
 		}

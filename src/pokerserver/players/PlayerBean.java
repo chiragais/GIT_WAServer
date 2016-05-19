@@ -80,7 +80,7 @@ public class PlayerBean {
 		this.playerName = pName;
 	}
 
-	public void setTotalBalance(int playersBal) {
+	public void setBalance(int playersBal) {
 		this.totalBalance = playersBal;
 	}
 
@@ -101,7 +101,7 @@ public class PlayerBean {
 		return waCard;
 	}
 
-	public int getTotalBalance() {
+	public int getBalance() {
 		return this.totalBalance;
 	}
 	

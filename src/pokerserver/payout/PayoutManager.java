@@ -51,8 +51,12 @@ public class PayoutManager {
 	 */
 	float[] PLAN12 = {24.50f,12.50f,9.00f,6.25f,5.25f,4.25f,3.25f,2.25f,1.50f,1.25f,0.85f,0.65f,0.45f,0.35f,0.30f,0.25f,0.20f,0.15f,0.125f};
 	
-	public PayoutManager() {
-		// TODO Auto-generated constructor stub
+	float[] PAYOUT_PLAN;
+	
+	int totalPlayer;
+	public PayoutManager(int totalPlayer) {
+		this.totalPlayer = totalPlayer;
+		this.PAYOUT_PLAN = getPayOutPlayerIndex(totalPlayer);
 	}
 	
 	/**
@@ -62,20 +66,17 @@ public class PayoutManager {
 	 * @param totalPlayer
 	 * @return
 	 */
-	public float getWinnigPercentage(int rankIndex,int totalPlayer){
-		
-		
-		
+	public float getWinnigPercentage(int rankIndex){
+		if (PAYOUT_PLAN != null && PAYOUT_PLAN.length>=rankIndex) {
+			float winningPercentage = PAYOUT_PLAN[getPayOutRankIndex(rankIndex)];
+			return winningPercentage;
+		}
 		return 0f;
 	}
-	/**
-	 * Prize money plan is based on total number of register player in tournament
-	 * @param playerIndex
-	 * @return
-	 */
-	public float[] getPrizeMoneyPlan(int playerIndex){
+	
+	public float[] getPrizeMoneyPlan(int totalPlayer){
 		
-		switch (playerIndex) {
+		switch (totalPlayer) {
 		case 1:
 			return PLAN1;
 		case 2:
@@ -104,34 +105,62 @@ public class PayoutManager {
 			return null;
 		}
 	}
-
-	public int getPayOutPlayerIndex(int totalPlr){
+	/**
+	 * Prize money plan is based on total number of register player in tournament
+	 * @param totalPlayer
+	 * @return
+	 */
+	public float[] getPayOutPlayerIndex(int totalPlr){
 		
-		if(isBetween(totalPlr, 1, 9))
-			return 1;
-		if(isBetween(totalPlr, 10, 32))
-			return 2;
-		if(isBetween(totalPlr, 33, 56))
-			return 3;
-		if(isBetween(totalPlr, 57, 96))
-			return 4;
-		if(isBetween(totalPlr, 97, 192))
-			return 5;
-		if(isBetween(totalPlr, 193, 296))
-			return 6;
-		if(isBetween(totalPlr, 297, 392))
-			return 7;
-		if(isBetween(totalPlr, 393, 496))
-			return 8;
-		if(isBetween(totalPlr, 497, 592))
-			return 9;
-		if(isBetween(totalPlr, 593, 792))
-			return 10;
-		if(isBetween(totalPlr, 793, 992))
-			return 11;
-		if(isBetween(totalPlr, 993, 1999))
-			return 12;
-		return 0;
+		if(isBetween(totalPlr, 1, 9)){
+			System.out.println("Payout Plan : 1");
+			return PLAN1;
+		}
+		if(isBetween(totalPlr, 10, 32)){
+			System.out.println("Payout Plan : 2");
+			return PLAN2;
+		}
+		if(isBetween(totalPlr, 33, 56)){
+			System.out.println("Payout Plan : 3");
+			return PLAN3;
+		}
+		if(isBetween(totalPlr, 57, 96)){
+			System.out.println("Payout Plan : 4");
+			return PLAN4;
+		}
+		if(isBetween(totalPlr, 97, 192)){
+			System.out.println("Payout Plan : 5");
+			return PLAN5;
+		}
+		if(isBetween(totalPlr, 193, 296)){
+			System.out.println("Payout Plan : 6");
+			return PLAN6;
+		}
+		if(isBetween(totalPlr, 297, 392)){
+			System.out.println("Payout Plan : 7");
+			return PLAN7;
+		}
+		if(isBetween(totalPlr, 393, 496)){
+			System.out.println("Payout Plan : 8");
+			return PLAN8;
+		}
+		if(isBetween(totalPlr, 497, 592)){
+			System.out.println("Payout Plan : 9");
+			return PLAN9;
+		}
+		if(isBetween(totalPlr, 593, 792)){
+			System.out.println("Payout Plan : 10");
+			return PLAN10;
+		}
+		if(isBetween(totalPlr, 793, 992)){
+			System.out.println("Payout Plan : 11");
+			return PLAN11;
+		}
+		if(isBetween(totalPlr, 993, 1999)){
+			System.out.println("Payout Plan : 12");
+			return PLAN12;
+		}
+		return null;
 	}
 	public int getPayOutRankIndex(int rank){
 		switch (rank) {

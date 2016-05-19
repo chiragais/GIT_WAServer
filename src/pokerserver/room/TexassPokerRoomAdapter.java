@@ -2,6 +2,8 @@ package pokerserver.room;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -31,7 +33,8 @@ public class TexassPokerRoomAdapter extends BaseTurnRoomAdaptor implements
 	private ITurnBasedRoom gameRoom;
 	private byte GAME_STATUS;
 	TexassGameManager gameManager;
-
+	private boolean isBreakTime = false;
+	
 	List<String> listRestartGameReq = new ArrayList<String>();
 	
 	public TexassPokerRoomAdapter(IZone izone, ITurnBasedRoom room) {
@@ -60,6 +63,13 @@ public class TexassPokerRoomAdapter extends BaseTurnRoomAdaptor implements
 
 	}
 	private void startGame() {
+		if((gameManager.getGameType()== GAME_TYPE_TOURNAMENT_REGULAR ||
+				gameManager.getGameType() == GAME_TYPE_TOURNAMENT_SIT_N_GO) &&
+				!gameManager.isTournamentStarted()){
+			gameManager.setTournamentStarted(true);
+			manageBliendLeveAndReBuyOfTournament();
+		}
+
 		managePlayerTurn(gameManager.getPlayersManager().getBigBlindPayer()
 				.getPlayerName());
 		gameRoom.startGame(TEXASS_SERVER_NAME);
@@ -72,7 +82,7 @@ public class TexassPokerRoomAdapter extends BaseTurnRoomAdaptor implements
 		if (currentRoundManager != null) {
 			PlayerBean nextPlayer = getNextPlayerFromCurrentPlayer(currentPlayer);
 			if (nextPlayer == null) {
-				System.out.println(" Next turn player : Null");
+//				System.out.println(" Next turn player : Null");
 			} else {
 				while (nextPlayer.isFolded() || nextPlayer.isAllIn()) {
 					System.out.println(" Next turn player : "
@@ -131,9 +141,10 @@ public class TexassPokerRoomAdapter extends BaseTurnRoomAdaptor implements
 						.getCardName());
 				cardsObject.put(TAG_CARD_PLAYER_2, player.getSecondCard()
 						.getCardName());
-				cardsObject.put(TAG_PLAYER_BALANCE, player.getTotalBalance());
+				cardsObject.put(TAG_PLAYER_BALANCE, player.getBalance());
 				cardsObject.put(TAG_GAME_STATUS, GAME_STATUS);
 				cardsObject.put(TAG_PLAYER_STATUS, plrStatus);
+				cardsObject.put(TAG_CURRENT_ROUND,gameManager.getCurrentRoundIndex());
 				gameRoom.BroadcastChat(TEXASS_SERVER_NAME, RESPONSE_FOR_PLAYERS_INFO
 						+ cardsObject.toString());
 				System.out.println("Texass Player Info : " + cardsObject.toString());
@@ -304,8 +315,8 @@ public class TexassPokerRoomAdapter extends BaseTurnRoomAdaptor implements
 			}
 		}
 		if(gameRoom.getJoinedUsers().size() == 0 && gameManager.getGameType() != GAME_TYPE_REGULAR){
-			System.out.print("CD:: Bliend Amt : "+SBAmount);
-			gameManager.setBliendAmount(SBAmount);
+//			System.out.print("CD:: Bliend Amt : "+SBAmount);
+			gameManager.setNewBliendAmount(SBAmount);
 		}
 		
 	}
@@ -321,6 +332,7 @@ public class TexassPokerRoomAdapter extends BaseTurnRoomAdaptor implements
 //			izone.deleteRoom(gameRoom.getId());
 			gameRoom.stopGame(TEXASS_SERVER_NAME);
 			GAME_STATUS = FINISHED;
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -336,10 +348,10 @@ public class TexassPokerRoomAdapter extends BaseTurnRoomAdaptor implements
 			gameManager.addTournamentPlayer(playerBean);
 		}
 		gameManager.getPlayersManager().removeAllPlayers();
+		gameManager.initGameRounds();
 		for (IUser user : gameRoom.getJoinedUsers()) {
 			addNewPlayerCards(user.getName());
 		}
-		gameManager.initGameRounds();
 		sendDefaultCards(null, true);
 		broadcastPlayerCardsInfo();
 		broadcastBlindPlayerDatas();
@@ -383,18 +395,36 @@ public class TexassPokerRoomAdapter extends BaseTurnRoomAdaptor implements
 		} else if (message.startsWith(REQUEST_FOR_RESTART_GAME)) {
 			listRestartGameReq.add(sender.getName());
 			if (isRequestFromAllActivePlayers())
-				handleRestartGame();
+				if(!isBreakTime)
+					handleRestartGame();
+				else{
+					System.out.println("===<><><> Break Time <><><>===");
+					startBreakTimer();
+				}
 		}else if(message.startsWith(REQUEST_FOR_BLIEND_AMOUNT)){
 			message = message.replace(REQUEST_FOR_BLIEND_AMOUNT, "");
 			try {
 				JSONObject jsonObject = new JSONObject(message);
-				gameManager.setBliendAmount(jsonObject.getInt(TAG_SMALL_BLIEND_AMOUNT));
+				gameManager.setNewBliendAmount(jsonObject.getInt(TAG_SMALL_BLIEND_AMOUNT));
 				gameManager.setGameType(jsonObject.getInt(TAG_GAME_TYPE));
+				isBreakTime=false;
 			} catch (JSONException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			System.out.println("Bliend Amt : "+ message);
+		}else if(message.startsWith(REQUEST_FOR_RE_BUY)){
+			System.out.println("<> Request for ReBuy : "+ sender);
+//			sender.SendChatNotification(TEXASS_SERVER_NAME, REQUEST_FOR_RE_BUY, gameRoom);
+			JSONObject playerObject = new JSONObject();
+			try {
+				PlayerBean playerBean = gameManager.getPlayersManager().getPlayerByName(sender.getName());
+				playerBean.setBalance(playerBean.getBalance()+gameManager.getTournamentEntryFee());
+				playerObject.put(TAG_PLAYER_NAME, sender.getName());
+				playerObject.put(TAG_PLAYER_BALANCE, playerBean.getBalance());
+			}catch(JSONException e){
+				e.printStackTrace();
+			}
+			gameRoom.BroadcastChat(TEXASS_SERVER_NAME,
+					REQUEST_FOR_RE_BUY + playerObject.toString());
 		}
 	}
 	private boolean isRequestFromAllActivePlayers() {
@@ -433,7 +463,9 @@ public class TexassPokerRoomAdapter extends BaseTurnRoomAdaptor implements
 		sendDefaultCards(user, false);
 		broadcastPlayerCardsInfo();
 		broadcastBlindPlayerDatas();
-		System.out.println("Game Status : " + GAME_STATUS);
+		if(gameManager.getGameType()==GAME_TYPE_TOURNAMENT_REGULAR || gameManager.getGameType()== GAME_TYPE_TOURNAMENT_SIT_N_GO)
+			gameRoom.BroadcastChat(TEXASS_SERVER_NAME, RESPONSE_FOR_RE_BUY_STATUS+gameManager.isReBuyChips);
+		System.out.println("Game Status : " + GAME_STATUS +" >> "+gameManager.getGameType());
 	}
 	
 	private void addNewPlayerCards(String userName) {
@@ -457,9 +489,9 @@ public class TexassPokerRoomAdapter extends BaseTurnRoomAdaptor implements
 			player.setTotalBalance(plrBalance);
 		}*/
 		int prvBalance =gameManager.getPlayerPreviousBalance(userName);
-		int plrBalance = prvBalance!=0 ?prvBalance :2000;
+		int plrBalance = prvBalance!=0 ?prvBalance :gameManager.getTournamentEntryFee();
 		System.out.println("<<>>> "+userName +" : "+plrBalance);
-		player.setTotalBalance(plrBalance);
+		player.setBalance(plrBalance);
 		
 		player.setCards(gameManager.generatePlayerCards(),
 				gameManager.generatePlayerCards(),
@@ -522,13 +554,17 @@ public class TexassPokerRoomAdapter extends BaseTurnRoomAdaptor implements
 				int totalPlayerInRoom = gameManager.getPlayersManager()
 						.getAllAvailablePlayers().size();
 				
-				System.out.println("Total Players : " + totalPlayerInRoom);
+//				System.out.println("Total Players : " + totalPlayerInRoom);
 
 				if (totalPlayerInRoom > 0) {
 					cardsObject.put(TAG_PLAYER_DEALER, gameManager
 							.getPlayersManager().getDealerPayer().getPlayerName());
+					cardsObject.put(TAG_PLAYER_BIG_BLIND, gameManager
+							.getPlayersManager().getDealerPayer().getPlayerName());
 				} else {
 					cardsObject.put(TAG_PLAYER_DEALER, RESPONSE_DATA_SEPRATOR);
+					cardsObject.put(TAG_PLAYER_BIG_BLIND,
+							RESPONSE_DATA_SEPRATOR);
 				}
 				if (totalPlayerInRoom > 1) {
 					cardsObject.put(TAG_PLAYER_SMALL_BLIND, gameManager
@@ -540,9 +576,6 @@ public class TexassPokerRoomAdapter extends BaseTurnRoomAdaptor implements
 				if (totalPlayerInRoom > 2) {
 					cardsObject.put(TAG_PLAYER_BIG_BLIND, gameManager
 							.getPlayersManager().getBigBlindPayer().getPlayerName());
-				} else {
-					cardsObject.put(TAG_PLAYER_BIG_BLIND,
-							RESPONSE_DATA_SEPRATOR);
 				}
 				cardsObject.put(TAG_SMALL_BLIEND_AMOUNT,gameManager.getBliendAmount());
 				
@@ -563,7 +596,7 @@ public class TexassPokerRoomAdapter extends BaseTurnRoomAdaptor implements
 			cardsObject.put(TAG_ROUND, gameManager.getCurrentRoundIndex());
 			cardsObject
 					.put(TAG_TABLE_AMOUNT, gameManager.getTotalTableAmount());
-			System.out.println("Round done " + cardsObject.toString());
+//			System.out.println("Round done " + cardsObject.toString());
 			gameRoom.BroadcastChat(TEXASS_SERVER_NAME, RESPONSE_FOR_ROUND_COMPLETE
 					+ cardsObject.toString());
 		} catch (JSONException e) {
@@ -582,7 +615,7 @@ public class TexassPokerRoomAdapter extends BaseTurnRoomAdaptor implements
 						gameManager.getTotalTableAmount());
 
 				winnerObject.put(TAG_WINNER_TOTAL_BALENCE, winnerPlayer
-						.getPlayer().getTotalBalance());
+						.getPlayer().getBalance());
 				winnerObject.put(TAG_WINNER_NAME, winnerPlayer.getPlayer()
 						.getPlayerName());
 				winnerObject.put(TAG_WINNER_RANK, winnerPlayer.getPlayer()
@@ -620,12 +653,83 @@ public class TexassPokerRoomAdapter extends BaseTurnRoomAdaptor implements
 			cardsObject.put(TAG_PLAYER_NAME, turnManager.getPlayer()
 					.getPlayerName());
 			cardsObject.put(TAG_PLAYER_BALANCE, turnManager.getPlayer()
-					.getTotalBalance());
+					.getBalance());
 			gameRoom.BroadcastChat(TEXASS_SERVER_NAME, RESPONSE_FOR_ACTION_DONE
 					+ cardsObject.toString());
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
-
 	}
+	
+	private void manageBliendLeveAndReBuyOfTournament(){
+		if(gameManager.getGameType()==GAME_TYPE_TOURNAMENT_SIT_N_GO){
+			startBliendLevelTimer(TOURNAMENT_SNG_BLIND_LEVEL_TIMER);
+		}else if(gameManager.getGameType()== GAME_TYPE_TOURNAMENT_REGULAR){
+			startBliendLevelTimer(TOURNAMENT_REGULAR_LEVEL_TIMER);
+			startReBuyChipsTimer();
+			startBreakWaitingTimer();
+		}
+	}
+	private void startBliendLevelTimer(int time){
+		long timeLng = 1000 * time;
+		Timer timer = new Timer();
+		timer.scheduleAtFixedRate(new TimerTask() {
+			@Override
+			public void run() {
+				gameManager.setNewBliendAmount(gameManager.getBliendAmount() * 2);
+				System.out.println("BliendLevel Updated : "+gameManager.getBliendAmount() * 2);
+			}
+		}, timeLng, timeLng);
+	}
+/**
+ * When a player has lost all of his/her chips within the first hour of Tournament, this player can
+click the "ReBuy" button to rebuy chips equal to the original Entry Fee without 10% house feeas many times as they want within an hour of Tournament and get back into the tournament.
+ */
+	
+	private void startReBuyChipsTimer(){
+		long timeLng = 1000 * TOURNAMENT_REBUY_TIMER;
+		final Timer timer = new Timer();
+		gameManager.isReBuyChips = true;
+		gameRoom.BroadcastChat(TEXASS_SERVER_NAME, RESPONSE_FOR_RE_BUY_STATUS+gameManager.isReBuyChips);
+		timer.scheduleAtFixedRate(new TimerTask() {
+			
+			@Override
+			public void run() {
+				System.out.println("ReBuy Timer Stop");
+				gameManager.isReBuyChips = false;
+				gameRoom.BroadcastChat(TEXASS_SERVER_NAME, RESPONSE_FOR_RE_BUY_STATUS+gameManager.isReBuyChips);
+				timer.cancel();
+			}
+		}, timeLng, timeLng);
+	}
+	
+	private void startBreakTimer(){
+		long timeLng = 1000 * TOURNAMENT_BREAK_TIMER;
+		final Timer timer = new Timer();
+		timer.scheduleAtFixedRate(new TimerTask() {
+			
+			@Override
+			public void run() {
+				handleRestartGame();
+				startBreakWaitingTimer();
+				timer.cancel();
+			}
+		}, timeLng, timeLng);
+	}
+	private void startBreakWaitingTimer(){
+		long timeLng = 1000 * TOURNAMENT_BREAK_WAITING_TIME;
+		final Timer timer = new Timer();
+		timer.scheduleAtFixedRate(new TimerTask() {
+			
+			@Override
+			public void run() {
+				isBreakTime=true;
+				System.out.println("--------------- Break Time");
+				gameRoom.BroadcastChat(TEXASS_SERVER_NAME,
+						RESPONSE_FOR_BREAK_STATUS);
+				timer.cancel();
+			}
+		}, timeLng, timeLng);
+	}
+	
 }
