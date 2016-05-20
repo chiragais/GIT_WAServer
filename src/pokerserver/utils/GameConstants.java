@@ -161,6 +161,7 @@ public interface GameConstants {
 	String TAG_ROUND = "Round";
 	String TAG_PLAYER_NAME = "Player_Name";
 	String TAG_PLAYER = "Player";
+	String TAG_PLAYER_POSITION = "Player_Position";
 	// Texass Game
 	String TAG_CARD_FLOP_1 = "Flop1";
 	String TAG_CARD_FLOP_2 = "Flop2";

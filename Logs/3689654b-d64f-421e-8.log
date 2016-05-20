@@ -7487,3 +7487,60 @@
 2016-05-19 18:25:08,772 - WARNING: already stopped or not in joined user
 2016-05-19 18:25:27,470 - WARNING: got out of turn request
 2016-05-19 18:25:27,480 - WARNING: got out of turn request
+2016-05-19 18:37:02,022 - WARNING: Room Created: id= 594722620
+2016-05-19 18:37:40,196 - WARNING: got out of turn request
+2016-05-19 18:38:36,792 - WARNING: got out of turn request
+2016-05-19 18:39:05,918 - WARNING: got out of turn request
+2016-05-19 18:39:07,128 - WARNING: got out of turn request
+2016-05-19 18:40:01,628 - WARNING: got out of turn request
+2016-05-19 18:40:03,668 - WARNING: got out of turn request
+2016-05-19 18:44:46,320 - WARNING: got out of turn request
+2016-05-19 18:44:47,184 - WARNING: got out of turn request
+2016-05-19 18:47:36,397 - WARNING: got out of turn request
+2016-05-19 18:47:36,407 - WARNING: got out of turn request
+2016-05-19 18:51:24,340 - WARNING: got out of turn request
+2016-05-19 18:52:03,507 - WARNING: got out of turn request
+2016-05-19 18:52:03,914 - WARNING: already stopped
+2016-05-19 18:52:04,491 - WARNING: got out of turn request
+2016-05-19 18:54:33,614 - WARNING: Room Created: id= 977459895
+2016-05-19 18:55:16,215 - WARNING: got out of turn request
+2016-05-19 18:55:17,301 - WARNING: got out of turn request
+2016-05-19 18:55:17,770 - WARNING: already stopped
+2016-05-19 18:55:41,215 - WARNING: got out of turn request
+2016-05-19 18:57:02,354 - WARNING: got out of turn request
+2016-05-19 18:57:08,331 - WARNING: got out of turn request
+2016-05-19 18:57:08,797 - WARNING: already stopped
+2016-05-19 18:57:12,317 - WARNING: got out of turn request
+2016-05-19 18:58:01,839 - WARNING: got out of turn request
+2016-05-19 18:58:06,762 - WARNING: got out of turn request
+2016-05-19 18:59:32,522 - WARNING: got out of turn request
+2016-05-19 18:59:40,686 - WARNING: got out of turn request
+2016-05-19 19:07:33,736 - WARNING: got out of turn request
+2016-05-19 19:08:21,071 - WARNING: got out of turn request
+2016-05-19 19:08:25,500 - WARNING: got out of turn request
+2016-05-19 19:08:44,388 - WARNING: got out of turn request
+2016-05-19 19:10:01,674 - WARNING: got out of turn request
+2016-05-19 19:10:06,890 - WARNING: got out of turn request
+2016-05-20 09:43:25,336 - WARNING: closing idle session /192.168.1.128:50881
+2016-05-20 09:43:30,069 - WARNING: Room Created: id= 350706844
+2016-05-20 09:45:05,284 - WARNING: got out of turn request
+2016-05-20 09:45:05,871 - WARNING: got out of turn request
+2016-05-20 09:47:28,168 - WARNING: got out of turn request
+2016-05-20 10:02:23,229 - WARNING: got out of turn request
+2016-05-20 10:25:41,124 - WARNING: got out of turn request
+2016-05-20 10:46:09,582 - WARNING: got out of turn request
+2016-05-20 10:48:31,506 - WARNING: Room Created: id= 1010997399
+2016-05-20 10:48:31,533 - ERROR: Error in getLockProperties java.lang.NullPointerException
+2016-05-20 10:48:43,653 - WARNING: Room Created: id= 168177524
+2016-05-20 10:49:09,932 - WARNING: got out of turn request
+2016-05-20 10:51:11,319 - WARNING: got out of turn request
+2016-05-20 10:52:20,666 - WARNING: got out of turn request
+2016-05-20 10:52:20,717 - WARNING: already stopped
+2016-05-20 10:54:29,962 - WARNING: Room Created: id= 619274458
+2016-05-20 10:55:20,727 - WARNING: got out of turn request
+2016-05-20 10:55:21,855 - WARNING: got out of turn request
+2016-05-20 10:55:22,383 - WARNING: already stopped
+2016-05-20 10:57:04,771 - WARNING: already stopped
+2016-05-20 10:59:56,975 - WARNING: Room Created: id= 833723351
+2016-05-20 11:00:19,505 - WARNING: got out of turn request
+2016-05-20 11:00:41,260 - WARNING: got out of turn request

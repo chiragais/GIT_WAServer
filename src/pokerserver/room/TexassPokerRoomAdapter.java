@@ -43,7 +43,7 @@ public class TexassPokerRoomAdapter extends BaseTurnRoomAdaptor implements
 		GAME_STATUS = STOPPED;
 		this.gameManager = new TexassGameManager();
 		gameManager.initGameRounds();
-		System.out.println("Texass Room : " + room.getName());
+		System.out.println("Texass Room : " + room.getName()+ " >> "+room.getMaxUsers());
 	}
 
 	@Override
@@ -137,6 +137,7 @@ public class TexassPokerRoomAdapter extends BaseTurnRoomAdaptor implements
 			JSONObject cardsObject = new JSONObject();
 			try {
 				cardsObject.put(TAG_PLAYER_NAME, player.getPlayerName());
+				cardsObject.put(TAG_PLAYER_POSITION, player.getPlayerPosition());
 				cardsObject.put(TAG_CARD_PLAYER_1, player.getFirstCard()
 						.getCardName());
 				cardsObject.put(TAG_CARD_PLAYER_2, player.getSecondCard()
@@ -469,8 +470,10 @@ public class TexassPokerRoomAdapter extends BaseTurnRoomAdaptor implements
 	}
 	
 	private void addNewPlayerCards(String userName) {
+		int plrPositionOnTable = getPlayerPosition();
+		
 		PlayerBean player = new PlayerBean(
-				gameRoom.getJoinedUsers().size() - 1, userName);
+				gameRoom.getJoinedUsers().size() - 1, userName, plrPositionOnTable);
 		int totalPlayers =gameManager.getPlayersManager().getAllAvailablePlayers().size() ; 
 		/*if(gameManager.getGameType()==GAME_TYPE_REGULAR){
 			if(totalPlayers== 0){
@@ -502,11 +505,9 @@ public class TexassPokerRoomAdapter extends BaseTurnRoomAdaptor implements
 		gameManager.addNewPlayerToGame(player);
 	}
 	public void onUserPaused(IUser user) {
-
 	}
 
 	public void onUserResume(IUser user) {
-
 	}
 
 	private void distributeCarsToPlayerFromDelear() {
@@ -732,4 +733,25 @@ click the "ReBuy" button to rebuy chips equal to the original Entry Fee without 
 		}, timeLng, timeLng);
 	}
 	
+	private int getPlayerPosition(){
+		if(!checkPlayerPositionAlreadyDefine(newPlayerPosition)){
+			return newPlayerPosition;
+		}else{
+			if(newPlayerPosition < gameRoom.getMaxUsers()-1){
+				newPlayerPosition++;
+			}else{
+				newPlayerPosition = 0;
+			}
+			return getPlayerPosition();
+		}
+	}
+	private boolean checkPlayerPositionAlreadyDefine(int position){
+		for(PlayerBean player : gameManager.getPlayersManager().getAllAvailablePlayers()){
+			if(player.getPlayerPosition()== position){
+				return true;
+			}
+		}
+		return false;
+	}
+	int newPlayerPosition = 0;
 }

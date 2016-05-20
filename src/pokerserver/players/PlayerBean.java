@@ -18,6 +18,7 @@ public class PlayerBean {
 	
 	private String playerName;
 	private int playerId;
+	private int playerPosition;
 	private int totalBalance = 1000;
 //	private boolean isActivePlayer = true;
 	private PlayerCards cards;
@@ -39,9 +40,10 @@ public class PlayerBean {
 	public PlayerBean() {
 	}
 
-	public PlayerBean(int pId, String pName) {
+	public PlayerBean(int pId, String pName, int plrPosition) {
 		this.playerId = pId;
 		this.playerName = pName;
+		this.playerPosition = plrPosition;
 	}
 
 	public void deductBetAmount(int betAmount) {
@@ -64,6 +66,14 @@ public class PlayerBean {
 		return this.isDealer;
 	}
 	
+	public int getPlayerPosition() {
+		return playerPosition;
+	}
+
+	public void setPlayerPosition(int playerPosition) {
+		this.playerPosition = playerPosition;
+	}
+
 	public void setBigBlind(boolean b) {
 		this.isBigBlind = b;
 	}
