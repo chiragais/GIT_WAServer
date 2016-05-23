@@ -29610,3 +29610,5 @@ Closing session (0x00000007: nio socket, server, /192.168.1.200:56307 => /192.16
 2016-05-23 14:57:46,901 - WARNING: Running with 500 CCU limit
 2016-05-23 15:03:24,388 - WARNING: Error in loading license from server java.lang.Exception: no key in AppConfig.json
 2016-05-23 15:03:24,392 - WARNING: Running with 500 CCU limit
+2016-05-23 15:23:05,661 - WARNING: Error in loading license from server java.lang.Exception: no key in AppConfig.json
+2016-05-23 15:23:05,665 - WARNING: Running with 500 CCU limit

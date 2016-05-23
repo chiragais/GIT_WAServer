@@ -212,5 +212,5 @@ public interface GameConstants {
 	String WA_APP_KEY = "970f84e7-bb66-4499-b";
 	String TEXASS_APP_KEY = "6be0f405-c805-45c2-9";
 	String TAXESS_POKERUP = "9b9fe694-2cc4-475a-a";
-	String TAXESS_POKERUP_LIVE = "4c09f09e-7a00-45c7-a";
+	String TAXESS_POKERUP_LIVE = "5e8278ec-cfc7-445d-8";
 }
