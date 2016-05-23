@@ -35,10 +35,10 @@ public class TexassPokerZoneExtension extends BaseZoneAdaptor {
 	@Override
 	public void handleCreateRoomRequest(IUser user, IRoom room,
 			HandlingResult result) {
-		System.out.println("... "+result.toString());
-		System.out.print("CD >> Room Name : " + room.getName()
-				+ " >> Max User : " + room.getMaxUsers() + " >> User Name : "
-				+ user.getName());
+//		System.out.println("... "+result.toString());
+//		System.out.print("CD >> Room Name : " + room.getName()
+//				+ " >> Max User : " + room.getMaxUsers() + " >> User Name : "
+//				+ user.getName());
 		room.setAdaptor(new TexassPokerRoomAdapter(izone, (ITurnBasedRoom) room));
 	}
 

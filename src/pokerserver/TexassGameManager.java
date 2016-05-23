@@ -58,8 +58,9 @@ public class TexassGameManager implements GameConstants {
 
 	public void initGameRounds() {
 		System.out
-				.println("================== Texass Game started ==================");
+				.println("\n================== Texass Game started ==================");
 		this.bliendAmount = newBliendAmt;
+		currentRound=0;
 		handManager = new GeneralHandManager(TEXASS_PLAYER_CARD_LIMIT_FOR_HAND);
 		winnerManager = new WinnerManager(playersManager, handManager);
 		generateDefaultCards();
@@ -90,10 +91,10 @@ public class TexassGameManager implements GameConstants {
 
 	public void addNewPlayerToGame(PlayerBean player) {
 		// handManager.findPlayerBestHand(player.getPlayerCards());
-		handManager.generatePlayerBestRank(listDefaultCards, player);
+//		handManager.generatePlayerBestRank(listDefaultCards, player);
 		for (Card card : player.getBestHandCards()) {
 			
-			System.out.println("Player Best Cards : " + card.getCardName());
+//			System.out.println("Player Best Cards : " + card.getCardName());
 		}
 		this.playersManager.addNewPlayerInRoom(player);
 	}
@@ -324,6 +325,7 @@ public class TexassGameManager implements GameConstants {
 		if (!allPlayerHaveTurn) {
 			return false;
 		}
+		System.out.println("Total BB Turn : "+ totalBBPlayersTurn);
 		if(totalBBPlayersTurn==1){
 			return false;
 		}
@@ -364,7 +366,7 @@ public class TexassGameManager implements GameConstants {
 
 	/** It will generate flop(3), turn(1) and river(1) cards. Total 5 cards */
 	public void generateDefaultCards() {
-		System.out.println("Generate Default Cards " );
+//		System.out.println("Generate Default Cards " );
 		listDefaultCards.clear();
 		listTableCards.clear();
 		while (listDefaultCards.size() != 5) {
@@ -384,7 +386,7 @@ public class TexassGameManager implements GameConstants {
 				return true;
 			}
 		}
-		System.out.println("Total Cards on table : " + listTableCards.size());
+//		System.out.println("Total Cards on table : " + listTableCards.size());
 		listTableCards.add(cardBean);
 		return false;
 	}
@@ -410,7 +412,11 @@ public class TexassGameManager implements GameConstants {
 		TurnManager turnManager = null;
 		PlayerBean currentPlayer = deductPlayerBetAmountFromBalance(userName,
 				betAmount, action);
-		if(currentRound == TEXASS_ROUND_PREFLOP&&currentPlayer.isBigBlind()){
+		PlayerBean bbPlayer = getPlayersManager()
+				.getBigBlindPayer();
+		boolean isBB = bbPlayer.getPlayerName().equals(currentPlayer.getPlayerName());
+		System.out.println("<><> "+currentPlayer.getPlayerName()+" >>BB : "+ isBB+" >>DLR : "+currentPlayer.isDealer());
+		if(currentRound == TEXASS_ROUND_PREFLOP&& isBB){
 			totalBBPlayersTurn++;
 		}
 		if (currentPlayer != null) {
@@ -424,7 +430,7 @@ public class TexassGameManager implements GameConstants {
 			System.out.println("Turn Manager # User: "
 					+ currentPlayer.getPlayerName() + " # Action: " + action
 					+ " # Bet: " + betAmount + " # Round: "
-					+ currentRoundManger.getRound());
+					+ currentRoundManger.getRound()+" # Total Bet : "+currentRoundManger.getTotalRoundBetAmount());
 		}
 		return turnManager;
 	}
@@ -553,7 +559,7 @@ public class TexassGameManager implements GameConstants {
 
 		winnerManager.setTotalTableAmount(totalBetAmount);
 		
-		System.out.println("Total Bet Amount : " + totalBetAmount);
+//		System.out.println("Total Bet Amount : " + totalBetAmount);
 		return totalBetAmount;
 	}
 }

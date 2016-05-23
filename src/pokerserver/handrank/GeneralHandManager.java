@@ -35,7 +35,7 @@ public class GeneralHandManager implements GameConstants {
 	
 	public  void generatePlayerBestRank(List<Card> listDefaultCards,PlayerBean playerBean){
 		
-		System.out.println("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
+//		System.out.println("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
 		HAND_RANK handRank = null;
 		List<Card> listPlayersCards = new ArrayList<Card>();
 		List<Card> listDefaultTableCards = new ArrayList<Card>();
@@ -44,20 +44,20 @@ public class GeneralHandManager implements GameConstants {
 		listPlayersCards.add(playerBean.getSecondCard());
 		listDefaultTableCards.addAll(listDefaultCards);
 		if(playerBean.getWACardStatus()==ACTION_WA_DOWN){
-			System.out.println("=========== WA Down");
+//			System.out.println("=========== WA Down");
 			listPlayersCards.add(playerBean.getWACard());
 		}else if(playerBean.getWACardStatus()== ACTION_WA_UP){
-			System.out.println("=========== WA UP");
+//			System.out.println("=========== WA UP");
 			listDefaultTableCards.add(playerBean.getWACard());
 		}
-		System.out.println("=========== Default Cards >> "+listDefaultTableCards.size());
+		/*System.out.println("=========== Default Cards >> "+listDefaultTableCards.size());
 		for(Card card : listDefaultTableCards){
 			System.out.println(card.getCardName());	
 		}
 		System.out.println("=========== Player Cards");
 		for(Card card : listPlayersCards){
 			System.out.println(card.getCardName());	
-		}
+		}*/
 		List<Card> listBestCards = new ArrayList<Card>();
 		List<Card> listAllTableCards = setPlayerAndDefaultCards(listDefaultTableCards, listPlayersCards);
 		if (isRoyalFlushRank(listAllTableCards)) {
@@ -97,18 +97,14 @@ public class GeneralHandManager implements GameConstants {
 		if (handRank!=null) {
 			listBestCards = getPlayerBestCards();
 			Card[] bestCard = new Card[listBestCards.size()];
-			System.out.println("Player : "+playerBean.getPlayerName()+" >> Rank : "+ handRank);
+//			System.out.println("Player : "+playerBean.getPlayerName()+" >> Rank : "+ handRank);
 			for (int i=0;i<listBestCards.size();i++) {
-				System.out.println(listBestCards.get(i).getCardName());
+//				System.out.println(listBestCards.get(i).getCardName());
 				bestCard[i]=listBestCards.get(i);
 			}
-//			System.out.println("--------------=====");
-//			for (int i=0;i<mainHandCards.size();i++) {
-//				System.out.println(mainHandCards.get(i).getCardName());
-//			}
 			playerBean.setPlayersBestHand(handRank, bestCard,mainHandCards);
 		}
-		System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+		System.out.println(">>>>>>>>>>>>>>> General Hand Manager >>>>>>>>>>>>>>>>>>");
 	}
 	public List<Card> getPlayerBestCards() {
 		return playerBestHandCard;
@@ -960,7 +956,7 @@ public class GeneralHandManager implements GameConstants {
 		if (PLAYER_CARD_LIMIT_FOR_HAND != 0)
 			// Check if player cards is higher then limit
 			if (totalPlayerCards > PLAYER_CARD_LIMIT_FOR_HAND) {
-				System.out.println("Total Player Cards : " + totalPlayerCards);
+//				System.out.println("Total Player Cards : " + totalPlayerCards);
 				while (totalPlayerCards > PLAYER_CARD_LIMIT_FOR_HAND) {
 					for (int i = listHandCards.size() - 1; i >= 0; i--) {
 						if (playerCards.contains(listHandCards.get(i))) {
@@ -1002,7 +998,7 @@ public class GeneralHandManager implements GameConstants {
 		if (PLAYER_CARD_LIMIT_FOR_HAND != 0)
 			// Check if player cards is higher then limit
 			if (totalPlayerCards > PLAYER_CARD_LIMIT_FOR_HAND) {
-				System.out.println("Total Player Cards : " + totalPlayerCards);
+//				System.out.println("Total Player Cards : " + totalPlayerCards);
 				while (totalPlayerCards > PLAYER_CARD_LIMIT_FOR_HAND) {
 					for (int i = listHandCards.size() - 1; i >= 0; i--) {
 						if (playerCards.contains(listHandCards.get(i))) {

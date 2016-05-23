@@ -95,7 +95,7 @@ public class PlayersManager {
 			dealerPlayer = roomPlayersList.get(dealerPosition);
 			dealerPlayer.setDealer(true);
 		}
-		System.out.println("Dealer Position : "+dealerPosition);
+//		System.out.println("Dealer Position : "+dealerPosition);
 		sbPosition =dealerPosition+1;
 		return dealerPlayer;
 	}
@@ -133,6 +133,10 @@ public class PlayersManager {
 			bbPosition = 0;
 			bbPlayer=roomPlayersList.get(bbPosition);
 			bbPlayer.setBigBlind(true);
+		}
+		// If two active players on table
+		if(bbPlayer.isWaitingForGame()){
+			return getDealerPayer();
 		}
 		return bbPlayer;
 	}

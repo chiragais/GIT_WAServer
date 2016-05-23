@@ -135,8 +135,8 @@ public class PlayerBean {
 	public void setCards(Card card1, Card card2, Card waCard) {
 		this.cards = new PlayerCards(card1, card2);
 		this.waCard = waCard;
-		System.out.println();
-		System.out.println(playerName +" >> Card 1: "+ card1.getCardName()+" >> Card 2: "+ card2.getCardName()+" >> WA Card : " + waCard.getCardName());
+//		System.out.println();
+//		System.out.println(playerName +" >> Card 1: "+ card1.getCardName()+" >> Card 2: "+ card2.getCardName()+" >> WA Card : " + waCard.getCardName());
 	}
 
 	public PlayerCards getPlayerCards() {

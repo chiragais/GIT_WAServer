@@ -91,13 +91,13 @@ public class WinnerManager implements GameConstants{
 								player2.getHandRank());
 					}
 				});
-		System.out.println("Before sort...........");
-		for (PlayerBean playerBean : listAllActivePlayers) {
-			System.out.println("Current Pla : " + playerBean.getPlayerName()
-					+ " >> " + playerBean.getBestHandRankTotal() + " >> "
-					+ playerBean.getHandRank());
-		}
-		System.out.println("Before sort...........");
+//		System.out.println("Before sort...........");
+//		for (PlayerBean playerBean : listAllActivePlayers) {
+//			System.out.println("Current Pla : " + playerBean.getPlayerName()
+//					+ " >> " + playerBean.getBestHandRankTotal() + " >> "
+//					+ playerBean.getHandRank());
+//		}
+//		System.out.println("Before sort...........");
 		for (int i = 0; i < listAllActivePlayers.size(); i++) {
 			List<PlayerBean> sameRankPlayer = new ArrayList<PlayerBean>();
 			PlayerBean currentPlayer = listAllActivePlayers

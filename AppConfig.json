@@ -1,7 +1,7 @@
 {
 	"TickTime" : 500,
 	"ListenPort" : 12346,
-	"MasterHost" : 52.25.168.232,
+	"MasterHost" : 52.36.236.214,
 	"LogLevel" : "WARN",
 	"FlashPolicyPort" : 8430,
 	"AdminUsername" : "admin",
