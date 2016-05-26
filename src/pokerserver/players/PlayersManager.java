@@ -11,9 +11,8 @@ public class PlayersManager {
 		 roomPlayersList = new ArrayList<>();
 	}
 
-	public void setCurrentGameCntr(int currentGameCntr){
-		
-		this.dealerPosition = currentGameCntr;
+	public void setDealerPosition(int currentGameCntr){
+		this.dealerPosition = currentGameCntr+1;
 	}
 	public void addNewPlayerInRoom(PlayerBean player) {
 		this.roomPlayersList.add(player);
@@ -82,7 +81,6 @@ public class PlayersManager {
 	public PlayerBean getDealerPayer(){
 		PlayerBean dealerPlayer = null;
 		for(int i = 0 ; i<roomPlayersList.size();i++){
-//			if(i==0){
 			if(dealerPosition==i){
 				roomPlayersList.get(i).setDealer(true);
 				dealerPlayer = roomPlayersList.get(i);
@@ -95,7 +93,7 @@ public class PlayersManager {
 			dealerPlayer = roomPlayersList.get(dealerPosition);
 			dealerPlayer.setDealer(true);
 		}
-//		System.out.println("Dealer Position : "+dealerPosition);
+		
 		sbPosition =dealerPosition+1;
 		return dealerPlayer;
 	}

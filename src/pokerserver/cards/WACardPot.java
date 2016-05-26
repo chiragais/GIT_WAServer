@@ -1,7 +1,9 @@
-package pokerserver.players;
+package pokerserver.cards;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import pokerserver.players.PlayerBean;
 
 public class WACardPot {
 	

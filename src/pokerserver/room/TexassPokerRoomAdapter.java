@@ -9,12 +9,13 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import pokerserver.TexassGameManager;
+import pokerserver.game.TexassGameManager;
 import pokerserver.players.PlayerBean;
-import pokerserver.players.Winner;
 import pokerserver.rounds.RoundManager;
 import pokerserver.turns.TurnManager;
 import pokerserver.utils.GameConstants;
+import pokerserver.utils.LogUtils;
+import pokerserver.winner.Winner;
 
 import com.shephertz.app42.server.idomain.BaseTurnRoomAdaptor;
 import com.shephertz.app42.server.idomain.HandlingResult;
@@ -29,7 +30,7 @@ import com.shephertz.app42.server.idomain.IZone;
 public class TexassPokerRoomAdapter extends BaseTurnRoomAdaptor implements
 		GameConstants {
 
-	private IZone izone;
+//	private IZone izone;
 	private ITurnBasedRoom gameRoom;
 	private byte GAME_STATUS;
 	TexassGameManager gameManager;
@@ -38,21 +39,19 @@ public class TexassPokerRoomAdapter extends BaseTurnRoomAdaptor implements
 	List<String> listRestartGameReq = new ArrayList<String>();
 	
 	public TexassPokerRoomAdapter(IZone izone, ITurnBasedRoom room) {
-		this.izone = izone;
+//		this.izone = izone;
 		this.gameRoom = room;
 		GAME_STATUS = STOPPED;
 		this.gameManager = new TexassGameManager();
 		gameManager.initGameRounds();
-//		for(IRoom iroom : izone.getRooms()){
-//			System.out.print(" >><< "+iroom.getId()+" >> "+iroom.getJoinedUsers().size());
-//		}
-//		System.out.println("Texass Room : " + room.getName()+ " >> "+room.getMaxUsers()+" >> "+izone.getRooms().size());
+		
 	}
 
 	@Override
 	public void onTimerTick(long time) {
-		if (GAME_STATUS == STOPPED
-				&& gameRoom.getJoinedUsers().size() >= MIN_PLAYER_TO_START_GAME && GAME_STATUS !=CARD_DISTRIBUTE) {
+		if (GAME_STATUS == STOPPED &&
+				gameRoom.getJoinedUsers().size() >= MIN_PLAYER_TO_START_GAME &&
+				GAME_STATUS !=CARD_DISTRIBUTE) {
 			distributeCarsToPlayerFromDelear();
 //			GAME_STATUS = RUNNING;
 			GAME_STATUS = CARD_DISTRIBUTE;
@@ -79,32 +78,27 @@ public class TexassPokerRoomAdapter extends BaseTurnRoomAdaptor implements
 		gameRoom.startGame(TEXASS_SERVER_NAME);
 	}
 	private void managePlayerTurn(String currentPlayer) {
-		System.out.println(">>Total Players : "
+		LogUtils.Log(">>Total Players : "
 				+ gameRoom.getJoinedUsers().size() +" >> Current Plr : "+ currentPlayer);
 		RoundManager currentRoundManager = gameManager.getCurrentRoundInfo();
 
 		if (currentRoundManager != null) {
-			PlayerBean nextPlayer = getNextPlayerFromCurrentPlayer(currentPlayer);
-			if (nextPlayer == null) {
-//				System.out.println(" Next turn player : Null");
-			} else {
+			PlayerBean nextPlayer = findNextPlayerFromCurrentPlayer(currentPlayer);
+			if (nextPlayer != null) {
 				while (nextPlayer.isFolded() || nextPlayer.isAllIn()) {
-					System.out.println(" Next turn player : "
+					LogUtils.Log(" Next turn player : "
 							+ nextPlayer.getPlayerName());
-					nextPlayer = getNextPlayerFromCurrentPlayer(nextPlayer
+					nextPlayer = findNextPlayerFromCurrentPlayer(nextPlayer
 							.getPlayerName());
 				}
-
 				gameRoom.setNextTurn(getUserFromName(nextPlayer.getPlayerName()));
-//				System.out.println(currentPlayer
+//				LogUtils.Log(currentPlayer
 //						+ " >> Next valid turn player : "
 //						+ nextPlayer.getPlayerName());
 			}
-		} else {
-			System.out.println("------ Error > Round is not started yet.....");
-		}
+		} 
 	}
-	public PlayerBean getNextPlayerFromCurrentPlayer(String currentPlayerName) {
+	public PlayerBean findNextPlayerFromCurrentPlayer(String currentPlayerName) {
 		List<PlayerBean> listPlayer = gameManager.getPlayersManager()
 				.getAllAactivePlayersForTurn();
 		for (int i = 0; i < listPlayer.size(); i++) {
@@ -131,35 +125,55 @@ public class TexassPokerRoomAdapter extends BaseTurnRoomAdaptor implements
 
 		for (PlayerBean player : gameManager.getPlayersManager()
 				.getAllAvailablePlayers()) {
+		
 			int plrStatus = STATUS_ACTIVE;
+			
 			if(player.isWaitingForGame()){
 				plrStatus=ACTION_WAITING_FOR_GAME;
-			}else if(player.isFolded() ){
+			}else if(player.isFolded() && GAME_STATUS == RUNNING ){
 				plrStatus = ACTION_FOLDED;
 			}
 			
-			JSONObject cardsObject = new JSONObject();
+			JSONObject playerJsonObject = new JSONObject();
 			try {
-				cardsObject.put(TAG_PLAYER_NAME, player.getPlayerName());
-				cardsObject.put(TAG_PLAYER_POSITION, player.getPlayerPosition());
-				cardsObject.put(TAG_CARD_PLAYER_1, player.getFirstCard()
+				playerJsonObject.put(TAG_PLAYER_NAME, player.getPlayerName());
+				playerJsonObject.put(TAG_PLAYER_POSITION, player.getPlayerPosition());
+				playerJsonObject.put(TAG_CARD_PLAYER_1, player.getFirstCard()
 						.getCardName());
-				cardsObject.put(TAG_CARD_PLAYER_2, player.getSecondCard()
+				playerJsonObject.put(TAG_CARD_PLAYER_2, player.getSecondCard()
 						.getCardName());
-				cardsObject.put(TAG_PLAYER_BALANCE, player.getBalance());
-				cardsObject.put(TAG_GAME_STATUS, GAME_STATUS);
-				cardsObject.put(TAG_PLAYER_STATUS, plrStatus);
-				cardsObject.put(TAG_CURRENT_ROUND,gameManager.getCurrentRoundIndex());
+				playerJsonObject.put(TAG_PLAYER_BALANCE, player.getBalance());
+				playerJsonObject.put(TAG_GAME_STATUS, GAME_STATUS);
+				playerJsonObject.put(TAG_PLAYER_STATUS, plrStatus);
+				playerJsonObject.put(TAG_CURRENT_ROUND,gameManager.getCurrentRoundIndex());
 				gameRoom.BroadcastChat(TEXASS_SERVER_NAME, RESPONSE_FOR_PLAYERS_INFO
-						+ cardsObject.toString());
-				System.out.println("Texass Player Info : " + cardsObject.toString());
+						+ playerJsonObject.toString());
+				LogUtils.Log(gameRoom.getName()+" Texass Player Info : " + playerJsonObject.toString());
 			} catch (JSONException e) {
 				e.printStackTrace();
 			}
 			
 		}
 	}
-
+	/**
+	 * Invoked when the timer expires for the current turn user.
+	 * 
+	 * By default, the turn user will be updated to the next user in order of
+	 * joining and a move notification with empty data will be sent to all the
+	 * subscribers of the room.
+	 * 
+	 * @param turn
+	 *            the current turn user whose turn has expired.
+	 * @param result
+	 *            use this to override the default behavior
+	 */
+	@Override
+	public void handleTurnExpired(IUser turn, HandlingResult result) {
+		LogUtils.Log("onTurnExpired : Turn User : " + turn.getName());
+		// result.doDefaultTurnLogic = false;
+		managePlayerAction(turn.getName(), ACTION_FOLD, 0);
+		// managePlayerTurn(turn.getName());
+	}
 	/**
 	 * Invoked when a move request is received from the client whose turn it is.
 	 * 
@@ -178,8 +192,9 @@ public class TexassPokerRoomAdapter extends BaseTurnRoomAdaptor implements
 
 	public void handleMoveRequest(IUser sender, String moveData,
 			HandlingResult result) {
+		
 		if (moveData.contains(REQUEST_FOR_ACTION)) {
-//			System.out.println("\nTexass : MoveRequest : Sender : " + sender.getName()
+//			LogUtils.Log("\nTexass : MoveRequest : Sender : " + sender.getName()
 //					+ " : Data : " + moveData);
 			int playerAction = 0;
 			JSONObject responseJson = null;
@@ -195,18 +210,21 @@ public class TexassPokerRoomAdapter extends BaseTurnRoomAdaptor implements
 			} catch (JSONException e) {
 				e.printStackTrace();
 			}
+//			LogUtils.Log("Next Plr : "+ gameRoom.getNextTurnUser().getName() +" >> "+gameRoom.getTurnUser().getName());
 		}
 	}
 	public void manageGameFinishEvent() {
 		
 		gameManager.moveToNextRound();
 		// Broad cast game completed to all players
-		broadcastRoundCompeleteToAllPlayers();
+//		broadcastRoundCompeleteToAllPlayers();
 		broadcastGameCompleteToAllPlayers();
 		gameManager.findBestPlayerHand();
 		gameManager.findAllWinnerPlayers();
+		
 		broadcastWinningPlayer();
 		handleFinishGame();
+		restartGameRequest();
 	}
 	public void managePlayerAction(String sender, int playerAction,
 			int betAmount) {
@@ -233,77 +251,10 @@ public class TexassPokerRoomAdapter extends BaseTurnRoomAdaptor implements
 		}
 	}
 
-	/**
-	 * Invoked when a start game request is received from a client when the room
-	 * is in stopped state.
-	 * 
-	 * By default a success response will be sent back to the client, the game
-	 * state will be updated and game started notification is sent to all the
-	 * subscribers of the room.
-	 * 
-	 * @param sender
-	 *            the user who has sent the request.
-	 * @param result
-	 *            use this to override the default behavior
-	 */
-	public void handleStartGameRequest(IUser sender, HandlingResult result) {
-		System.out.println("Room : handleStartGameRequest : Sender User : "
-				+ sender.getName());
-	}
 
-	/**
-	 * Invoked when a stop game request is received from a client when the room
-	 * is in started state.
-	 * 
-	 * By default a success response will be sent back to the client, the game
-	 * state will be updated and game stopped notification is sent to all the
-	 * subscribers of the room.
-	 * 
-	 * @param sender
-	 *            the user who has sent the request.
-	 * @param result
-	 *            use this to override the default behavior
-	 */
-	public void handleStopGameRequest(IUser sender, HandlingResult result) {
-		
-		System.out.println("Room : handleStopGameRequest : Sender User : "
-				+ sender.getName());
-	}
-
-	/**
-	 * Invoked when the timer expires for the current turn user.
-	 * 
-	 * By default, the turn user will be updated to the next user in order of
-	 * joining and a move notification with empty data will be sent to all the
-	 * subscribers of the room.
-	 * 
-	 * @param turn
-	 *            the current turn user whose turn has expired.
-	 * @param result
-	 *            use this to override the default behavior
-	 */
-	@Override
-	public void handleTurnExpired(IUser turn, HandlingResult result) {
-		System.out.println("onTurnExpired : Turn User : " + turn.getName());
-		managePlayerAction(turn.getName(), ACTION_FOLD, 0);
-
-	}
-
-	/**
-	 * Invoked when a user leaves the turn based room.
-	 * 
-	 * By default, the turn user will be updated to the next user in order of
-	 * joining if the user who is leaving was the current turn user and a move
-	 * notification with empty data will be sent to all the subscribers of the
-	 * room.
-	 * 
-	 * @param user
-	 * @param result
-	 *            use this to override the default behavior
-	 */
 	public void handleUserLeavingTurnRoom(IUser user, HandlingResult result) {
 		
-		System.out.println("Room : handleUserLeavingTurnRoom :  User : "
+		LogUtils.Log("Room : handleUserLeavingTurnRoom :  User : "
 				+ user.getName());
 		gameManager.leavePlayerToGame(gameManager.getPlayersManager().getPlayerByName(user
 				.getName()));
@@ -311,12 +262,9 @@ public class TexassPokerRoomAdapter extends BaseTurnRoomAdaptor implements
 		// This will be changed.
 		if (GAME_STATUS == RUNNING || GAME_STATUS == FINISHED) {
 			if(gameRoom.getJoinedUsers().size() == 0){
-				System.out.println("Room : Game Over ..... ");
+				LogUtils.Log("Room : Game Over ..... ");
 				gameManager.getPlayersManager().removeAllPlayers();
 				GAME_STATUS = FINISHED;
-			}else{
-//				System.out.print("CD:: "+gameRoom.getNextTurnUser().getName());
-//				gameRoom.setNextTurn(gameRoom.getNextTurnUser());
 			}
 		}
 		if(gameRoom.getJoinedUsers().size() == 0 && gameManager.getGameType() != GAME_TYPE_REGULAR){
@@ -331,30 +279,25 @@ public class TexassPokerRoomAdapter extends BaseTurnRoomAdaptor implements
 	 * user and his cards.
 	 */
 	private void handleFinishGame() {
-
 		try {
-//			gameRoom.setAdaptor(null);
-//			izone.deleteRoom(gameRoom.getId());
 			gameRoom.stopGame(TEXASS_SERVER_NAME);
 			GAME_STATUS = FINISHED;
-			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 	private void handleRestartGame() {
-
-		System.out.println("--- Restarting Game -------- ");
+		LogUtils.Log("--- Restarting Game -------- ");
 		listRestartGameReq.clear();
 		gameRoom.BroadcastChat(TEXASS_SERVER_NAME, RESPONSE_FOR_GAME_START);
-//		gameManager.initGameRounds();
 		// For Temporary. It will be come from DB
 		for(PlayerBean playerBean : gameManager.getPlayersManager().getAllAvailablePlayers()){
-			
 			gameManager.addTournamentPlayer(playerBean);
 		}
 		gameManager.getPlayersManager().removeAllPlayers();
+		gameManager.updateTotalGameCntr(gameRoom.getJoinedUsers().size());
 		gameManager.initGameRounds();
+		
 		GAME_STATUS = STOPPED;
 		for (IUser user : gameRoom.getJoinedUsers()) {
 			addNewPlayerCards(user.getName());
@@ -363,7 +306,6 @@ public class TexassPokerRoomAdapter extends BaseTurnRoomAdaptor implements
 		broadcastPlayerCardsInfo();
 		broadcastBlindPlayerDatas();
 		
-//		System.out.println("Game Status : " + GAME_STATUS);
 	}
 
 	/**
@@ -382,14 +324,14 @@ public class TexassPokerRoomAdapter extends BaseTurnRoomAdaptor implements
 	 */
 	public void handleChatRequest(IUser sender, String message,
 			HandlingResult result) {
-//		gameRoom.l
-		System.out.println("ChatRequest :  User : " + sender.getName()
+		LogUtils.Log("ChatRequest :  User : " + sender.getName()
 				+ " : Message : " + message);
+		
+		// This will be remove
 		if ( message.startsWith(RESPONSE_FOR_DESTRIBUTE_CARD)) {
 			listRestartGameReq.add(sender.getName());
-//			System.out.println("Total Request : "+listRestartGameReq.size());
+//			LogUtils.Log("Total Request : "+listRestartGameReq.size());
 			if (isRequestFromAllActivePlayers()) {
-				System.out.println("Start Game");
 				listRestartGameReq.clear();
 				gameManager.startPreFlopRound();
 				gameManager.managePlayerAction(gameManager.getPlayersManager()
@@ -399,16 +341,15 @@ public class TexassPokerRoomAdapter extends BaseTurnRoomAdaptor implements
 						.getBigBlindPayer().getPlayerName(), ACTION_BET,
 						gameManager.getBliendAmount() * 2);
 				startGame();
+				
 			}
+			// This will be remove
 		} else if (message.startsWith(REQUEST_FOR_RESTART_GAME)) {
 			listRestartGameReq.add(sender.getName());
-			if (isRequestFromAllActivePlayers())
-				if(!isBreakTime)
-					handleRestartGame();
-				else{
-					System.out.println("===<><><> Break Time <><><>===");
-					startBreakTimer();
-				}
+			if (isRequestFromAllActivePlayers()){
+				listRestartGameReq.clear();
+				restartGameRequest();
+			}
 		}else if(message.startsWith(REQUEST_FOR_BLIEND_AMOUNT)){
 			message = message.replace(REQUEST_FOR_BLIEND_AMOUNT, "");
 			try {
@@ -420,8 +361,6 @@ public class TexassPokerRoomAdapter extends BaseTurnRoomAdaptor implements
 				e.printStackTrace();
 			}
 		}else if(message.startsWith(REQUEST_FOR_RE_BUY)){
-		
-//			sender.SendChatNotification(TEXASS_SERVER_NAME, REQUEST_FOR_RE_BUY, gameRoom);
 			JSONObject playerObject = new JSONObject();
 			try {
 				PlayerBean playerBean = gameManager.getPlayersManager().getPlayerByName(sender.getName());
@@ -431,13 +370,12 @@ public class TexassPokerRoomAdapter extends BaseTurnRoomAdaptor implements
 			}catch(JSONException e){
 				e.printStackTrace();
 			}
-			System.out.println("<> Request for ReBuy : "+ playerObject.toString());
+			LogUtils.Log("<> Request for ReBuy : "+ playerObject.toString());
 			gameRoom.BroadcastChat(TEXASS_SERVER_NAME,
 					REQUEST_FOR_RE_BUY + playerObject.toString());
 		}
 	}
 	private boolean isRequestFromAllActivePlayers() {
-		// TODO Auto-generated method stub
 		for (PlayerBean playerBean : gameManager.getPlayersManager()
 				.getAllAactivePlayersForTurn()) {
 			if (!listRestartGameReq.contains(playerBean.getPlayerName())) {
@@ -446,7 +384,50 @@ public class TexassPokerRoomAdapter extends BaseTurnRoomAdaptor implements
 		}
 		return true;
 	}
+	
+	private void restartGameRequest() {
 
+		long timeLng = 1000 * RESTART_GAME_TIME;
+		final Timer timer = new Timer();
+		timer.scheduleAtFixedRate(new TimerTask() {
+
+			@Override
+			public void run() {
+				if (!isBreakTime)
+					handleRestartGame();
+				else {
+					LogUtils.Log("===<><><> Break Time <><><>===");
+					startBreakTimer();
+				}
+				timer.cancel();
+			}
+		}, timeLng, timeLng);
+
+	}
+
+	private void startGameAfterDistributeCardsOnTable(){
+
+		long timeLng = 1000 * (gameManager.getPlayersManager().getTotalActivePlayerCounter() * 2);
+		final Timer timer = new Timer();
+		timer.scheduleAtFixedRate(new TimerTask() {
+
+			@Override
+			public void run() {
+				LogUtils.Log("----------------------------");
+				gameManager.startPreFlopRound();
+				gameManager.managePlayerAction(gameManager.getPlayersManager()
+						.getSmallBlindPayer().getPlayerName(), ACTION_BET,
+						gameManager.getBliendAmount());
+				gameManager.managePlayerAction(gameManager.getPlayersManager()
+						.getBigBlindPayer().getPlayerName(), ACTION_BET,
+						gameManager.getBliendAmount() * 2);
+				startGame();
+				timer.cancel();
+			}
+		}, timeLng, timeLng);
+
+		
+	}
 	/**
 	 * Invoked when a join request is received by the room and the number of
 	 * joined users is less than the maxUsers allowed.
@@ -462,7 +443,7 @@ public class TexassPokerRoomAdapter extends BaseTurnRoomAdaptor implements
 	 *            use this to override the default behavior
 	 */
 	public void handleUserJoinRequest(IUser user, HandlingResult result) {
-		System.out.println(">>UserJoinRequest :  User : " + user.getName());
+		LogUtils.Log(">>UserJoinRequest :  User : " + user.getName());
 		// Handle player request
 		if (gameRoom.getJoinedUsers().isEmpty()) {
 			GAME_STATUS = STOPPED;
@@ -472,9 +453,9 @@ public class TexassPokerRoomAdapter extends BaseTurnRoomAdaptor implements
 		sendDefaultCards(user, false);
 		broadcastPlayerCardsInfo();
 		broadcastBlindPlayerDatas();
-		if(gameManager.getGameType()==GAME_TYPE_TOURNAMENT_REGULAR || gameManager.getGameType()== GAME_TYPE_TOURNAMENT_SIT_N_GO)
+		if(gameManager.getGameType()==GAME_TYPE_TOURNAMENT_REGULAR ||
+				gameManager.getGameType()== GAME_TYPE_TOURNAMENT_SIT_N_GO)
 			gameRoom.BroadcastChat(TEXASS_SERVER_NAME, RESPONSE_FOR_RE_BUY_STATUS+gameManager.isReBuyChips);
-//		System.out.println("Game Status : " + GAME_STATUS +" >> "+gameManager.getGameType());
 	}
 	
 	private void addNewPlayerCards(String userName) {
@@ -482,7 +463,7 @@ public class TexassPokerRoomAdapter extends BaseTurnRoomAdaptor implements
 		
 		PlayerBean player = new PlayerBean(
 				gameRoom.getJoinedUsers().size() - 1, userName, plrPositionOnTable);
-		int totalPlayers =gameManager.getPlayersManager().getAllAvailablePlayers().size() ; 
+//		int totalPlayers =gameManager.getPlayersManager().getAllAvailablePlayers().size() ; 
 		/*if(gameManager.getGameType()==GAME_TYPE_REGULAR){
 			if(totalPlayers== 0){
 				player.setTotalBalance(2000);
@@ -496,12 +477,12 @@ public class TexassPokerRoomAdapter extends BaseTurnRoomAdaptor implements
 		}else{
 			int plrBalance = 1000;
 			plrBalance = gameManager.getPlayerPreviousBalance(userName);
-			System.out.println("<<>>> "+userName +" : "+plrBalance);
+			LogUtils.Log("<<>>> "+userName +" : "+plrBalance);
 			player.setTotalBalance(plrBalance);
 		}*/
 		int prvBalance =gameManager.getPlayerPreviousBalance(userName);
 		int plrBalance = prvBalance!=0 ?prvBalance :gameManager.getTournamentEntryFee();
-//		System.out.println("<<>>> "+userName +" : "+plrBalance);
+//		LogUtils.Log("<<>>> "+userName +" : "+plrBalance);
 		player.setBalance(plrBalance);
 		
 		player.setCards(gameManager.generatePlayerCards(),
@@ -511,7 +492,6 @@ public class TexassPokerRoomAdapter extends BaseTurnRoomAdaptor implements
 			player.setWaitingForGame(true);
 		}
 		if(player.getBalance()<=0){
-			
 			gameRoom.removeUser(getUserFromName(player.getPlayerName()), true);
 		}
 		gameManager.addNewPlayerToGame(player);
@@ -524,7 +504,8 @@ public class TexassPokerRoomAdapter extends BaseTurnRoomAdaptor implements
 
 	private void distributeCarsToPlayerFromDelear() {
 		gameRoom.BroadcastChat(TEXASS_SERVER_NAME, RESPONSE_FOR_DESTRIBUTE_CARD);
-		System.out.println("Distribute cards...");
+		LogUtils.Log("Distribute cards...");
+		startGameAfterDistributeCardsOnTable();
 	}
 
 	/** Manage default and player hand cards */
@@ -554,7 +535,7 @@ public class TexassPokerRoomAdapter extends BaseTurnRoomAdaptor implements
 				user.SendChatNotification(TEXASS_SERVER_NAME, RESPONSE_FOR_DEFAULT_CARDS
 						+ cardsObject.toString(), gameRoom);
 			}
-			System.out.println("Default Cards Details : "
+			LogUtils.Log("Default Cards Details : "
 					+ cardsObject.toString());
 		} catch (JSONException e) {
 			e.printStackTrace();
@@ -562,42 +543,40 @@ public class TexassPokerRoomAdapter extends BaseTurnRoomAdaptor implements
 	}
 
 	private void broadcastBlindPlayerDatas() {
-		JSONObject cardsObject = new JSONObject();
+		JSONObject playersObject = new JSONObject();
 		try {
 			if (!gameManager.getPlayersManager().getAllAactivePlayersForTurn()
 					.isEmpty()) {
 				int totalPlayerInRoom = gameManager.getPlayersManager()
 						.getAllAactivePlayersForTurn().size();
 				
-//				System.out.println("Total Players : " + totalPlayerInRoom);
-
 				if (totalPlayerInRoom > 0) {
-					cardsObject.put(TAG_PLAYER_DEALER, gameManager
+					playersObject.put(TAG_PLAYER_DEALER, gameManager
 							.getPlayersManager().getDealerPayer().getPlayerName());
-					cardsObject.put(TAG_PLAYER_BIG_BLIND, gameManager
+					playersObject.put(TAG_PLAYER_BIG_BLIND, gameManager
 							.getPlayersManager().getDealerPayer().getPlayerName());
 				} else {
-					cardsObject.put(TAG_PLAYER_DEALER, RESPONSE_DATA_SEPRATOR);
-					cardsObject.put(TAG_PLAYER_BIG_BLIND,
+					playersObject.put(TAG_PLAYER_DEALER, RESPONSE_DATA_SEPRATOR);
+					playersObject.put(TAG_PLAYER_BIG_BLIND,
 							RESPONSE_DATA_SEPRATOR);
 				}
 				if (totalPlayerInRoom > 1) {
-					cardsObject.put(TAG_PLAYER_SMALL_BLIND, gameManager
+					playersObject.put(TAG_PLAYER_SMALL_BLIND, gameManager
 							.getPlayersManager().getSmallBlindPayer().getPlayerName());
 				} else {
-					cardsObject.put(TAG_PLAYER_SMALL_BLIND,
+					playersObject.put(TAG_PLAYER_SMALL_BLIND,
 							RESPONSE_DATA_SEPRATOR);
 				}
 				if (totalPlayerInRoom > 2) {
-					cardsObject.put(TAG_PLAYER_BIG_BLIND, gameManager
+					playersObject.put(TAG_PLAYER_BIG_BLIND, gameManager
 							.getPlayersManager().getBigBlindPayer().getPlayerName());
 				}
-				cardsObject.put(TAG_SMALL_BLIEND_AMOUNT,gameManager.getBliendAmount());
+				playersObject.put(TAG_SMALL_BLIEND_AMOUNT,gameManager.getBliendAmount());
 				
-				System.out.println("Blind Player Details : "
-						+ cardsObject.toString());
+				LogUtils.Log("Blind Player Details : "
+						+ playersObject.toString());
 				gameRoom.BroadcastChat(TEXASS_SERVER_NAME, RESPONSE_FOR_BLIEND_PLAYER
-						+ cardsObject.toString());
+						+ playersObject.toString());
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -606,14 +585,14 @@ public class TexassPokerRoomAdapter extends BaseTurnRoomAdaptor implements
 	}
 
 	private void broadcastRoundCompeleteToAllPlayers() {
-		JSONObject cardsObject = new JSONObject();
+		JSONObject roundObject = new JSONObject();
 		try {
-			cardsObject.put(TAG_ROUND, gameManager.getCurrentRoundIndex());
-			cardsObject
+			roundObject.put(TAG_ROUND, gameManager.getCurrentRoundIndex());
+			roundObject
 					.put(TAG_TABLE_AMOUNT, gameManager.getTotalTableAmount());
-//			System.out.println("Round done " + cardsObject.toString());
+//			LogUtils.Log("Round done " + cardsObject.toString());
 			gameRoom.BroadcastChat(TEXASS_SERVER_NAME, RESPONSE_FOR_ROUND_COMPLETE
-					+ cardsObject.toString());
+					+ roundObject.toString());
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
@@ -645,7 +624,7 @@ public class TexassPokerRoomAdapter extends BaseTurnRoomAdaptor implements
 
 			gameRoom.BroadcastChat(TEXASS_SERVER_NAME, RESPONSE_FOR_WINNIER_INFO
 					+ winnerArray.toString());
-			System.out.println("<<>> " + winnerArray.toString());
+			LogUtils.Log("<<>> " + winnerArray.toString());
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
@@ -694,7 +673,7 @@ public class TexassPokerRoomAdapter extends BaseTurnRoomAdaptor implements
 				if (GAME_STATUS == RUNNING) {
 					gameManager.setNewBliendAmount(gameManager
 							.getBliendAmount() * 2);
-					System.out.println("BliendLevel Updated : "
+					LogUtils.Log("BliendLevel Updated : "
 							+ gameManager.getBliendAmount() * 2);
 				}
 			}
@@ -714,7 +693,7 @@ click the "ReBuy" button to rebuy chips equal to the original Entry Fee without 
 			
 			@Override
 			public void run() {
-				System.out.println("ReBuy Timer Stop");
+				LogUtils.Log("ReBuy Timer Stop");
 				gameManager.isReBuyChips = false;
 				gameRoom.BroadcastChat(TEXASS_SERVER_NAME, RESPONSE_FOR_RE_BUY_STATUS+gameManager.isReBuyChips);
 				timer.cancel();
@@ -743,7 +722,7 @@ click the "ReBuy" button to rebuy chips equal to the original Entry Fee without 
 			@Override
 			public void run() {
 				isBreakTime=true;
-//				System.out.println("--------------- Break Time");
+//				LogUtils.Log("--------------- Break Time");
 				gameRoom.BroadcastChat(TEXASS_SERVER_NAME,
 						RESPONSE_FOR_BREAK_STATUS);
 				timer.cancel();

@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import pokerserver.cards.Card;
 import pokerserver.cards.PlayerCards;
 import pokerserver.utils.GameConstants;
+import pokerserver.utils.LogUtils;
 /**
  * Manage player cards and user hands
  * @author Chirag
@@ -59,11 +60,11 @@ public class PlayerHand implements GameConstants {
 		allCards = sortingCards(allCards);
 
 		for (int j = 0; j < allCards.length; j++) {
-			System.out.println("this is list of cards " + j + " = "
+			LogUtils.Log("this is list of cards " + j + " = "
 					+ allCards[j].getValue());
 		}
 
-		System.out.println("___________________________________________________");
+		LogUtils.Log("___________________________________________________");
 
 		if (isRoyalFlush(allCards)) {
 			pokerHandRank = HAND_RANK.ROYAL_FLUSH;
@@ -116,7 +117,7 @@ public class PlayerHand implements GameConstants {
 			}
 		}
 		for (int i = 0; i < cardArray.length; i++) {
-			System.out.println("this is order  = " + cardArray[i].getValue());
+			LogUtils.Log("this is order  = " + cardArray[i].getValue());
 		}
 		return cardArray;
 	}
@@ -178,19 +179,19 @@ public class PlayerHand implements GameConstants {
 			}
 		}
 		if (isAStraight) {
-			System.out.println("this is pokerhand    "+"  "+allCards.length);
-			System.out.println("this is pokerhand    "+"  "+PokerHandFinalCards.length);
+			LogUtils.Log("this is pokerhand    "+"  "+allCards.length);
+			LogUtils.Log("this is pokerhand    "+"  "+PokerHandFinalCards.length);
 			
 			for (int i=0,j=0; i < allCards.length - 1; i++) {
 
 				if ((allCards[i].getValue() - allCards[i + 1].getValue()) == 1) {
 					PokerHandFinalCards[j] = allCards[i];
 					
-				    System.out.println("this is pokerhand    "+j+"  "+PokerHandFinalCards[j]);
+				    LogUtils.Log("this is pokerhand    "+j+"  "+PokerHandFinalCards[j]);
 					j++;
 					if(j==PokerHandFinalCards.length-1){
 						PokerHandFinalCards[j]=allCards[i+1];
-						 System.out.println("this is pokerhand    "+j+"  "+PokerHandFinalCards[j]);
+						 LogUtils.Log("this is pokerhand    "+j+"  "+PokerHandFinalCards[j]);
 						break;
 					}
 				}

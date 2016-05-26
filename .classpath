@@ -15,5 +15,8 @@
 	<classpathentry kind="lib" path="libs/slf4j-api-1.7.5.jar"/>
 	<classpathentry kind="lib" path="libs/spring-beans-3.2.0.M1.jar"/>
 	<classpathentry kind="lib" path="libs/tomcat-apr-5.5.23.jar"/>
+	<classpathentry kind="lib" path="libs/httpclient-4.5.2.jar"/>
+	<classpathentry kind="lib" path="libs/httpcore-4.4.4.jar"/>
+	<classpathentry kind="lib" path="libs/commons-logging-1.2.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

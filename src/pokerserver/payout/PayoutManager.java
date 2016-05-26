@@ -1,5 +1,7 @@
 package pokerserver.payout;
 
+import pokerserver.utils.LogUtils;
+
 public class PayoutManager {
 
 	/**
@@ -113,51 +115,51 @@ public class PayoutManager {
 	public float[] getPayOutPlayerIndex(int totalPlr){
 		
 		if(isBetween(totalPlr, 1, 9)){
-			System.out.println("Payout Plan : 1");
+			LogUtils.Log("Payout Plan : 1");
 			return PLAN1;
 		}
 		if(isBetween(totalPlr, 10, 32)){
-			System.out.println("Payout Plan : 2");
+			LogUtils.Log("Payout Plan : 2");
 			return PLAN2;
 		}
 		if(isBetween(totalPlr, 33, 56)){
-			System.out.println("Payout Plan : 3");
+			LogUtils.Log("Payout Plan : 3");
 			return PLAN3;
 		}
 		if(isBetween(totalPlr, 57, 96)){
-			System.out.println("Payout Plan : 4");
+			LogUtils.Log("Payout Plan : 4");
 			return PLAN4;
 		}
 		if(isBetween(totalPlr, 97, 192)){
-			System.out.println("Payout Plan : 5");
+			LogUtils.Log("Payout Plan : 5");
 			return PLAN5;
 		}
 		if(isBetween(totalPlr, 193, 296)){
-			System.out.println("Payout Plan : 6");
+			LogUtils.Log("Payout Plan : 6");
 			return PLAN6;
 		}
 		if(isBetween(totalPlr, 297, 392)){
-			System.out.println("Payout Plan : 7");
+			LogUtils.Log("Payout Plan : 7");
 			return PLAN7;
 		}
 		if(isBetween(totalPlr, 393, 496)){
-			System.out.println("Payout Plan : 8");
+			LogUtils.Log("Payout Plan : 8");
 			return PLAN8;
 		}
 		if(isBetween(totalPlr, 497, 592)){
-			System.out.println("Payout Plan : 9");
+			LogUtils.Log("Payout Plan : 9");
 			return PLAN9;
 		}
 		if(isBetween(totalPlr, 593, 792)){
-			System.out.println("Payout Plan : 10");
+			LogUtils.Log("Payout Plan : 10");
 			return PLAN10;
 		}
 		if(isBetween(totalPlr, 793, 992)){
-			System.out.println("Payout Plan : 11");
+			LogUtils.Log("Payout Plan : 11");
 			return PLAN11;
 		}
 		if(isBetween(totalPlr, 993, 1999)){
-			System.out.println("Payout Plan : 12");
+			LogUtils.Log("Payout Plan : 12");
 			return PLAN12;
 		}
 		return null;

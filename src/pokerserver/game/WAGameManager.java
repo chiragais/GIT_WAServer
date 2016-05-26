@@ -1,4 +1,4 @@
-	package pokerserver;
+	package pokerserver.game;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -6,16 +6,17 @@ import java.util.Comparator;
 import java.util.List;
 
 import pokerserver.cards.Card;
+import pokerserver.cards.WACardPot;
 import pokerserver.handrank.GeneralHandManager;
 import pokerserver.players.AllInPlayer;
 import pokerserver.players.PlayerBean;
 import pokerserver.players.PlayersManager;
-import pokerserver.players.WACardPot;
-import pokerserver.players.Winner;
-import pokerserver.players.WinnerManager;
 import pokerserver.rounds.RoundManager;
 import pokerserver.turns.TurnManager;
 import pokerserver.utils.GameConstants;
+import pokerserver.utils.LogUtils;
+import pokerserver.winner.Winner;
+import pokerserver.winner.WinnerManager;
 
 /**
  * Manage player, round and all other tasks
@@ -63,7 +64,7 @@ public class WAGameManager implements GameConstants {
 		totalBBPlayersTurn = 0;
 		if(totalGameCntr>playersManager.getTotalActivePlayerCounter())
 			totalGameCntr=0;
-		playersManager.setCurrentGameCntr(totalGameCntr++);
+		playersManager.setDealerPosition(totalGameCntr++);
 		// startFirstRound();
 	}
 
@@ -113,7 +114,7 @@ public class WAGameManager implements GameConstants {
 				}
 			}
 			for(WACardPot waCardPot : winnerManager.getAllWACardPots()){
-				System.out.println("WA Pot Amt : "+waCardPot.getPotAmt() +" >> TotalPlayer : "+waCardPot.getPlayers().size());
+				LogUtils.Log("WA Pot Amt : "+waCardPot.getPotAmt() +" >> TotalPlayer : "+waCardPot.getPlayers().size());
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -193,19 +194,13 @@ public class WAGameManager implements GameConstants {
 							.getTotalRoundBetAmount();
 				AllInPlayer allInPlayer = new AllInPlayer(
 						player.getPlayerName(), allInBetTotalAmount);
-				System.out.println("\n this is all in amount of player  "
+				LogUtils.Log("\n this is all in amount of player  "
 						+ allInPlayer.getPlayerName() + "  is =  "
 						+ allInPlayer.getTotalAllInPotAmount());
 				winnerManager.addAllInTotalPotAmount(allInPlayer);
 			}
 
 		}
-
-//		for (AllInPlayer allInPlayer : winnerManager.getAllInPlayers()) {
-//			System.out.println("\n All IN Player :  "
-//					+ allInPlayer.getPlayerName() + "  Bet Amount =  "
-//					+ allInPlayer.getTotalAllInPotAmount());
-//		}
 	}
 
 	public void leavePlayerToGame(PlayerBean player) {
@@ -237,7 +232,7 @@ public class WAGameManager implements GameConstants {
 	 */
 	public void startFirstRound() {
 		currentRound = WA_ROUND_START;
-		System.out.println(">>>>>>>>>>> WA start Round started");
+		LogUtils.Log(">>>>>>>>>>> WA start Round started");
 		startRound.setStatus(STATUS_ACTIVE);
 		firstFlopRound.setStatus(STATUS_PENDING);
 		secondFlopRound.setStatus(STATUS_PENDING);
@@ -247,7 +242,7 @@ public class WAGameManager implements GameConstants {
 
 	public void startFirstFlopRound() {
 		currentRound = WA_ROUND_FIRST_FLOP;
-		System.out.println(">>>>>>>>>>>WA First Flop Round started  ");
+		LogUtils.Log(">>>>>>>>>>>WA First Flop Round started  ");
 		startRound.setStatus(STATUS_FINISH);
 		firstFlopRound.setStatus(STATUS_ACTIVE);
 		secondFlopRound.setStatus(STATUS_PENDING);
@@ -257,7 +252,7 @@ public class WAGameManager implements GameConstants {
 
 	public void startSecondFlopRound() {
 		currentRound = WA_ROUND_SECOND_FLOP;
-		System.out.println(">>>>>>>>>>> WA Second flop Round started  ");
+		LogUtils.Log(">>>>>>>>>>> WA Second flop Round started  ");
 		startRound.setStatus(STATUS_FINISH);
 		firstFlopRound.setStatus(STATUS_FINISH);
 		secondFlopRound.setStatus(STATUS_ACTIVE);
@@ -267,7 +262,7 @@ public class WAGameManager implements GameConstants {
 
 	public void startWhoopAssRound() {
 		currentRound = WA_ROUND_WHOOPASS;
-		System.out.println(">>>>>>>>>>> WA WhoopAss Round started  ");
+		LogUtils.Log(">>>>>>>>>>> WA WhoopAss Round started  ");
 		startRound.setStatus(STATUS_FINISH);
 		firstFlopRound.setStatus(STATUS_FINISH);
 		secondFlopRound.setStatus(STATUS_FINISH);
@@ -277,7 +272,7 @@ public class WAGameManager implements GameConstants {
 
 	public void startThirdFlopRound() {
 		currentRound = WA_ROUND_THIRD_FLOP;
-		System.out.println(">>>>>>>>>>> WA Third Round started  ");
+		LogUtils.Log(">>>>>>>>>>> WA Third Round started  ");
 		startRound.setStatus(STATUS_FINISH);
 		firstFlopRound.setStatus(STATUS_FINISH);
 		secondFlopRound.setStatus(STATUS_FINISH);
@@ -354,14 +349,12 @@ public class WAGameManager implements GameConstants {
 			
 			for (PlayerBean player : playersManager.getAllAvailablePlayers()) {
 				// Check total BB Player turn
-				
 				int totalBetAmt = currentRound.getTotalPlayerBetAmount(player);
 				if (maxPlayerBetAmt < totalBetAmt) {
 					maxPlayerBetAmt = totalBetAmt;
 				}
 				if (!player.isFolded() && !player.isAllIn()) {
 					allPlayersAreAllIn = false;
-//					System.out.println("<> Other "+player.getPlayerName()+" >> "+currentRound.getPlayerLastAction(player));
 					totalPlayerWiseBetAmount.add(new PlayerBetBean(currentRound
 							.getTotalPlayerBetAmount(player), currentRound
 							.getPlayerLastAction(player)));
@@ -403,7 +396,7 @@ public class WAGameManager implements GameConstants {
 			if (!allPlayerHaveTurn) {
 				return false;
 			}
-			System.out.println("TotalBB Players Turn : "+totalBBPlayersTurn);
+//			LogUtils.Log("TotalBB Players Turn : "+totalBBPlayersTurn);
 			if(totalBBPlayersTurn==1){
 				return false;
 			}
@@ -412,11 +405,7 @@ public class WAGameManager implements GameConstants {
 		}
 	}
 
-	public void setWhoopAssCardStatus() {
-
-	}
-
-	public int getPlayerTotalBetAmount(String name) {
+	public int getPlayerTotalBetAmountInAllRounds(String name) {
 		PlayerBean player = playersManager.getPlayerByName(name);
 		int totalBetAmount = 0;
 		totalBetAmount += startRound.getTotalPlayerBetAmount(player);
@@ -443,7 +432,7 @@ public class WAGameManager implements GameConstants {
 			break;
 		case WA_ROUND_WHOOPASS:
 			calculatePotAmountForAllInMembers();
-			System.out.println("WA Round done: Calculate WA Pot: ");
+			LogUtils.Log("WA Round done: Calculate WA Pot: ");
 			findWAShortPot();
 			
 			startThirdFlopRound();
@@ -473,12 +462,10 @@ public class WAGameManager implements GameConstants {
 	/** Check card is already on table or not */
 	public boolean isAlreadyDesributedCard(Card cardBean) {
 		for (Card cardBean2 : listTableCards) {
-//			System.out.println(cardBean2.getCardName()+ " == " + cardBean.getCardName()+" : "+cardBean.getCardName().equals(cardBean2.getCardName()));			
 			if (cardBean.getCardName().equals(cardBean2.getCardName())) {
 				return true;
 			}
 		}
-//		System.out.println("New card added : "+cardBean.getCardName()+" >> "+listTableCards.size());
 		listTableCards.add(cardBean);
 		return false;
 	}
@@ -488,7 +475,6 @@ public class WAGameManager implements GameConstants {
 		while (isAlreadyDesributedCard(cardBean)) {
 			cardBean.generateRandomCard();
 		}
-		// System.out.print("Default card  : " + cardBean.getCardName());
 		return cardBean;
 	}
 
@@ -498,15 +484,6 @@ public class WAGameManager implements GameConstants {
 		// gamePlay.executePlayerAction(betAmount, userAction);
 		return addCurrentActionToTurnManager(userName, betAmount, userAction);
 	}
-
-/*	public void setTotalTableBetAmount() {
-		int totalBetAmount = 0;
-		totalBetAmount += startRound.getTotalRoundBetAmount();
-		totalBetAmount += firstFlopRound.getTotalRoundBetAmount();
-		totalBetAmount += secondFlopRound.getTotalRoundBetAmount();
-		totalBetAmount += thirdRound.getTotalRoundBetAmount();
-		winnerManager.setTotalTableAmount(totalBetAmount);
-	}*/
 
 	public int getTotalTableAmount() {
 		int totalBetAmount = 0;
@@ -542,7 +519,7 @@ public class WAGameManager implements GameConstants {
 			}
 			turnManager = new TurnManager(currentPlayer, action, betAmount);
 			currentRoundManger.addTurnRecord(turnManager);
-			System.out.println("Turn Manager # User: "
+			LogUtils.Log("Turn Manager # User: "
 					+ currentPlayer.getPlayerName() + " # Action: " + action
 					+ " # Bet: " + betAmount + " # Round: "
 					+ currentRoundManger.getRound());
@@ -575,7 +552,7 @@ public class WAGameManager implements GameConstants {
 				foldedCntr++;
 			}
 		}
-		System.out.println("Number Of players : "+playersManager.getAllAvailablePlayers().size()+" >>Total folded : "+foldedCntr);
+		LogUtils.Log("Number Of players : "+playersManager.getAllAvailablePlayers().size()+" >>Total folded : "+foldedCntr);
 		if(playersManager.getAllAvailablePlayers().size()-1 == foldedCntr){
 			return true;
 		}

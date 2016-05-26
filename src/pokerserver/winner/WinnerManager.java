@@ -1,4 +1,4 @@
-package pokerserver.players;
+package pokerserver.winner;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -6,11 +6,14 @@ import java.util.Comparator;
 import java.util.List;
 
 import pokerserver.cards.Card;
+import pokerserver.cards.WACardPot;
 import pokerserver.handrank.GeneralHandManager;
 import pokerserver.payout.PayoutManager;
-import pokerserver.turns.TurnManager;
+import pokerserver.players.AllInPlayer;
+import pokerserver.players.PlayerBean;
+import pokerserver.players.PlayersManager;
 import pokerserver.utils.GameConstants;
-import pokerserver.utils.GameConstants.HAND_RANK;
+import pokerserver.utils.LogUtils;
 
 public class WinnerManager implements GameConstants{
 
@@ -91,13 +94,13 @@ public class WinnerManager implements GameConstants{
 								player2.getHandRank());
 					}
 				});
-//		System.out.println("Before sort...........");
+//		LogUtils.Log("Before sort...........");
 //		for (PlayerBean playerBean : listAllActivePlayers) {
-//			System.out.println("Current Pla : " + playerBean.getPlayerName()
+//			LogUtils.Log("Current Pla : " + playerBean.getPlayerName()
 //					+ " >> " + playerBean.getBestHandRankTotal() + " >> "
 //					+ playerBean.getHandRank());
 //		}
-//		System.out.println("Before sort...........");
+//		LogUtils.Log("Before sort...........");
 		for (int i = 0; i < listAllActivePlayers.size(); i++) {
 			List<PlayerBean> sameRankPlayer = new ArrayList<PlayerBean>();
 			PlayerBean currentPlayer = listAllActivePlayers
@@ -122,7 +125,7 @@ public class WinnerManager implements GameConstants{
 		}
 
 		for (PlayerBean playerBean : listWinnerPlayer) {
-			System.out.println("Current Pla : " + playerBean.getPlayerName()
+			LogUtils.Log("Current Pla : " + playerBean.getPlayerName()
 					+ " >> " + playerBean.getBestHandRankTotal() + " >> "
 					+ playerBean.getHandRank());
 		}
@@ -142,7 +145,7 @@ public class WinnerManager implements GameConstants{
 				});
 		
 		for(WACardPot waPotBean: listWACardPotList){
-			System.out.println("WA Pot : Pending Amt : "+ pendingPotAmt+" >> Pot Amt : "+waPotBean.getPotAmt());
+			LogUtils.Log("WA Pot : Pending Amt : "+ pendingPotAmt+" >> Pot Amt : "+waPotBean.getPotAmt());
 			
 			if(waPotBean.getPotAmt()<=betAmt){
 				waPotBean.addPlayer(playerBean);
@@ -154,7 +157,7 @@ public class WinnerManager implements GameConstants{
 			WACardPot waPot = new WACardPot(pendingPotAmt);
 			waPot.addPlayer(playerBean);
 			addWACardPot(waPot);
-			System.out.println("WA Pot : New Added : "+pendingPotAmt);
+			LogUtils.Log("WA Pot : New Added : "+pendingPotAmt);
 		}
 	}
 	/*public WACardPot checkForWACardPot(int potAmt){
@@ -194,7 +197,7 @@ public class WinnerManager implements GameConstants{
 					}
 				}
 				if(totalActivePlayerCnr==1){
-					System.out.println("WA Winner Player : "+lastActivePlayer.getPlayerName()+" >> Pot Amt : "+waCardPot.getPotAmt());
+					LogUtils.Log("WA Winner Player : "+lastActivePlayer.getPlayerName()+" >> Pot Amt : "+waCardPot.getPotAmt());
 					waCardPot.setWinnerPlayer(lastActivePlayer);
 					listWinnerWAPotAfterFold.add(waCardPot);
 				}
@@ -203,7 +206,7 @@ public class WinnerManager implements GameConstants{
 		return listWinnerWAPotAfterFold;
 	}
 	public void findWinnerPlayers(int gameType) {
-//		System.out.println("\n Find Winner Player ------------"+gameType);
+//		LogUtils.Log("\n Find Winner Player ------------"+gameType);
 		List<PlayerBean> listAscWinningPlayers = generateWinnerPlayers(); 
 
 		// Manage WA card pots
@@ -230,7 +233,7 @@ public class WinnerManager implements GameConstants{
 							winner.getPlayer().getBalance()
 									+ winner.getWinningAmount());
 					listWinners.add(winner);
-					System.out.println("SNG : Player : "
+					LogUtils.Log("SNG : Player : "
 							+ player.getPlayerName() + " > Rank Index : " + i
 							+ " > Payout : " + winningPercentage
 							+ " > Winning Amt : " + winningAmt
@@ -279,9 +282,9 @@ public class WinnerManager implements GameConstants{
 		if (totalTableAmount != 0) {
 			remainingAmount = totalTableAmount;
 		}
-		System.out.println("\n ---------------------------------");
+		LogUtils.Log("\n ---------------------------------");
 		for (Winner player : listWinners) {
-			System.out.println("\n Winner Player =  "
+			LogUtils.Log("\n Winner Player =  "
 					+ player.getPlayer().getPlayerName() +" :: Amount : "+player.getWinningAmount());
 		}
 

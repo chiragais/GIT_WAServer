@@ -204,6 +204,7 @@ public interface GameConstants {
 	int TOURNAMENT_REBUY_TIMER = 60 * 2;
 	int TOURNAMENT_BREAK_TIMER = 60 * 1;
 	int TOURNAMENT_BREAK_WAITING_TIME = 60 * 1;
+	int RESTART_GAME_TIME = 10;
 	
 	int SBAmount = 10;
 	

@@ -1,2 +1,381 @@
 2016-05-23 15:01:54,668 - WARNING: Room Created: id= 1042799795
 2016-05-23 15:01:54,679 - ERROR: Error in getLockProperties java.lang.NullPointerException
+2016-05-23 17:16:47,772 - WARNING: Room Created: id= 257742064
+2016-05-23 17:18:56,062 - WARNING: got out of turn request
+2016-05-23 17:20:13,952 - WARNING: got out of turn request
+2016-05-23 17:20:29,862 - WARNING: got out of turn request
+2016-05-23 17:20:29,865 - WARNING: got out of turn request
+2016-05-23 17:21:14,679 - WARNING: got out of turn request
+2016-05-23 17:21:21,058 - WARNING: got out of turn request
+2016-05-23 17:21:45,359 - WARNING: got out of turn request
+2016-05-23 17:22:23,461 - WARNING: got out of turn request
+2016-05-23 17:22:27,128 - WARNING: got out of turn request
+2016-05-23 17:23:34,953 - WARNING: got out of turn request
+2016-05-23 17:30:05,871 - WARNING: Room Created: id= 1393057391
+2016-05-23 17:30:35,886 - WARNING: got out of turn request
+2016-05-23 17:30:43,126 - WARNING: got out of turn request
+2016-05-23 17:31:58,689 - WARNING: got out of turn request
+2016-05-23 17:32:00,896 - WARNING: got out of turn request
+2016-05-23 17:33:28,187 - WARNING: closing idle session /192.168.1.128:60796
+2016-05-23 17:33:29,188 - WARNING: closing idle session /192.168.1.128:60799
+2016-05-23 17:39:58,120 - WARNING: got out of turn request
+2016-05-23 17:40:27,659 - WARNING: got out of turn request
+2016-05-23 17:40:52,384 - WARNING: got out of turn request
+2016-05-23 17:40:53,365 - WARNING: got out of turn request
+2016-05-23 17:41:10,920 - WARNING: got out of turn request
+2016-05-23 17:41:11,869 - WARNING: got out of turn request
+2016-05-23 17:44:08,553 - WARNING: got out of turn request
+2016-05-23 17:44:10,600 - WARNING: got out of turn request
+2016-05-23 17:44:10,604 - WARNING: got out of turn request
+2016-05-23 17:44:10,616 - WARNING: got out of turn request
+2016-05-23 17:44:47,751 - WARNING: got out of turn request
+2016-05-23 17:44:55,788 - WARNING: got out of turn request
+2016-05-23 17:44:57,197 - WARNING: got out of turn request
+2016-05-23 17:47:41,635 - WARNING: got out of turn request
+2016-05-23 17:47:42,461 - WARNING: got out of turn request
+2016-05-23 17:48:40,240 - WARNING: got out of turn request
+2016-05-23 17:49:41,021 - WARNING: got out of turn request
+2016-05-23 17:49:41,024 - WARNING: got out of turn request
+2016-05-23 17:50:15,879 - WARNING: got out of turn request
+2016-05-23 17:50:44,773 - WARNING: got out of turn request
+2016-05-23 17:50:49,892 - WARNING: got out of turn request
+2016-05-23 17:51:18,470 - WARNING: got out of turn request
+2016-05-23 17:51:19,667 - WARNING: got out of turn request
+2016-05-23 17:53:32,774 - WARNING: got out of turn request
+2016-05-23 17:53:32,778 - WARNING: got out of turn request
+2016-05-23 17:53:32,792 - WARNING: exceptionCaught cause null remote /192.168.1.128:62279
+2016-05-23 17:53:32,801 - WARNING: got out of turn request
+2016-05-23 17:54:44,970 - WARNING: got out of turn request
+2016-05-23 17:57:34,770 - WARNING: got out of turn request
+2016-05-23 17:58:08,801 - WARNING: got out of turn request
+2016-05-23 17:58:08,808 - WARNING: got out of turn request
+2016-05-23 18:10:30,963 - WARNING: got out of turn request
+2016-05-23 18:10:30,991 - WARNING: got out of turn request
+2016-05-23 18:10:31,015 - WARNING: got out of turn request
+2016-05-23 18:11:16,156 - WARNING: got out of turn request
+2016-05-23 18:12:19,237 - WARNING: got out of turn request
+2016-05-23 18:12:49,559 - WARNING: got out of turn request
+2016-05-23 18:12:53,055 - WARNING: got out of turn request
+2016-05-23 18:13:18,602 - WARNING: got out of turn request
+2016-05-23 18:15:33,186 - WARNING: got out of turn request
+2016-05-23 18:15:33,203 - WARNING: got out of turn request
+2016-05-23 18:16:13,399 - WARNING: got out of turn request
+2016-05-23 18:17:02,589 - WARNING: got out of turn request
+2016-05-23 18:17:05,310 - WARNING: got out of turn request
+2016-05-23 18:17:24,397 - WARNING: got out of turn request
+2016-05-23 18:17:25,566 - WARNING: got out of turn request
+2016-05-23 18:18:05,711 - WARNING: got out of turn request
+2016-05-23 18:19:25,152 - WARNING: got out of turn request
+2016-05-23 18:19:25,152 - WARNING: got out of turn request
+2016-05-23 18:19:25,154 - WARNING: got out of turn request
+2016-05-23 18:19:25,164 - WARNING: exceptionCaught cause null remote /192.168.1.128:63980
+2016-05-23 18:20:49,710 - WARNING: got out of turn request
+2016-05-23 18:20:51,485 - WARNING: got out of turn request
+2016-05-23 18:21:17,079 - WARNING: got out of turn request
+2016-05-23 18:21:17,081 - WARNING: got out of turn request
+2016-05-23 18:21:17,082 - WARNING: got out of turn request
+2016-05-23 18:21:18,639 - WARNING: got out of turn request
+2016-05-23 18:23:23,042 - WARNING: got out of turn request
+2016-05-23 18:23:25,390 - WARNING: got out of turn request
+2016-05-23 18:23:56,306 - WARNING: got out of turn request
+2016-05-23 18:23:57,651 - WARNING: got out of turn request
+2016-05-23 18:24:20,471 - WARNING: got out of turn request
+2016-05-23 18:24:21,608 - WARNING: got out of turn request
+2016-05-23 18:24:47,820 - WARNING: got out of turn request
+2016-05-23 18:24:49,823 - WARNING: got out of turn request
+2016-05-23 18:24:49,825 - WARNING: got out of turn request
+2016-05-23 18:24:49,838 - WARNING: got out of turn request
+2016-05-23 18:31:03,012 - WARNING: got out of turn request
+2016-05-23 18:33:25,259 - WARNING: got out of turn request
+2016-05-23 18:33:56,970 - WARNING: got out of turn request
+2016-05-23 18:33:57,907 - WARNING: got out of turn request
+2016-05-23 18:33:58,933 - WARNING: got out of turn request
+2016-05-23 18:34:00,248 - WARNING: got out of turn request
+2016-05-23 18:36:22,770 - WARNING: got out of turn request
+2016-05-23 18:39:55,207 - WARNING: got out of turn request
+2016-05-23 18:41:00,559 - WARNING: got out of turn request
+2016-05-23 18:41:00,595 - WARNING: got out of turn request
+2016-05-23 18:41:02,882 - WARNING: got out of turn request
+2016-05-23 18:50:45,024 - WARNING: got out of turn request
+2016-05-23 18:50:46,055 - WARNING: got out of turn request
+2016-05-23 18:51:12,631 - WARNING: got out of turn request
+2016-05-23 18:51:13,235 - WARNING: got out of turn request
+2016-05-23 18:51:34,868 - WARNING: got out of turn request
+2016-05-23 18:51:34,873 - WARNING: got out of turn request
+2016-05-23 18:51:34,889 - WARNING: got out of turn request
+2016-05-23 18:51:34,894 - WARNING: exceptionCaught cause null remote /192.168.1.128:49827
+2016-05-23 18:51:36,421 - WARNING: got out of turn request
+2016-05-23 18:57:07,801 - WARNING: got out of turn request
+2016-05-23 18:57:07,811 - WARNING: got out of turn request
+2016-05-23 18:57:07,820 - WARNING: got out of turn request
+2016-05-23 19:05:34,427 - WARNING: got out of turn request
+2016-05-23 19:06:25,208 - WARNING: got out of turn request
+2016-05-23 19:06:30,502 - WARNING: got out of turn request
+2016-05-23 19:06:36,518 - WARNING: got out of turn request
+2016-05-23 19:07:32,664 - WARNING: got out of turn request
+2016-05-23 19:21:48,085 - WARNING: got out of turn request
+2016-05-23 19:21:53,039 - WARNING: got out of turn request
+2016-05-23 19:21:55,535 - WARNING: got out of turn request
+2016-05-23 19:22:17,247 - WARNING: got out of turn request
+2016-05-23 19:22:42,514 - WARNING: got out of turn request
+2016-05-23 19:22:43,253 - WARNING: got out of turn request
+2016-05-23 19:23:13,854 - WARNING: got out of turn request
+2016-05-23 19:23:37,070 - WARNING: got out of turn request
+2016-05-23 19:23:41,998 - WARNING: got out of turn request
+2016-05-23 19:24:09,448 - WARNING: got out of turn request
+2016-05-23 19:24:10,096 - WARNING: got out of turn request
+2016-05-23 19:24:10,984 - WARNING: got out of turn request
+2016-05-23 19:24:11,840 - WARNING: got out of turn request
+2016-05-23 19:29:36,403 - WARNING: got out of turn request
+2016-05-23 19:30:04,830 - WARNING: got out of turn request
+2016-05-23 19:30:04,844 - WARNING: got out of turn request
+2016-05-23 19:30:04,847 - WARNING: got out of turn request
+2016-05-24 11:16:24,338 - WARNING: Room Created: id= 1447128536
+2016-05-24 11:16:27,032 - WARNING: got out of turn request
+2016-05-24 11:16:58,038 - WARNING: got out of turn request
+2016-05-24 11:18:31,749 - WARNING: got out of turn request
+2016-05-24 11:18:38,166 - WARNING: got out of turn request
+2016-05-24 11:25:56,350 - WARNING: got out of turn request
+2016-05-24 11:26:14,698 - WARNING: got out of turn request
+2016-05-24 11:26:57,265 - WARNING: got out of turn request
+2016-05-24 11:27:15,283 - WARNING: got out of turn request
+2016-05-24 11:27:40,498 - WARNING: got out of turn request
+2016-05-24 11:28:04,863 - WARNING: got out of turn request
+2016-05-24 12:02:09,141 - ERROR: Error in handleRequest java.util.ConcurrentModificationException
+2016-05-24 12:02:09,141 - ERROR: Error in handleRequest java.util.ConcurrentModificationException
+2016-05-24 12:02:09,141 - ERROR: Error in handleRequest java.util.ConcurrentModificationException
+2016-05-24 12:02:09,141 - WARNING: exceptionCaught cause null remote /192.168.1.128:56081
+2016-05-24 12:02:09,141 - WARNING: exceptionCaught cause null remote /192.168.1.128:56069
+2016-05-24 12:02:09,141 - WARNING: exceptionCaught cause null remote /192.168.1.128:56054
+2016-05-24 13:42:20,913 - WARNING: Room Created: id= 593103031
+2016-05-24 13:49:42,009 - WARNING: got out of turn request
+2016-05-24 13:52:28,295 - WARNING: got out of turn request
+2016-05-24 15:29:51,584 - WARNING: Room Created: id= 1174352850
+2016-05-24 15:30:10,281 - WARNING: got out of turn request
+2016-05-24 15:30:31,370 - WARNING: Room Created: id= 1180953686
+2016-05-24 15:30:40,261 - WARNING: Room Created: id= 1398649511
+2016-05-24 15:31:27,095 - WARNING: got out of turn request
+2016-05-24 15:31:48,116 - WARNING: Room Created: id= 891322506
+2016-05-24 15:31:56,898 - WARNING: Room Created: id= 877855269
+2016-05-24 15:37:53,636 - WARNING: Room Created: id= 2120330696
+2016-05-24 15:38:02,754 - WARNING: Room Created: id= 1909473247
+2016-05-24 15:40:29,691 - WARNING: Room Created: id= 1654989320
+2016-05-24 15:40:49,436 - WARNING: Room Created: id= 484708888
+2016-05-24 15:47:20,503 - WARNING: Room Created: id= 68563841
+2016-05-24 15:47:25,693 - WARNING: Room Created: id= 1742532205
+2016-05-24 15:47:44,722 - WARNING: closing idle session /192.168.1.226:55689
+2016-05-24 15:48:45,422 - WARNING: got out of turn request
+2016-05-24 15:49:02,072 - WARNING: Room Created: id= 540973428
+2016-05-24 15:49:10,827 - WARNING: Room Created: id= 1982851105
+2016-05-24 15:52:06,234 - WARNING: Room Created: id= 1959194243
+2016-05-24 15:52:15,439 - WARNING: Room Created: id= 1900194266
+2016-05-24 15:55:32,719 - WARNING: closing idle session /192.168.1.227:54200
+2016-05-24 15:55:33,447 - WARNING: closing idle session /192.168.1.226:55695
+2016-05-24 16:01:00,378 - WARNING: Room Created: id= 1435352284
+2016-05-24 16:01:05,688 - WARNING: Room Created: id= 1288537131
+2016-05-24 16:02:33,720 - WARNING: Room Created: id= 695115905
+2016-05-24 16:05:19,721 - WARNING: got out of turn request
+2016-05-24 16:05:25,724 - WARNING: closing idle session /192.168.1.128:57439
+2016-05-24 16:20:20,628 - WARNING: Room Created: id= 1406504787
+2016-05-24 16:22:12,543 - WARNING: Room Created: id= 1544813854
+2016-05-24 17:42:18,578 - WARNING: got out of turn request
+2016-05-24 17:42:28,285 - WARNING: got out of turn request
+2016-05-24 17:53:01,826 - WARNING: Room Created: id= 1673146377
+2016-05-24 17:57:18,434 - WARNING: Room Created: id= 1912579470
+2016-05-24 18:06:33,366 - WARNING: Room Created: id= 369519318
+2016-05-24 18:07:46,540 - WARNING: closing idle session /192.168.1.227:54710
+2016-05-24 18:07:48,542 - WARNING: closing idle session /192.168.1.226:55820
+2016-05-24 18:09:47,794 - WARNING: closing idle session /192.168.1.227:54748
+2016-05-24 18:11:17,169 - WARNING: Room Created: id= 1577102049
+2016-05-24 18:13:02,388 - WARNING: got out of turn request
+2016-05-24 18:13:09,349 - WARNING: got out of turn request
+2016-05-24 18:30:23,896 - WARNING: Room Created: id= 1591191557
+2016-05-24 18:54:07,519 - WARNING: got out of turn request
+2016-05-24 18:56:10,924 - WARNING: got out of turn request
+2016-05-24 18:56:40,590 - WARNING: got out of turn request
+2016-05-24 18:56:42,076 - WARNING: got out of turn request
+2016-05-24 18:57:12,362 - WARNING: got out of turn request
+2016-05-24 18:58:21,293 - WARNING: got out of turn request
+2016-05-24 18:58:47,598 - WARNING: got out of turn request
+2016-05-24 18:58:47,619 - WARNING: got out of turn request
+2016-05-24 18:58:47,620 - WARNING: got out of turn request
+2016-05-24 18:59:13,185 - WARNING: got out of turn request
+2016-05-24 18:59:51,667 - WARNING: got out of turn request
+2016-05-25 17:05:27,747 - WARNING: Room Created: id= 334421495
+2016-05-25 17:05:31,791 - WARNING: got out of turn request
+2016-05-25 17:07:59,376 - WARNING: got out of turn request
+2016-05-25 17:08:03,829 - WARNING: got out of turn request
+2016-05-25 17:09:56,009 - WARNING: got out of turn request
+2016-05-25 17:10:32,910 - WARNING: got out of turn request
+2016-05-25 17:11:36,480 - WARNING: got out of turn request
+2016-05-25 17:12:24,054 - WARNING: got out of turn request
+2016-05-25 17:36:46,266 - WARNING: Room Created: id= 1737525679
+2016-05-25 17:53:18,944 - WARNING: got out of turn request
+2016-05-25 17:53:20,965 - WARNING: got out of turn request
+2016-05-25 17:53:45,257 - WARNING: got out of turn request
+2016-05-25 18:02:05,092 - WARNING: got out of turn request
+2016-05-25 18:15:59,296 - WARNING: Room Created: id= 565201398
+2016-05-25 18:18:27,411 - WARNING: got out of turn request
+2016-05-25 18:20:05,375 - WARNING: got out of turn request
+2016-05-25 18:20:06,745 - WARNING: got out of turn request
+2016-05-25 18:20:07,576 - WARNING: got out of turn request
+2016-05-25 18:23:06,685 - WARNING: got out of turn request
+2016-05-25 18:33:12,158 - WARNING: got out of turn request
+2016-05-25 18:33:13,084 - WARNING: got out of turn request
+2016-05-25 18:50:15,191 - WARNING: got out of turn request
+2016-05-25 18:50:58,332 - WARNING: got out of turn request
+2016-05-25 18:54:42,341 - WARNING: got out of turn request
+2016-05-25 18:55:23,130 - WARNING: got out of turn request
+2016-05-25 18:55:24,126 - WARNING: got out of turn request
+2016-05-25 18:57:30,913 - WARNING: got out of turn request
+2016-05-25 18:57:32,267 - WARNING: got out of turn request
+2016-05-25 18:57:33,310 - WARNING: got out of turn request
+2016-05-25 19:16:22,979 - WARNING: got out of turn request
+2016-05-26 09:59:24,311 - WARNING: Room Created: id= 1427150507
+2016-05-26 10:01:53,602 - WARNING: got out of turn request
+2016-05-26 10:05:31,791 - WARNING: got out of turn request
+2016-05-26 10:11:35,848 - WARNING: got out of turn request
+2016-05-26 10:12:46,214 - WARNING: got out of turn request
+2016-05-26 10:20:24,482 - WARNING: got out of turn request
+2016-05-26 10:20:31,023 - WARNING: got out of turn request
+2016-05-26 10:31:48,929 - WARNING: got out of turn request
+2016-05-26 10:31:48,930 - WARNING: got out of turn request
+2016-05-26 10:35:38,013 - ERROR: Exception in handleChat java.util.ConcurrentModificationException
+2016-05-26 10:35:58,506 - WARNING: got out of turn request
+2016-05-26 10:40:09,351 - WARNING: got out of turn request
+2016-05-26 10:44:59,017 - WARNING: got out of turn request
+2016-05-26 10:45:00,042 - WARNING: got out of turn request
+2016-05-26 10:45:00,851 - WARNING: got out of turn request
+2016-05-26 10:54:37,059 - WARNING: got out of turn request
+2016-05-26 10:54:46,586 - WARNING: got out of turn request
+2016-05-26 11:38:20,299 - WARNING: got out of turn request
+2016-05-26 11:54:13,404 - WARNING: got out of turn request
+2016-05-26 11:59:25,792 - WARNING: Room Created: id= 1858647263
+2016-05-26 12:01:35,326 - WARNING: got out of turn request
+2016-05-26 12:01:35,365 - WARNING: got out of turn request
+2016-05-26 12:01:40,421 - WARNING: got out of turn request
+2016-05-26 12:04:18,956 - WARNING: got out of turn request
+2016-05-26 12:06:15,619 - WARNING: exceptionCaught cause null remote /192.168.1.129:62118
+2016-05-26 12:09:36,474 - WARNING: got out of turn request
+2016-05-26 12:19:01,318 - WARNING: got out of turn request
+2016-05-26 12:21:16,177 - WARNING: got out of turn request
+2016-05-26 12:22:27,661 - WARNING: Room Created: id= 896679282
+2016-05-26 12:24:08,534 - WARNING: exceptionCaught cause null remote /192.168.1.129:63252
+2016-05-26 12:28:17,824 - WARNING: Room Created: id= 1802570537
+2016-05-26 12:30:38,090 - WARNING: Room Created: id= 1877858406
+2016-05-26 12:34:44,635 - WARNING: Room Created: id= 1324592148
+2016-05-26 12:36:38,209 - WARNING: Room Created: id= 1693525463
+2016-05-26 12:39:18,839 - WARNING: Room Created: id= 396182642
+2016-05-26 12:40:17,213 - WARNING: got out of turn request
+2016-05-26 12:40:17,219 - WARNING: got out of turn request
+2016-05-26 12:40:18,066 - WARNING: got out of turn request
+2016-05-26 12:42:30,217 - WARNING: Room Created: id= 1230889922
+2016-05-26 12:54:39,972 - WARNING: Room Created: id= 89856846
+2016-05-26 12:57:45,967 - ERROR: Exception in handleChat java.util.ConcurrentModificationException
+2016-05-26 12:58:52,524 - WARNING: Room Created: id= 998960321
+2016-05-26 13:23:29,894 - WARNING: Room Created: id= 410804823
+2016-05-26 13:24:06,946 - WARNING: exceptionCaught cause null remote /192.168.1.129:50744
+2016-05-26 13:24:13,627 - WARNING: got out of turn request
+2016-05-26 13:24:46,975 - WARNING: exceptionCaught cause null remote /192.168.1.129:50791
+2016-05-26 13:24:57,050 - WARNING: got out of turn request
+2016-05-26 13:25:26,403 - WARNING: got out of turn request
+2016-05-26 13:25:31,434 - WARNING: exceptionCaught cause null remote /192.168.1.129:50844
+2016-05-26 13:26:50,591 - WARNING: Room Created: id= 1835798904
+2016-05-26 13:27:39,146 - WARNING: Room Created: id= 2104797563
+2016-05-26 13:27:59,301 - WARNING: exceptionCaught cause null remote /192.168.1.129:51014
+2016-05-26 13:28:07,684 - WARNING: got out of turn request
+2016-05-26 13:36:33,479 - WARNING: Room Created: id= 1198924403
+2016-05-26 13:37:22,843 - WARNING: got out of turn request
+2016-05-26 13:38:11,838 - WARNING: Room Created: id= 1917089118
+2016-05-26 13:38:45,798 - WARNING: got out of turn request
+2016-05-26 13:38:45,803 - WARNING: got out of turn request
+2016-05-26 14:08:43,559 - WARNING: Room Created: id= 1774755333
+2016-05-26 14:09:46,312 - WARNING: Room Created: id= 949388690
+2016-05-26 14:14:12,389 - WARNING: Room Created: id= 510674196
+2016-05-26 14:17:19,714 - WARNING: got out of turn request
+2016-05-26 14:17:19,792 - WARNING: got out of turn request
+2016-05-26 14:17:19,829 - WARNING: got out of turn request
+2016-05-26 14:23:17,059 - WARNING: got out of turn request
+2016-05-26 14:28:00,823 - WARNING: got out of turn request
+2016-05-26 14:28:01,862 - WARNING: got out of turn request
+2016-05-26 14:40:07,745 - WARNING: got out of turn request
+2016-05-26 14:41:06,298 - WARNING: got out of turn request
+2016-05-26 14:45:17,836 - WARNING: got out of turn request
+2016-05-26 14:45:17,853 - WARNING: got out of turn request
+2016-05-26 14:51:09,195 - WARNING: Room Created: id= 507152286
+2016-05-26 14:51:28,292 - WARNING: got out of turn request
+2016-05-26 14:51:28,305 - WARNING: got out of turn request
+2016-05-26 14:56:00,355 - WARNING: Room Created: id= 190999794
+2016-05-26 14:56:58,919 - WARNING: got out of turn request
+2016-05-26 14:56:58,925 - WARNING: got out of turn request
+2016-05-26 14:58:31,259 - WARNING: got out of turn request
+2016-05-26 14:58:34,829 - WARNING: got out of turn request
+2016-05-26 14:58:53,819 - WARNING: exceptionCaught cause null remote /192.168.1.129:57390
+2016-05-26 14:58:59,186 - WARNING: got out of turn request
+2016-05-26 14:59:39,145 - WARNING: got out of turn request
+2016-05-26 14:59:43,489 - WARNING: got out of turn request
+2016-05-26 15:00:03,906 - WARNING: got out of turn request
+2016-05-26 15:00:14,760 - WARNING: got out of turn request
+2016-05-26 15:00:17,611 - WARNING: got out of turn request
+2016-05-26 15:00:41,711 - WARNING: got out of turn request
+2016-05-26 15:00:44,576 - WARNING: got out of turn request
+2016-05-26 15:01:12,574 - WARNING: got out of turn request
+2016-05-26 15:12:44,371 - WARNING: closing idle session /192.168.1.129:57629
+2016-05-26 15:15:39,039 - WARNING: got out of turn request
+2016-05-26 15:28:34,128 - WARNING: got out of turn request
+2016-05-26 15:40:13,571 - WARNING: Room Created: id= 1517493815
+2016-05-26 15:41:48,987 - WARNING: already stopped
+2016-05-26 15:41:53,580 - WARNING: got out of turn request
+2016-05-26 15:42:31,953 - WARNING: exceptionCaught cause null remote /192.168.1.129:60603
+2016-05-26 15:42:37,681 - WARNING: got out of turn request
+2016-05-26 15:43:35,779 - WARNING: exceptionCaught cause null remote /192.168.1.129:60678
+2016-05-26 15:44:22,201 - WARNING: exceptionCaught cause null remote /192.168.1.129:60733
+2016-05-26 15:46:06,154 - WARNING: exceptionCaught cause null remote /192.168.1.129:60855
+2016-05-26 15:48:41,332 - WARNING: exceptionCaught cause null remote /192.168.1.129:61065
+2016-05-26 15:49:40,037 - WARNING: closing idle session /192.168.1.129:61140
+2016-05-26 15:49:45,513 - WARNING: Room Created: id= 2024944506
+2016-05-26 15:49:58,888 - WARNING: exceptionCaught cause null remote /192.168.1.129:61165
+2016-05-26 15:50:36,296 - WARNING: exceptionCaught cause null remote /192.168.1.129:61212
+2016-05-26 15:51:42,706 - WARNING: exceptionCaught cause null remote /192.168.1.129:61289
+2016-05-26 15:53:54,203 - WARNING: exceptionCaught cause null remote /192.168.1.129:61445
+2016-05-26 15:55:56,662 - WARNING: got out of turn request
+2016-05-26 15:56:04,261 - WARNING: got out of turn request
+2016-05-26 15:56:24,139 - WARNING: exceptionCaught cause null remote /192.168.1.129:61633
+2016-05-26 15:56:31,877 - WARNING: got out of turn request
+2016-05-26 15:58:05,583 - WARNING: exceptionCaught cause null remote /192.168.1.129:61743
+2016-05-26 15:58:40,915 - WARNING: got out of turn request
+2016-05-26 16:01:26,872 - WARNING: exceptionCaught cause null remote /192.168.1.129:61959
+2016-05-26 16:01:29,063 - WARNING: got out of turn request
+2016-05-26 16:02:15,273 - WARNING: exceptionCaught cause null remote /192.168.1.129:62033
+2016-05-26 16:02:19,632 - WARNING: got out of turn request
+2016-05-26 16:03:53,167 - WARNING: exceptionCaught cause null remote /192.168.1.129:62144
+2016-05-26 16:03:54,057 - WARNING: got out of turn request
+2016-05-26 16:05:21,127 - WARNING: exceptionCaught cause null remote /192.168.1.129:62262
+2016-05-26 16:06:12,280 - WARNING: already stopped
+2016-05-26 16:06:12,280 - WARNING: exceptionCaught cause null remote /192.168.1.129:62324
+2016-05-26 16:07:52,961 - WARNING: exceptionCaught cause null remote /192.168.1.129:62436
+2016-05-26 16:09:21,829 - WARNING: exceptionCaught cause null remote /192.168.1.129:62557
+2016-05-26 16:12:35,811 - WARNING: exceptionCaught cause null remote /192.168.1.129:62776
+2016-05-26 16:14:57,795 - WARNING: got out of turn request
+2016-05-26 16:16:25,793 - WARNING: exceptionCaught cause null remote /192.168.1.129:63047
+2016-05-26 16:16:28,639 - WARNING: got out of turn request
+2016-05-26 16:17:31,912 - WARNING: exceptionCaught cause null remote /192.168.1.129:63145
+2016-05-26 16:17:33,059 - WARNING: got out of turn request
+2016-05-26 16:18:24,119 - WARNING: Room Created: id= 969024070
+2016-05-26 16:18:38,265 - WARNING: got out of turn request
+2016-05-26 16:27:01,345 - WARNING: got out of turn request
+2016-05-26 16:30:49,154 - WARNING: got out of turn request
+2016-05-26 16:34:00,712 - WARNING: got out of turn request
+2016-05-26 16:35:02,363 - WARNING: got out of turn request
+2016-05-26 16:35:13,237 - WARNING: got out of turn request
+2016-05-26 16:40:38,165 - WARNING: got out of turn request
+2016-05-26 16:41:40,266 - WARNING: got out of turn request
+2016-05-26 16:42:10,204 - WARNING: got out of turn request
+2016-05-26 16:43:25,721 - WARNING: closing idle session /192.168.1.129:64931
+2016-05-26 16:43:30,375 - WARNING: got out of turn request
+2016-05-26 16:44:12,691 - WARNING: got out of turn request
+2016-05-26 16:46:46,992 - WARNING: got out of turn request
+2016-05-26 16:48:43,525 - WARNING: closing idle session /192.168.1.129:65373
+2016-05-26 16:49:19,230 - WARNING: got out of turn request
+2016-05-26 16:49:53,625 - WARNING: got out of turn request
+2016-05-26 16:49:54,427 - WARNING: got out of turn request

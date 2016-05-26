@@ -1,4 +1,6 @@
-package pokerserver.players;
+package pokerserver.winner;
+
+import pokerserver.players.PlayerBean;
 
 public class Winner {
   private	PlayerBean player;
