@@ -1,10 +1,22 @@
 package pokerserver.room;
 
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.NameValuePair;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.HttpClients;
+import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.util.EntityUtils;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -13,6 +25,7 @@ import pokerserver.game.TexassGameManager;
 import pokerserver.players.PlayerBean;
 import pokerserver.rounds.RoundManager;
 import pokerserver.turns.TurnManager;
+import pokerserver.utils.APIConstants;
 import pokerserver.utils.GameConstants;
 import pokerserver.utils.LogUtils;
 import pokerserver.winner.Winner;
@@ -34,6 +47,7 @@ public class TexassPokerRoomAdapter extends BaseTurnRoomAdaptor implements
 	private ITurnBasedRoom gameRoom;
 	private byte GAME_STATUS;
 	TexassGameManager gameManager;
+	int minPlayerToStartGame= MIN_PLAYER_TO_START_GAME;
 	private boolean isBreakTime = false;
 	
 	List<String> listRestartGameReq = new ArrayList<String>();
@@ -44,13 +58,19 @@ public class TexassPokerRoomAdapter extends BaseTurnRoomAdaptor implements
 		GAME_STATUS = STOPPED;
 		this.gameManager = new TexassGameManager();
 		gameManager.initGameRounds();
-		
+		if (gameRoom.getProperties().containsKey("MinPlayer")) {
+			LogUtils.Log("Room : " + gameRoom.getName() + " >> "
+					+ gameRoom.getProperties().toString() + " >> "
+					+ gameRoom.getProperties().get("MinPlayer"));
+			minPlayerToStartGame = Integer.valueOf(room.getProperties()
+					.get("MinPlayer").toString());
+		}
 	}
 
 	@Override
 	public void onTimerTick(long time) {
 		if (GAME_STATUS == STOPPED &&
-				gameRoom.getJoinedUsers().size() >= MIN_PLAYER_TO_START_GAME &&
+				gameRoom.getJoinedUsers().size() >= minPlayerToStartGame &&
 				GAME_STATUS !=CARD_DISTRIBUTE) {
 			distributeCarsToPlayerFromDelear();
 //			GAME_STATUS = RUNNING;
@@ -59,7 +79,7 @@ public class TexassPokerRoomAdapter extends BaseTurnRoomAdaptor implements
 			GAME_STATUS = RUNNING;
 			gameRoom.startGame(TEXASS_SERVER_NAME);
 		} else if (GAME_STATUS == RUNNING
-				&& gameRoom.getJoinedUsers().size() < MIN_PLAYER_TO_START_GAME) {
+				&& gameRoom.getJoinedUsers().size() < minPlayerToStartGame) {
 			GAME_STATUS = STOPPED;
 			gameRoom.stopGame(TEXASS_SERVER_NAME);
 		}
@@ -221,7 +241,6 @@ public class TexassPokerRoomAdapter extends BaseTurnRoomAdaptor implements
 		broadcastGameCompleteToAllPlayers();
 		gameManager.findBestPlayerHand();
 		gameManager.findAllWinnerPlayers();
-		
 		broadcastWinningPlayer();
 		handleFinishGame();
 		restartGameRequest();
@@ -233,6 +252,10 @@ public class TexassPokerRoomAdapter extends BaseTurnRoomAdaptor implements
 
 		if (turnManager != null)
 			broadcastPlayerActionDoneToOtherPlayers(turnManager);
+		if(playerAction==ACTION_FOLD){
+			LogUtils.Log("Test 02");
+			gameManager.leavePlayerToGame(gameManager.getPlayersManager().getPlayerByName(sender));
+		}
 		// If all players are folded or all in then declare last player as a
 		// winner
 		PlayerBean lastActivePlayer = gameManager.checkAllAreFoldOrAllIn();
@@ -256,22 +279,36 @@ public class TexassPokerRoomAdapter extends BaseTurnRoomAdaptor implements
 		
 		LogUtils.Log("Room : handleUserLeavingTurnRoom :  User : "
 				+ user.getName());
-		gameManager.leavePlayerToGame(gameManager.getPlayersManager().getPlayerByName(user
-				.getName()));
+		try {
+			sendLeavePlayerDetailsToServer(user.getName());
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+		
+		if (gameManager.getCurrentRoundInfo() == null) {
+			gameManager.leavePlayerToGame(gameManager.getPlayersManager()
+					.getPlayerByName(user.getName()));
+		} else {
+			managePlayerAction(user.getName(), ACTION_FOLD, 0);
+		}
+		
 		broadcastBlindPlayerDatas();
+		
+		
 		// This will be changed.
 		if (GAME_STATUS == RUNNING || GAME_STATUS == FINISHED) {
 			if(gameRoom.getJoinedUsers().size() == 0){
 				LogUtils.Log("Room : Game Over ..... ");
 				gameManager.getPlayersManager().removeAllPlayers();
 				GAME_STATUS = FINISHED;
+				//For PokerUP
+				sendGameFinishStatusToServer();
 			}
 		}
 		if(gameRoom.getJoinedUsers().size() == 0 && gameManager.getGameType() != GAME_TYPE_REGULAR){
 //			System.out.print("CD:: Bliend Amt : "+SBAmount);
 			gameManager.setNewBliendAmount(SBAmount);
 		}
-		
 	}
 
 	/*
@@ -599,6 +636,7 @@ public class TexassPokerRoomAdapter extends BaseTurnRoomAdaptor implements
 		
 	}
 	private void broadcastWinningPlayer() {
+		JSONArray gamePlayerArray = new JSONArray();
 		JSONArray winnerArray = new JSONArray();
 		try {
 			for (Winner winnerPlayer : gameManager.getAllWinnerPlayers()) {
@@ -620,14 +658,59 @@ public class TexassPokerRoomAdapter extends BaseTurnRoomAdaptor implements
 				winnerObject.put(TAG_WINNER_BEST_CARDS, winnerPlayer
 						.getPlayer().getBestHandCardsName());
 				winnerArray.put(winnerObject);
+				JSONObject jsonObject = sendGamePlayerDetailsToServer(gamePlayerArray, winnerPlayer.getPlayer(), true);
+				if(jsonObject!=null)
+					gamePlayerArray.put(jsonObject);
 			}
-
 			gameRoom.BroadcastChat(TEXASS_SERVER_NAME, RESPONSE_FOR_WINNIER_INFO
 					+ winnerArray.toString());
-			LogUtils.Log("<<>> " + winnerArray.toString());
+			LogUtils.Log("Winner Data : " + winnerArray.toString());
+			
+			// Get lost player data
+			for(PlayerBean playerBean : gameManager.getPlayersManager().getAllAactivePlayersForTurn()){
+				JSONObject jsonObject = sendGamePlayerDetailsToServer(gamePlayerArray, playerBean, false);
+				if(jsonObject!=null)
+					gamePlayerArray.put(jsonObject);
+			}
+			LogUtils.Log("Game Player status : "+ gamePlayerArray.toString());
+			sendGameWinningIfoToServer(gamePlayerArray);
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
+	}
+	/**
+	 * Send game player data to server
+	 * @param winnerArray
+	 * @param player
+	 * @param isWinner
+	 * @return
+	 */
+	
+	public JSONObject sendGamePlayerDetailsToServer(JSONArray winnerArray,PlayerBean player,boolean isWinner){
+		// First check is user is already in list of not
+		for(int i = 0;i<winnerArray.length();i++){
+			try {
+				JSONObject jsonObject = winnerArray.getJSONObject(i);
+				if(jsonObject.getString(APIConstants.TAG_USER_ID).equals(player.getPlayerName())){
+					return null;
+				}
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+		try {
+			JSONObject jsonObject = new JSONObject();
+			jsonObject.put(APIConstants.TAG_USER_ID, player.getPlayerName());
+			jsonObject.put(APIConstants.TAG_BALANCE, player.getBalance());
+			jsonObject.put(APIConstants.TAG_STATUS, isWinner?"win":"lost");
+			return jsonObject;
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 	private void broadcastGameCompleteToAllPlayers() {
@@ -750,5 +833,67 @@ click the "ReBuy" button to rebuy chips equal to the original Entry Fee without 
 		}
 		return false;
 	}
+	
+	public void sendGameWinningIfoToServer(JSONArray playerArray) throws JSONException{
+		JSONObject playObject = new JSONObject();
+		playObject.put("player_list", playerArray);
+		
+		List<NameValuePair> params = new ArrayList<NameValuePair>();
+		params.add(new BasicNameValuePair(APIConstants.TAG_GAME_ID, String.valueOf(gameRoom.getProperties().get("RoomName"))));
+		params.add(new BasicNameValuePair(APIConstants.TAG_TIMESTAMP, String.valueOf(System.currentTimeMillis())));
+		
+		params.add(new BasicNameValuePair("players", playObject.toString()));
+		LogUtils.Log("API Winnner Req : "+params.toString());
+		sendDataToServer(APIConstants.ACTION_WIN_USER, params);
+		
+	}
+	public void sendGameFinishStatusToServer(){
+		List<NameValuePair> params = new ArrayList<NameValuePair>();
+		params.add(new BasicNameValuePair(APIConstants.TAG_GAME_ID, String.valueOf(gameRoom.getProperties().get("RoomName"))));
+		params.add(new BasicNameValuePair(APIConstants.TAG_TIMESTAMP, String.valueOf(System.currentTimeMillis())));
+		LogUtils.Log("Exit Game req : "+params.toString());
+		sendDataToServer(APIConstants.ACTION_END_GAME, params);
+	}
+	
+	private void sendLeavePlayerDetailsToServer(String user) throws JSONException {
+		PlayerBean playerBean = gameManager.getPlayersManager().getPlayerByName(user);
+		
+		List<NameValuePair> params = new ArrayList<NameValuePair>();
+		params.add(new BasicNameValuePair(APIConstants.TAG_GAME_ID, String.valueOf(gameRoom.getProperties().get("RoomName"))));
+		params.add(new BasicNameValuePair(APIConstants.TAG_BALANCE, String.valueOf( playerBean.getBalance())));
+		params.add(new BasicNameValuePair(APIConstants.TAG_USER_ID, String.valueOf( playerBean.getPlayerName())));
+		params.add(new BasicNameValuePair(APIConstants.TAG_TIMESTAMP, String.valueOf(System.currentTimeMillis())));
+		
+		LogUtils.Log("Leave Player req : "+params.toString());
+		sendDataToServer(APIConstants.ACTION_LEAVE_USER, params);
+	}
+	
+	public void sendDataToServer(String url,List<NameValuePair> params){
+		HttpClient httpClient = HttpClients.createDefault();
+		HttpPost httpPost = new HttpPost(url);
+		// Request parameters and other properties.
+		try {
+		    httpPost.setEntity(new UrlEncodedFormEntity(params, "UTF-8"));
+		} catch (UnsupportedEncodingException e) {
+		    // writing error to Log
+		    e.printStackTrace();
+		}
+		try {
+		    HttpResponse response = httpClient.execute(httpPost);
+		    HttpEntity respEntity = response.getEntity();
+		    if (respEntity != null) {
+		        // EntityUtils to get the response content
+		        String content =  EntityUtils.toString(respEntity);
+		        System.out.println("Response >:< "+ content);
+		    }
+		} catch (ClientProtocolException e) {
+		    // writing exception to log
+		    e.printStackTrace();
+		} catch (IOException e) {
+		    // writing exception to log
+		    e.printStackTrace();
+		}
+	} 
+
 	int newPlayerPosition = 0;
 }

@@ -399,7 +399,6 @@ public class TexassGameManager implements GameConstants {
 	/** Handles player's action taken by him */
 	public TurnManager managePlayerAction(String userName, int action,
 			int betAmount) {
-		
 		TurnManager turnManager = null;
 		PlayerBean currentPlayer = deductPlayerBetAmountFromBalance(userName,
 				betAmount, action);
@@ -417,7 +416,6 @@ public class TexassGameManager implements GameConstants {
 			RoundManager currentRoundManger = getCurrentRoundInfo();
 			turnManager = new TurnManager(currentPlayer, action, betAmount);
 			currentRoundManger.addTurnRecord(turnManager);
-			
 			LogUtils.Log("Turn Manager # User: "
 					+ currentPlayer.getPlayerName() + " # Action: " + action
 					+ " # Bet: " + betAmount + " # Round: "

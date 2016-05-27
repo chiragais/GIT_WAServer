@@ -2,6 +2,8 @@ package pokerserver.players;
 
 import java.util.ArrayList;
 
+import pokerserver.utils.LogUtils;
+
 public class PlayersManager {
 
 	public ArrayList<PlayerBean> roomPlayersList; // all player container list
@@ -64,6 +66,7 @@ public class PlayersManager {
 	
 	public void removePlayerFromRoom(PlayerBean player) {
 		this.roomPlayersList.remove(player);
+		LogUtils.Log("Remove Player : "+ player.getPlayerName());
 	}
 	public void removeAllPlayers(){
 		this.roomPlayersList.clear();
